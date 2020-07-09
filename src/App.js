@@ -8,7 +8,11 @@ function App() {
   return (
     <div className="main">
       <nav className="nav">
-        <div className="nav__box"></div>
+        <div className="nav__burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         <div className="nav__lanSwitch">Eng</div>
       </nav>
       <section className="content">
@@ -26,7 +30,9 @@ function App() {
           <p className="content__desc__text">
             Поминутная аренда авто твоего города
           </p>
-          <button className="content__desc__button">Забронировать</button>
+          <button className="content__desc__button button">
+            Забронировать
+          </button>
         </main>
         <footer className="footer">
           <span>© 2016-2019 «Need for drive»</span>8 (495) 234-22-44
@@ -39,7 +45,7 @@ function App() {
             Оставляйте машину на платных городских парковках и разрешенных
             местах, не нарушая ПДД, а также в аэропортах.
           </p>
-          <button className="slider__button">Подробнее</button>
+          <button className="slider__button button">Подробнее</button>
         </div>
       </section>
     </div>

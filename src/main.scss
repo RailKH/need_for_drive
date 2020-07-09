@@ -2,17 +2,51 @@ $green: #0ec261;
 $black: #121212;
 $light-gray: #eeeeee;
 $dark-gray: #999999;
-
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Light.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.nav__box {
-  width: 20px;
-  height: 20px;
-  background-color: blue;
+.button {
+  height: 48px;
+  background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
+  background-blend-mode: darken;
+  border-radius: 8px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: $light-gray;
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .main {
   display: flex;
 }
@@ -21,11 +55,22 @@ $dark-gray: #999999;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 31px 0;
+  padding-bottom: 17px;
+  padding-top: 38px;
   background: #151b1f;
   color: white;
   width: 64px;
   height: 100vh;
+  &__burger {
+    span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: $light-gray;
+      margin: 4px 0;
+      border-radius: 3px;
+    }
+  }
   &__lanSwitch {
     width: 48px;
     height: 48px;
@@ -58,29 +103,159 @@ $dark-gray: #999999;
   &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    &__logo {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 35px;
+      color: $green;
+      text-decoration: none;
+      pointer-events: none;
+    }
+    &__location {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      color: $dark-gray;
+    }
+    &__location::before {
+      content: url(./img/Group.svg);
+      position: relative;
+      right: 5px;
+      top: 5px;
+    }
   }
   &__desc {
-    height: 308px;
+    // height: 308px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    &__title {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 70px;
+      line-height: 66px;
+      margin-bottom: 34px;
+
+      span {
+        color: $green;
+      }
+    }
+    &__text {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 26px;
+      line-height: 30px;
+      color: $dark-gray;
+      margin-bottom: 60px;
+    }
+    &__button {
+      width: 250px;
+    }
   }
 
   .footer {
     display: flex;
     justify-content: space-between;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    color: $black;
+    span {
+      color: $dark-gray;
+    }
   }
 }
 
 .slider {
   width: 50%;
   height: 100vh;
-
+  padding: 0 96px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #bebebe;
+  background: url(./img/bg_slider_0.jpg) no-repeat center center;
+  background-size: cover;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  }
   .slider_1 {
-    width: 80%;
+    z-index: 5;
+  }
+  &__title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    color: $light-gray;
+    margin-bottom: 10px;
+  }
+  &__text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 90%;
+    color: $light-gray;
+    margin-bottom: 32px;
+  }
+  &__button {
+    width: 164px;
+    background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .content {
+    width: 100%;
+  }
+  .slider {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .nav {
+    position: absolute;
+    top: 20px;
+    background: none;
+    height: auto;
+    padding: 0;
+    span {
+      background: $black;
+    }
+    &__lanSwitch {
+      display: none;
+    }
+  }
+  .content {
+    padding: 0;
+
+    &__header {
+      padding: 16px;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    &__desc__title {
+      font-size: 32px;
+    }
+    &__desc__text {
+      font-size: 18px;
+      line-height: 21px;
+    }
   }
 }
