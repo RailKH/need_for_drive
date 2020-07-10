@@ -129,6 +129,10 @@
           justify-content: space-between;
 }
 
+.content.disabled {
+  display: none;
+}
+
 .content__header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -205,7 +209,7 @@
   width: 250px;
 }
 
-.content .footer {
+.content__footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -220,8 +224,48 @@
   color: #121212;
 }
 
-.content .footer span {
+.content__footer span {
   color: #999999;
+}
+
+.menu {
+  width: 50%;
+  height: 100vh;
+  padding: 64px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #121212;
+}
+
+.menu ul {
+  margin-bottom: 38px;
+}
+
+.menu__content li {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 37px;
+  margin-bottom: 24px;
+  color: #ffffff;
+  list-style-type: none;
+}
+
+.menu__content__icons a {
+  margin-right: 24px;
+}
+
+.menu__content__icons svg:hover .icon {
+  fill: #0ec261;
+}
+
+.menu__content li:hover {
+  color: #0ec261;
 }
 
 .slider {
@@ -283,9 +327,19 @@
   border-radius: 4px;
 }
 
+.slider .slider_1.disabled {
+  z-index: -1;
+}
+
 @media (max-width: 1023px) {
-  .content {
+  .content,
+  .menu {
     width: 100%;
+  }
+  .content__content li,
+  .menu__content li {
+    font-size: 28px;
+    line-height: 33px;
   }
   .slider {
     display: none;
@@ -320,11 +374,52 @@
             align-items: flex-end;
   }
   .content__desc__title {
-    font-size: 32px;
+    font-size: 9.8vw;
+    line-height: normal;
+    padding: 0 16px;
+    margin-bottom: 16px;
   }
   .content__desc__text {
-    font-size: 18px;
+    font-size: 5.5vw;
+    padding: 0 16px;
     line-height: 21px;
+    line-height: normal;
+  }
+  .content__desc__button {
+    margin-left: 16px;
+  }
+  .content__footer {
+    background: #121212;
+    padding: 16px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    color: #0ec261;
+  }
+  .content__footer span {
+    color: #eeeeee;
+    margin-top: 8px;
+  }
+  .menu {
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+  }
+  .menu__content li {
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+
+@media (max-width: 340px) {
+  .content__desc__button {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
   }
 }
 /*# sourceMappingURL=main.css.map */
