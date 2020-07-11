@@ -69,6 +69,19 @@ $dark-gray: #999999;
       background: $light-gray;
       margin: 4px 0;
       border-radius: 3px;
+      transition: 0.55s;
+    }
+    &.active {
+      transition: 0.55s;
+      .menu-top {
+        transform: rotate(50deg) translateY(5px) translateX(5px);
+      }
+      .menu-middle {
+        opacity: 0;
+      }
+      .menu-bottom {
+        transform: rotate(-410deg) translateX(5px) translateY(-5px);
+      }
     }
   }
   &__lanSwitch {
@@ -132,7 +145,6 @@ $dark-gray: #999999;
     }
   }
   &__desc {
-    // height: 308px;
     display: flex;
     flex-direction: column;
     &__title {
@@ -182,6 +194,9 @@ $dark-gray: #999999;
   display: flex;
   align-items: center;
   background: $black;
+  &.disabled {
+    display: none;
+  }
   ul {
     margin-bottom: 38px;
   }
@@ -224,35 +239,35 @@ $dark-gray: #999999;
     height: 100%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
   }
-  .slider_1 {
+  &__content {
     z-index: 5;
-  }
-  &__title {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 40px;
-    line-height: 47px;
-    color: $light-gray;
-    margin-bottom: 10px;
-  }
-  &__text {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 90%;
-    color: $light-gray;
-    margin-bottom: 32px;
-  }
-  &__button {
-    width: 164px;
-    background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
-    border-radius: 4px;
+    &__title {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 47px;
+      color: $light-gray;
+      margin-bottom: 10px;
+    }
+    &__text {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 90%;
+      color: $light-gray;
+      margin-bottom: 32px;
+    }
+    &__button {
+      width: 164px;
+      background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
+      border-radius: 4px;
+    }
   }
 }
-.slider .slider_1.disabled {
-  z-index: -1;
+.slider .slider__content.disabled {
+  z-index: auto;
 }
 
 @media (max-width: 1023px) {
@@ -277,6 +292,11 @@ $dark-gray: #999999;
     padding: 0;
     span {
       background: $black;
+    }
+    .active {
+      span {
+        background: $light-gray;
+      }
     }
     &__lanSwitch {
       display: none;
