@@ -50,6 +50,11 @@
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.button:hover {
+  background: -webkit-gradient(linear, left top, right top, color-stop(2.61%, #0b934a), color-stop(112.6%, #026e47));
+  background: linear-gradient(90deg, #0b934a 2.61%, #026e47 112.6%);
+}
+
 .main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -132,6 +137,7 @@
 
 .nav__lanSwitch:hover {
   border: 1px solid #eeeeee;
+  color: #eeeeee;
 }
 
 .content {
@@ -249,6 +255,10 @@
   color: #999999;
 }
 
+.content__footer:not(span):hover {
+  color: #0ec261;
+}
+
 .menu {
   width: 50%;
   height: 100vh;
@@ -293,21 +303,14 @@
   color: #0ec261;
 }
 
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
 .slider {
   width: 50%;
   height: 100vh;
-  padding: 0 96px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  background: url(./img/bg_slider_0.jpg) no-repeat center center;
-  background-size: cover;
   position: relative;
 }
 
@@ -322,7 +325,22 @@
 }
 
 .slider__content {
-  z-index: 5;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(#000000)), url(./img/bg_slider_0.jpg);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%), url(./img/bg_slider_0.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  padding: 0 96px;
 }
 
 .slider__content__title {
@@ -352,8 +370,22 @@
   border-radius: 4px;
 }
 
-.slider .slider__content.disabled {
-  z-index: auto;
+.slider .swiper-pagination-bullet-active {
+  background: #0ec261;
+}
+
+.slider .swiper-button-prev,
+.slider .swiper-button-next {
+  color: #eeeeee;
+}
+
+.slider .swiper-button-prev:after,
+.slider .swiper-button-next:after {
+  font-size: 15px;
+}
+
+.slider.disabled::before {
+  z-index: 2;
 }
 
 @media (max-width: 1023px) {
