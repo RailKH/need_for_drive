@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 export default function Content(props) {
   return (
-    <section className={classnames("content", props.burger && "disabled")}>
+    <section className="content">
       <header className="content__header">
         <a href="#" className="content__header__logo">
           Need for drive

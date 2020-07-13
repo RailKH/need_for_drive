@@ -53,6 +53,9 @@ $dark-gray: #999999;
 
 .main {
   display: flex;
+  font-family: Roboto;
+  font-style: normal;
+  font-size: 14px;
 }
 .nav {
   display: flex;
@@ -117,9 +120,7 @@ $dark-gray: #999999;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  &.disabled {
-    display: none;
-  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -202,6 +203,8 @@ $dark-gray: #999999;
   display: flex;
   align-items: center;
   background: $black;
+  position: absolute;
+  margin-left: 57px;
   &.disabled {
     display: none;
   }
@@ -286,40 +289,81 @@ $dark-gray: #999999;
       border-radius: 4px;
     }
   }
-  .swiper-button-prev {
-    left: 0;
-  }
-  .swiper-button-next {
-    right: 0;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    color: $light-gray;
-    width: 53px;
-    height: 100vh;
-    top: 21px;
-  }
-  .swiper-button-prev:hover,
-  .swiper-button-next:hover {
-    background: #0ec261;
-    opacity: 0.2;
-    cursor: url(../img/Pointer.svg), pointer;
-  }
+  // .swiper-button-prev {
+  //   left: 0;
+  // }
+  // .swiper-button-next {
+  //   right: 0;
+  // }
+  // .swiper-button-prev,
+  // .swiper-button-next {
+  //   color: $light-gray;
+  //   width: 53px;
+  //   height: 100vh;
+  //   top: 21px;
+  // }
+  // .swiper-button-prev:hover,
+  // .swiper-button-next:hover {
+  //   background: #0ec261;
+  //   opacity: 0.2;
+  //   cursor: url(../img/Pointer.svg), pointer;
+  // }
 
-  .swiper-button-prev:after,
-  .swiper-button-next:after {
-    font-size: 15px;
-  }
-  .swiper-pagination-bullet {
-    background-color: $light-gray;
-  }
-  .swiper-pagination-bullet-active {
-    background: $green;
-  }
+  // .swiper-button-prev:after,
+  // .swiper-button-next:after {
+  //   font-size: 15px;
+  // }
+  // .swiper-pagination-bullet {
+  //   background-color: $light-gray;
+  // }
+  // .swiper-pagination-bullet-active {
+  //   background: $green;
+  // }
 }
 .slider.disabled {
   &::before {
     z-index: 2;
+  }
+}
+
+.order {
+  width: 100%;
+  .content__header {
+    margin: 32px 64px;
+  }
+  .link {
+    display: flex;
+    border-top: 1px solid $light-gray;
+    border-bottom: 1px solid $light-gray;
+    padding: 7px 64px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: $dark-gray;
+    span {
+      background: url(../img/Vector.svg) no-repeat center center;
+      width: 38px;
+    }
+    .active {
+      color: $green;
+    }
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    height: 100vh;
+
+    &__location {
+      height: 1000px;
+      overflow-y: scroll;
+    }
+    &__cost {
+      // width: 320px;
+      padding-left: 30px;
+    }
+    .disabled {
+      display: none;
+    }
   }
 }
 

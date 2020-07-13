@@ -1,6 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
+import car0 from "../img/bg_slider_0.jpg";
 import car1 from "../img/bg_slider_1.jpg";
 import car2 from "../img/bg_slider_2.jpg";
 import car3 from "../img/bg_slider_3.jpg";
@@ -15,74 +16,53 @@ SwiperCore.use([Navigation, Pagination]);
 
 export default function Slider(props) {
   const gradient = "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%)";
+  const cars = [car0, car1, car2, car3];
+  const dataSlider = [
+    {
+      name: "Бесплатная парковка",
+      desc:
+        "Оставляйте машину на платных городских парковках и разрешенных местах, не нарушая ПДД, а также в аэропортах.",
+      color: "",
+    },
+    {
+      name: "Страховка",
+      desc: "Полная страховка страховка автомобиля",
+      color: "",
+    },
+    {
+      name: "Бензин",
+      desc: "Полный бак на любой заправке города за наш счёт",
+      color: "",
+    },
+    {
+      name: "Обслуживание",
+      desc: "Автомобиль проходит еженедельное ТО",
+      color: "",
+    },
+  ];
 
   return (
     <section className={classnames("slider", props.burger && "disabled")}>
       <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
-        <SwiperSlide>
-          <div className="slider__content">
-            <div className="slider__content__wrapper">
-              <div className="slider__content__title">Бесплатная парковка</div>
-              <p className="slider__content__text">
-                Оставляйте машину на платных городских парковках и разрешенных
-                местах, не нарушая ПДД, а также в аэропортах.
-              </p>
-              <button className="slider__content__button button">
-                Подробнее
-              </button>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div
-            className="slider__content"
-            style={{ backgroundImage: `${gradient}, url(${car1})` }}>
-            <div className="slider__content__wrapper">
-              <div className="slider__content__title">Страховка</div>
-              <p className="slider__content__text">
-                Полная страховка страховка автомобиля
-              </p>
-              <button className="slider__content__button button">
-                Подробнее
-              </button>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div
-            className="slider__content"
-            style={{ backgroundImage: `${gradient}, url(${car2})` }}>
-            <div className="slider__content__wrapper">
-              <div className="slider__content__title">Бензин</div>
-              <p className="slider__content__text">
-                Полный бак на любой заправке города за наш счёт
-              </p>
-              <button
-                className="slider__content__button button"
+        {dataSlider.map((item, ind) => {
+          return (
+            <SwiperSlide>
+              <div
+                className="slider__content"
                 style={{
-                  backgroundColor:
-                    "linear-gradient(90deg, #132949 0%, #0C7B67 100%)",
+                  backgroundImage: `${gradient}, url(${cars[ind]})`,
                 }}>
-                Подробнее
-              </button>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div
-            className="slider__content"
-            style={{ backgroundImage: `${gradient}, url(${car3})` }}>
-            <div className="slider__content__wrapper">
-              <div className="slider__content__title">Обслуживание</div>
-              <p className="slider__content__text">
-                Автомобиль проходит еженедельное ТО
-              </p>
-              <button className="slider__content__button button">
-                Подробнее
-              </button>
-            </div>
-          </div>
-        </SwiperSlide>
+                <div className="slider__content__wrapper">
+                  <div className="slider__content__title">{item.name}</div>
+                  <p className="slider__content__text">{item.desc}</p>
+                  <button className="slider__content__button button">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </section>
   );
