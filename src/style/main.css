@@ -1,27 +1,27 @@
 @font-face {
   font-family: "Roboto";
-  src: url("./fonts/Roboto-Bold.ttf");
+  src: url("../fonts/Roboto-Bold.ttf");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url("./fonts/Roboto-Light.ttf");
+  src: url("../fonts/Roboto-Light.ttf");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url("./fonts/Roboto-Regular.ttf");
+  src: url("../fonts/Roboto-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url("./fonts/Roboto-Medium.ttf");
+  src: url("../fonts/Roboto-Medium.ttf");
   font-weight: 500;
   font-style: normal;
 }
@@ -193,7 +193,7 @@
 }
 
 .content__header__location::before {
-  content: url(./img/Group.svg);
+  content: url(../img/Group.svg);
   position: relative;
   right: 5px;
   top: 5px;
@@ -325,8 +325,8 @@
 }
 
 .slider__content {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(#000000)), url(./img/bg_slider_0.jpg);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%), url(./img/bg_slider_0.jpg);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(#000000)), url(../img/bg_slider_0.jpg);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%), url(../img/bg_slider_0.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -370,13 +370,27 @@
   border-radius: 4px;
 }
 
-.slider .swiper-pagination-bullet-active {
-  background: #0ec261;
+.slider .swiper-button-prev {
+  left: 0;
+}
+
+.slider .swiper-button-next {
+  right: 0;
 }
 
 .slider .swiper-button-prev,
 .slider .swiper-button-next {
   color: #eeeeee;
+  width: 53px;
+  height: 100vh;
+  top: 21px;
+}
+
+.slider .swiper-button-prev:hover,
+.slider .swiper-button-next:hover {
+  background: #0ec261;
+  opacity: 0.2;
+  cursor: url(../img/Pointer.svg), pointer;
 }
 
 .slider .swiper-button-prev:after,
@@ -384,8 +398,52 @@
   font-size: 15px;
 }
 
+.slider .swiper-pagination-bullet {
+  background-color: #eeeeee;
+}
+
+.slider .swiper-pagination-bullet-active {
+  background: #0ec261;
+}
+
 .slider.disabled::before {
   z-index: 2;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #eeeeee;
+  width: 53px;
+  height: 100vh;
+  top: 21px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: #0ec261;
+  opacity: 0.2;
+  cursor: url(../img/Pointer.svg), pointer;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 15px;
+}
+
+.swiper-pagination-bullet {
+  background-color: #eeeeee;
+}
+
+.swiper-pagination-bullet-active {
+  background: #0ec261;
 }
 
 @media (max-width: 1023px) {

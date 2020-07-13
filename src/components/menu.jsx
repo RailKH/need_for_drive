@@ -1,58 +1,10 @@
-import React from "react";
-import Navigation2 from "./components/navigation";
-import Content from "./components/content";
-import Menu from "./components/menu";
-import Slider from "./components/slider";
+import React from 'react';
+import classnames from "classnames";
 
-import "./style/main.css";
-
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      burger: false,
-    };
-    this.openMenu = this.openMenu.bind(this);
-  }
-
-  openMenu() {
-    this.setState((state) => ({
-      burger: !state.burger,
-    }));
-  }
-  render() {
-    return (
-      <div className="main">
-        <Navigation2 openMenu={this.openMenu} burger={this.state.burger} />
-        <Content burger={this.state.burger} />
-        <Menu burger={this.state.burger} />
-        <Slider burger={this.state.burger} />
-        {/* <section
-          className={classnames("content", this.state.burger && "disabled")}>
-          <header className="content__header">
-            <a href="#" className="content__header__logo">
-              Need for drive
-            </a>
-            <span className="content__header__location">Ульяновск</span>
-          </header>
-          <main className="content__desc">
-            <div className="content__desc__title">
-              Каршеринг <br />
-              <span>Need for drive</span>
-            </div>
-            <p className="content__desc__text">
-              Поминутная аренда авто твоего города
-            </p>
-            <button className="content__desc__button button">
-              Забронировать
-            </button>
-          </main>
-          <footer className="content__footer">
-            <span>© 2016-2019 «Need for drive»</span>8 (495) 234-22-44
-          </footer>
-        </section> */}
-        {/* <section
-          className={classnames("menu", !this.state.burger && "disabled")}>
+export default function Menu(props){
+    return(
+        <section
+          className={classnames("menu", !props.burger && "disabled")}>
           <div className="menu__content">
             <ul>
               <li>ПАРКОВКА</li>
@@ -119,81 +71,6 @@ class App extends React.Component {
               </a>
             </div>
           </div>
-        </section> */}
-        {/* <section
-          className={classnames("slider", this.state.burger && "disabled")}>
-          <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
-            <SwiperSlide>
-              <div className="slider__content">
-                <div className="slider__content__wrapper">
-                  <div className="slider__content__title">
-                    Бесплатная парковка
-                  </div>
-                  <p className="slider__content__text">
-                    Оставляйте машину на платных городских парковках и
-                    разрешенных местах, не нарушая ПДД, а также в аэропортах.
-                  </p>
-                  <button className="slider__content__button button">
-                    Подробнее
-                  </button>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div
-                className="slider__content"
-                style={{ backgroundImage: `${gradient}, url(${car1})` }}>
-                <div className="slider__content__wrapper">
-                  <div className="slider__content__title">Страховка</div>
-                  <p className="slider__content__text">
-                    Полная страховка страховка автомобиля
-                  </p>
-                  <button className="slider__content__button button">
-                    Подробнее
-                  </button>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div
-                className="slider__content"
-                style={{ backgroundImage: `${gradient}, url(${car2})` }}>
-                <div className="slider__content__wrapper">
-                  <div className="slider__content__title">Бензин</div>
-                  <p className="slider__content__text">
-                    Полный бак на любой заправке города за наш счёт
-                  </p>
-                  <button
-                    className="slider__content__button button"
-                    style={{
-                      backgroundColor:
-                        "linear-gradient(90deg, #132949 0%, #0C7B67 100%)",
-                    }}>
-                    Подробнее
-                  </button>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div
-                className="slider__content"
-                style={{ backgroundImage: `${gradient}, url(${car3})` }}>
-                <div className="slider__content__wrapper">
-                  <div className="slider__content__title">Обслуживание</div>
-                  <p className="slider__content__text">
-                    Автомобиль проходит еженедельное ТО
-                  </p>
-                  <button className="slider__content__button button">
-                    Подробнее
-                  </button>
-                </div>
-              </div>
-            </SwiperSlide>
-          </Swiper>
-        </section> */}
-      </div>
-    );
-  }
+        </section>
+    )
 }
-
-export default App;
