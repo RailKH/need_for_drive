@@ -1,8 +1,8 @@
 import React from "react";
 import Navigation from "./components/navigation";
-// import Content from "./components/content";
+import Content from "./components/content";
 import Menu from "./components/menu";
-// import Slider from "./components/slider";
+import Slider from "./components/slider";
 import Order from "./components/order";
 
 import "./style/main.css";

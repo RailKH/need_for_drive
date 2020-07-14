@@ -10,20 +10,33 @@ class Order extends React.Component {
           <span className="content__header__location">Ульяновск</span>
         </header>
         <div className="link">
-          <div className="link__location active">Местоположение</div>
-          <span></span>
-          <div className="link__model">Модель</div>
-          <span></span>
-          <div className="link__extra">Дополнительно</div>
-          <span></span>
-          <div className="link__total">Итого</div>
+          <div className="link__content">
+            <div className="link__content__location active">Местоположение</div>
+            <span></span>
+            <div className="link__content__model">Модель</div>
+            <span></span>
+            <div className="link__content__extra">Дополнительно</div>
+            <span></span>
+            <div className="link__content__total">Итого</div>
+          </div>
         </div>
         <section className="order__content">
-          <div className="order__content__location"></div>
-          <div className="order__content__model disabled"></div>
-          <div className="order__content__extra disabled"></div>
-          <div className="order__content__total disabled"></div>
-          <div className="order__content__cost"></div>
+          <div className="wrapper">
+            <div className="order__content__location">
+              <div className="form">
+                <div>
+                  <label for="city">City</label>
+                  <div>
+                    <input id="city" type="text"></input>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="order__content__model disabled"></div>
+            <div className="order__content__extra disabled"></div>
+            <div className="order__content__total disabled"></div>
+            <div className="order__content__cost">dfdfd</div>
+          </div>
         </section>
       </section>
     );

@@ -78,10 +78,13 @@
   .order {
     .content__header {
       margin: 0;
+      padding: 16px;
     }
     .link {
-      padding: 7px 16px;
-      font-size: 10px;
+      &__content {
+        padding: 7px 16px;
+        font-size: 10px;
+      }
     }
   }
 }
