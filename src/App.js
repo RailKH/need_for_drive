@@ -25,10 +25,10 @@ class App extends React.Component {
     return (
       <div className="main">
         <Navigation openMenu={this.openMenu} burger={this.state.burger} />
-        {/* <Content burger={this.state.burger} /> */}
+        <Content burger={this.state.burger} />
         <Menu burger={this.state.burger} />
-        {/* <Slider burger={this.state.burger} /> */}
-        <Order />
+        <Slider burger={this.state.burger} />
+        {/* <Order /> */}
       </div>
     );
   }
