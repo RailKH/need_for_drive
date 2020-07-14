@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2eab37214f1e4ecd9ecf5349b9a64fb0",
+    "revision": "95859be342a20a8bf28660015d8724ac",
     "url": "/need_for_drive/index.html"
   },
   {
-    "revision": "eb408efd63d7b27a596f",
-    "url": "/need_for_drive/static/css/2.67fce8d6.chunk.css"
+    "revision": "32f5a709054b6915dc12",
+    "url": "/need_for_drive/static/css/2.d8100e34.chunk.css"
   },
   {
-    "revision": "16c1421a92e3e366a71d",
-    "url": "/need_for_drive/static/css/main.406b7195.chunk.css"
+    "revision": "8d701de2a1130ccf7858",
+    "url": "/need_for_drive/static/css/main.e8fd6be7.chunk.css"
   },
   {
-    "revision": "eb408efd63d7b27a596f",
-    "url": "/need_for_drive/static/js/2.4bdc6e0c.chunk.js"
+    "revision": "32f5a709054b6915dc12",
+    "url": "/need_for_drive/static/js/2.79f8dd3c.chunk.js"
   },
   {
     "revision": "5ac48c47bb3912b14c2d8de4f56d5ae8",
-    "url": "/need_for_drive/static/js/2.4bdc6e0c.chunk.js.LICENSE.txt"
+    "url": "/need_for_drive/static/js/2.79f8dd3c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "16c1421a92e3e366a71d",
-    "url": "/need_for_drive/static/js/main.2c345b0d.chunk.js"
+    "revision": "8d701de2a1130ccf7858",
+    "url": "/need_for_drive/static/js/main.d3ace1d2.chunk.js"
   },
   {
     "revision": "2fe2865970048183b964",
@@ -30,6 +30,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "7cc0558f6c8e98abbd6d3a31aec109fa",
     "url": "/need_for_drive/static/media/Group.7cc0558f.svg"
+  },
+  {
+    "revision": "0dcaee7e7ee93c27c68e6296b251b8bb",
+    "url": "/need_for_drive/static/media/Pointer.0dcaee7e.svg"
   },
   {
     "revision": "e07df86cef2e721115583d61d1fb68a6",
@@ -46,6 +50,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "11eabca2251325cfc5589c9c6fb57b46",
     "url": "/need_for_drive/static/media/Roboto-Regular.11eabca2.ttf"
+  },
+  {
+    "revision": "ef4df2e9934eabeb426ae5045ef0019a",
+    "url": "/need_for_drive/static/media/Vector.ef4df2e9.svg"
   },
   {
     "revision": "727e5851432e590d0d0746da10a9d0cc",
