@@ -1,14 +1,52 @@
 import React from "react";
+
+const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
+
 class Order extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      valueCity: "",
+      filterCity: [],
+    };
+    this.addCity = this.addCity.bind(this);
+    this.selectCity = this.selectCity.bind(this);
+  }
+  //актвирует выпадающий список
+  addCity(e) {
+    this.state.filterCity = [];
+    if (e.target.value !== "") {
+      this.state.filterCity = CITY;
+    }
+    this.setState({
+      valueCity: e.target.value,
+    });
+  }
+  //срабатывает при нажатии на город из списка
+  selectCity(e) {
+    this.setState({
+      filterCity: [],
+      valueCity: e.target.textContent,
+    });
+  }
   render() {
+    const list = this.state.filterCity.map((item, id) => {
+      return (
+        <li onClick={(e) => this.selectCity(e)} key={id} className="dropdown">
+          {item}
+        </li>
+      );
+    });
     return (
       <section className="order">
-        <header className="content__header">
-          <a href="#" className="content__header__logo">
-            Need for drive
-          </a>
-          <span className="content__header__location">Ульяновск</span>
-        </header>
+        <div className="order__header">
+          <header className="content__header">
+            <a href="#" className="content__header__logo">
+              Need for drive
+            </a>
+            <span className="content__header__location">Ульяновск</span>
+          </header>
+        </div>
         <div className="link">
           <div className="link__content">
             <div className="link__content__location active">Местоположение</div>
@@ -25,16 +63,19 @@ class Order extends React.Component {
             <div className="order__content__location">
               <div className="form">
                 <div>
-                  <label for="city">Город</label>
-                  <div>
+                  <label htmlFor="city">Город</label>
+                  <div className="wrap__location">
                     <input
                       id="city"
                       type="text"
+                      onChange={this.addCity}
+                      value={this.state.valueCity}
                       placeholder="Начните вводить город..."></input>
+                    <ul className="dropdown-list">{list}</ul>
                   </div>
                 </div>
                 <div>
-                  <label for="delivery_point">Пункт выдачи</label>
+                  <label htmlFor="delivery_point">Пункт выдачи</label>
                   <div>
                     <input
                       id="delivery_point"
@@ -54,35 +95,37 @@ class Order extends React.Component {
             <div className="order__content__cost">
               <p className="title">Ваш заказ:</p>
               <div className="param">
-                <div class="delivery_point">
-                  <span class="delivery_point__prop feature-left">
+                <div className="delivery_point">
+                  <span className="delivery_point__prop feature-left">
                     Пункт выдачи
                   </span>
-                  <span class="delivery_point__value feature-right">
+                  <span className="delivery_point__value feature-right">
                     Ульяновск, Нариманова 42
                   </span>
                 </div>
-                <div class="model">
-                  <span class="model__prop feature-left">Модель</span>
-                  <span class="model__value feature-right">Hyndai, i30 N</span>
+                <div className="model">
+                  <span className="model__prop feature-left">Модель</span>
+                  <span className="model__value feature-right">
+                    Hyndai, i30 N
+                  </span>
                 </div>
-                <div class="color">
-                  <span class="color__prop feature-left">Цвет</span>
-                  <span class="color__value feature-right">Голубой</span>
+                <div className="color">
+                  <span className="color__prop feature-left">Цвет</span>
+                  <span className="color__value feature-right">Голубой</span>
                 </div>
-                <div class="duration">
-                  <span class="duration__prop feature-left">
+                <div className="duration">
+                  <span className="duration__prop feature-left">
                     Длительность аренды
                   </span>
-                  <span class="duration__value feature-right">1д 2ч</span>
+                  <span className="duration__value feature-right">1д 2ч</span>
                 </div>
-                <div class="rate">
-                  <span class="rate__prop feature-left">Тариф</span>
-                  <span class="rate__value feature-right">На сутки</span>
+                <div className="rate">
+                  <span className="rate__prop feature-left">Тариф</span>
+                  <span className="rate__value feature-right">На сутки</span>
                 </div>
-                <div class="oil">
-                  <span class="oil__prop feature-left">Полный бак</span>
-                  <span class="oil__value feature-right">Да</span>
+                <div className="oil">
+                  <span className="oil__prop feature-left">Полный бак</span>
+                  <span className="oil__value feature-right">Да</span>
                 </div>
               </div>
               <p className="cost">
