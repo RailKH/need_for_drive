@@ -28,7 +28,7 @@ class App extends React.Component {
         {/* <Content burger={this.state.burger} /> */}
         <Menu burger={this.state.burger} />
         {/* <Slider burger={this.state.burger} /> */}
-        <Order />
+        <Order burger={this.state.burger} />
       </div>
     );
   }

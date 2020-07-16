@@ -1,10 +1,11 @@
 import React from "react";
+import classnames from "classnames";
 
 const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
 
 class Order extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       valueCity: "",
       filterCity: [],
@@ -38,7 +39,7 @@ class Order extends React.Component {
       );
     });
     return (
-      <section className="order">
+      <section className={classnames("order", this.props.burger && "disabled")}>
         <div className="order__header">
           <header className="content__header">
             <a href="#" className="content__header__logo">
@@ -62,7 +63,7 @@ class Order extends React.Component {
           <div className="wrapper">
             <div className="order__content__location">
               <div className="form">
-                <div>
+                <div className="form__input">
                   <label htmlFor="city">Город</label>
                   <div className="wrap__location">
                     <input
@@ -74,13 +75,14 @@ class Order extends React.Component {
                     <ul className="dropdown-list">{list}</ul>
                   </div>
                 </div>
-                <div>
+                <div className="form__input">
                   <label htmlFor="delivery_point">Пункт выдачи</label>
-                  <div>
+                  <div className="wrap__location">
                     <input
                       id="delivery_point"
                       type="text"
                       placeholder="Начните вводить пункт..."></input>
+                    <ul className="dropdown-list delivery"></ul>
                   </div>
                 </div>
                 <div className="map">
