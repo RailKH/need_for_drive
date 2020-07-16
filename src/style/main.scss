@@ -305,6 +305,7 @@ $dark-gray: #999999;
   background-color: white;
   display: flex;
   flex-direction: column;
+  position: relative;
   &.disabled {
     &::before {
       z-index: 2;
@@ -351,9 +352,14 @@ $dark-gray: #999999;
     .active {
       color: $green;
     }
+    .ready {
+      color: $black;
+    }
   }
   &__content {
     flex: 1;
+    overflow: hidden;
+    overflow-y: scroll;
     .wrapper {
       box-sizing: content-box;
       height: 100%;
@@ -365,6 +371,11 @@ $dark-gray: #999999;
       grid-template-columns: 1fr 320px;
       > div {
         padding-top: 33px;
+      }
+    }
+    &__location {
+      .form > div {
+        margin-bottom: 13px;
       }
       .form__input {
         display: flex;
@@ -399,11 +410,6 @@ $dark-gray: #999999;
           cursor: url(../img/Cursor.png), pointer;
         }
       }
-    }
-    &__location {
-      .form > div {
-        margin-bottom: 13px;
-      }
       .wrap__location {
         display: flex;
         position: relative;
@@ -431,7 +437,69 @@ $dark-gray: #999999;
         }
       }
     }
+    &__model {
+      .form__radio {
+        input[type="radio"] {
+          display: none;
+        }
 
+        input[type="radio"] + label {
+          color: $dark-gray;
+          margin-right: 16px;
+          cursor: url(../img/Pointer.svg), pointer;
+        }
+
+        input[type="radio"] + label span {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          margin: -2px 8px 0 0;
+          vertical-align: middle;
+          border: 1px solid $dark-gray;
+          border-radius: 50%;
+        }
+
+        input[type="radio"]:checked + label span {
+          border: 3px solid $green;
+        }
+        input[type="radio"]:checked + label {
+          color: $black;
+        }
+      }
+      .form__selectCar {
+        display: flex;
+        margin: 48px 30px 16px 0;
+        max-width: 736px;
+        flex-wrap: wrap;
+        &__item {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          padding: 16px;
+          border: 1px solid $light-gray;
+          &.active {
+            border: 1px solid $green;
+          }
+          .title {
+            font-size: 18px;
+            line-height: 21px;
+            text-transform: uppercase;
+            font-weight: normal;
+          }
+          .cost {
+            color: $dark-gray;
+          }
+          &:hover {
+            cursor: url(../img/Pointer.svg), pointer;
+            border: 1px solid $dark-gray;
+          }
+          img {
+            width: 80%;
+            align-self: flex-end;
+          }
+        }
+      }
+    }
     &__cost {
       border-left: 1px solid $light-gray;
       padding-left: 30px;

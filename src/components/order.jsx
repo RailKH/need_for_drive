@@ -8,10 +8,13 @@ class Order extends React.Component {
     super(props);
     this.state = {
       valueCity: "",
+      valueCityPoint: "",
       filterCity: [],
+      valueCar: "",
     };
     this.addCity = this.addCity.bind(this);
     this.selectCity = this.selectCity.bind(this);
+    this.clearInput = this.clearInput.bind(this);
   }
   //актвирует выпадающий список
   addCity(e) {
@@ -30,7 +33,14 @@ class Order extends React.Component {
       valueCity: e.target.textContent,
     });
   }
+  //очистка inputs
+  clearInput(item) {
+    this.setState({
+      item: "",
+    });
+  }
   render() {
+    const [car_1, car_2, car_3] = this.props.cars;
     const list = this.state.filterCity.map((item, id) => {
       return (
         <li onClick={(e) => this.selectCity(e)} key={id} className="dropdown">
@@ -50,9 +60,9 @@ class Order extends React.Component {
         </div>
         <div className="link">
           <div className="link__content">
-            <div className="link__content__location active">Местоположение</div>
+            <div className="link__content__location ready">Местоположение</div>
             <span></span>
-            <div className="link__content__model">Модель</div>
+            <div className="link__content__model active">Модель</div>
             <span></span>
             <div className="link__content__extra">Дополнительно</div>
             <span></span>
@@ -71,7 +81,15 @@ class Order extends React.Component {
                       type="text"
                       onChange={this.addCity}
                       value={this.state.valueCity}
-                      placeholder="Начните вводить город..."></input>
+                      placeholder="Начните вводить город..."
+                    />
+                    {this.state.valueCity && (
+                      <span
+                        class="close"
+                        onClick={() => this.clearInput("valueCity")}>
+                        &times;
+                      </span>
+                    )}
                     <ul className="dropdown-list">{list}</ul>
                   </div>
                 </div>
@@ -81,17 +99,56 @@ class Order extends React.Component {
                     <input
                       id="delivery_point"
                       type="text"
-                      placeholder="Начните вводить пункт..."></input>
+                      placeholder="Начните вводить пункт..."
+                    />
+                    <span
+                      class="close"
+                      onClick={() => this.clearInput("valueCityPoint")}>
+                      &times;
+                    </span>
                     <ul className="dropdown-list delivery"></ul>
                   </div>
                 </div>
                 <div className="map">
                   <p>Выбрать на карте:</p>
+
                   <div className="map__area"></div>
                 </div>
               </div>
             </div>
-            <div className="order__content__model disabled"></div>
+            <div className="order__content__model disabled">
+              <div className="form__radio">
+                <input type="radio" id="r1" name="rr" />
+                <label for="r1">
+                  <span></span>Все модели
+                </label>
+                <input type="radio" id="r2" name="rr" />
+                <label for="r2">
+                  <span></span>Эконом
+                </label>
+                <input type="radio" id="r3" name="rr" />
+                <label for="r3">
+                  <span></span>Премиум
+                </label>
+              </div>
+              <div className="form__selectCar">
+                <div className="form__selectCar__item">
+                  <p className="title">Elantra</p>
+                  <p className="cost">12000-25000P</p>
+                  <img src={car_1} />
+                </div>
+                <div className="form__selectCar__item active">
+                  <p className="title">i30 N</p>
+                  <p className="cost">10000-32000P</p>
+                  <img src={car_2} />
+                </div>
+                <div className="form__selectCar__item">
+                  <p className="title">CRETA</p>
+                  <p className="cost">12000-25000P</p>
+                  <img src={car_3} />
+                </div>
+              </div>
+            </div>
             <div className="order__content__extra disabled"></div>
             <div className="order__content__total disabled"></div>
             <div className="order__content__cost">

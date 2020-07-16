@@ -392,6 +392,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
 .order.disabled::before {
@@ -445,10 +446,16 @@
   color: #0ec261;
 }
 
+.order .link .ready {
+  color: #121212;
+}
+
 .order__content {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .order__content .wrapper {
@@ -469,13 +476,17 @@
   padding-top: 33px;
 }
 
-.order__content .wrapper .form__input {
+.order__content__location .form > div {
+  margin-bottom: 13px;
+}
+
+.order__content__location .form__input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.order__content .wrapper .form input {
+.order__content__location .form input {
   font-family: Roboto;
   font-weight: 300;
   font-size: 14px;
@@ -484,7 +495,7 @@
   outline: none;
 }
 
-.order__content .wrapper .form .dropdown-list {
+.order__content__location .form .dropdown-list {
   width: 100%;
   max-height: 106px;
   z-index: 2;
@@ -497,21 +508,17 @@
   top: 19px;
 }
 
-.order__content .wrapper .form .dropdown-list.delivery {
+.order__content__location .form .dropdown-list.delivery {
   z-index: 1;
 }
 
-.order__content .wrapper .form .dropdown-list .dropdown {
+.order__content__location .form .dropdown-list .dropdown {
   padding: 3px 6px;
 }
 
-.order__content .wrapper .form .dropdown-list .dropdown:hover {
+.order__content__location .form .dropdown-list .dropdown:hover {
   color: #0ec261;
   cursor: url(../img/Cursor.png), pointer;
-}
-
-.order__content__location .form > div {
-  margin-bottom: 13px;
 }
 
 .order__content__location .wrap__location {
@@ -546,6 +553,83 @@
   max-width: 736px;
   height: 352px;
   background: url(../img/map.jpg) no-repeat center center;
+}
+
+.order__content__model .form__radio input[type="radio"] {
+  display: none;
+}
+
+.order__content__model .form__radio input[type="radio"] + label {
+  color: #999999;
+  margin-right: 16px;
+  cursor: url(../img/Pointer.svg), pointer;
+}
+
+.order__content__model .form__radio input[type="radio"] + label span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: -2px 8px 0 0;
+  vertical-align: middle;
+  border: 1px solid #999999;
+  border-radius: 50%;
+}
+
+.order__content__model .form__radio input[type="radio"]:checked + label span {
+  border: 3px solid #0ec261;
+}
+
+.order__content__model .form__radio input[type="radio"]:checked + label {
+  color: #121212;
+}
+
+.order__content__model .form__selectCar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 48px 30px 16px 0;
+  max-width: 736px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.order__content__model .form__selectCar__item {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 16px;
+  border: 1px solid #eeeeee;
+}
+
+.order__content__model .form__selectCar__item.active {
+  border: 1px solid #0ec261;
+}
+
+.order__content__model .form__selectCar__item .title {
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.order__content__model .form__selectCar__item .cost {
+  color: #999999;
+}
+
+.order__content__model .form__selectCar__item:hover {
+  cursor: url(../img/Pointer.svg), pointer;
+  border: 1px solid #999999;
+}
+
+.order__content__model .form__selectCar__item img {
+  width: 80%;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .order__content__cost {
@@ -791,6 +875,12 @@
   }
   .order__content__location .map {
     margin-top: 15px;
+  }
+  .order__content__model .form__selectCar {
+    margin: 15px 0 0 0;
+  }
+  .order__content__model .form__selectCar__item {
+    width: 80%;
   }
   .order__content__cost {
     border: none;

@@ -121,6 +121,14 @@
           margin-top: 15px;
         }
       }
+      &__model {
+        .form__selectCar {
+          margin: 15px 0 0 0;
+          &__item {
+            width: 80%;
+          }
+        }
+      }
       &__cost {
         border: none;
         border-top: 1px solid $light-gray;
