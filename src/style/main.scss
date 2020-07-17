@@ -415,6 +415,9 @@ $dark-gray: #999999;
         position: relative;
         width: 224px;
         margin-right: 30px;
+        .close:hover {
+          cursor: url(../img/Cursor.png), pointer;
+        }
       }
       label {
         width: 91px;
@@ -423,6 +426,7 @@ $dark-gray: #999999;
         float: left;
         margin-right: 8px;
       }
+
       input {
         border: none;
         width: 100%;

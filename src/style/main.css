@@ -530,6 +530,10 @@
   margin-right: 30px;
 }
 
+.order__content__location .wrap__location .close:hover {
+  cursor: url(../img/Cursor.png), pointer;
+}
+
 .order__content__location label {
   width: 91px;
   -ms-flex-negative: 0;

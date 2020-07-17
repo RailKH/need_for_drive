@@ -35,10 +35,17 @@ class Order extends React.Component {
   }
   //очистка inputs
   clearInput(item) {
-    this.setState({
-      item: "",
-    });
+    if (item == "valueCity") {
+      this.setState({
+        valueCity: "",
+      });
+    } else {
+      this.setState({
+        valueCityPoint: "",
+      });
+    }
   }
+
   render() {
     const [car_1, car_2, car_3] = this.props.cars;
     const list = this.state.filterCity.map((item, id) => {
@@ -71,7 +78,7 @@ class Order extends React.Component {
         </div>
         <section className="order__content">
           <div className="wrapper">
-            <div className="order__content__location">
+            <div className="order__content__location disabled">
               <div className="form">
                 <div className="form__input">
                   <label htmlFor="city">Город</label>
@@ -99,6 +106,7 @@ class Order extends React.Component {
                     <input
                       id="delivery_point"
                       type="text"
+                      // value={this.state.valueCityPoint}
                       placeholder="Начните вводить пункт..."
                     />
                     <span
@@ -116,7 +124,7 @@ class Order extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="order__content__model disabled">
+            <div className="order__content__model">
               <div className="form__radio">
                 <input type="radio" id="r1" name="rr" />
                 <label for="r1">
