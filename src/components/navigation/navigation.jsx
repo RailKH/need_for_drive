@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import classnames from "classnames";
+import "./navigation.scss";
 
 export default function Navigation(props) {
+  const [lang, setLang] = useState(true);
   return (
     <nav className="nav">
       <div
@@ -11,7 +13,9 @@ export default function Navigation(props) {
         <span className="menu-middle"></span>
         <span className="menu-bottom"></span>
       </div>
-      <div className="nav__lanSwitch">Eng</div>
+      <div className="nav__lanSwitch" onClick={() => setLang(!lang)}>
+        {lang ? "Рус" : "Eng"}
+      </div>
     </nav>
   );
 }

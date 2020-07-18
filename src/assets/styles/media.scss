@@ -129,6 +129,12 @@
           }
         }
       }
+      &__total {
+        flex-wrap: wrap;
+        .total__form {
+          width: 190px;
+        }
+      }
       &__cost {
         border: none;
         border-top: 1px solid $light-gray;

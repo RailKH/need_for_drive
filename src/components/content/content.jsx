@@ -1,5 +1,5 @@
 import React from "react";
-import classnames from "classnames";
+import "./content.scss";
 
 export default function Content(props) {
   return (
@@ -21,7 +21,12 @@ export default function Content(props) {
         <button className="content__desc__button button">Забронировать</button>
       </main>
       <footer className="content__footer">
-        <span>© 2016-2019 «Need for drive»</span>8 (495) 234-22-44
+        <span className="content__footer__copyright">
+          © 2016-2019 «Need for drive»
+        </span>
+        <a className="content__footer__phone" href="tel:8495234-22-44">
+          8 (495) 234-22-44
+        </a>
       </footer>
     </section>
   );

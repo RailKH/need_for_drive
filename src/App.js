@@ -1,14 +1,15 @@
 import React from "react";
-import Navigation from "./components/navigation";
-import Content from "./components/content";
-import Menu from "./components/menu";
-import Slider from "./components/slider";
+import Navigation from "./components/navigation/navigation";
+import Content from "./components/content/content";
+import Menu from "./components/menu/menu";
+import Slider from "./components/slider/slider";
 import Order from "./components/order";
-import car_1 from "./img/cars/image_1.png";
-import car_2 from "./img/cars/image_2.png";
-import car_3 from "./img/cars/image_3.png";
+import car_1 from "./assets/img/cars/image_1.png";
+import car_2 from "./assets/img/cars/image_2.png";
+import car_3 from "./assets/img/cars/image_3.png";
 
-import "./style/main.css";
+import "./assets/styles/main.scss";
+import Verification from "./components/verification";
 
 const cars = [car_1, car_2, car_3];
 
@@ -34,6 +35,7 @@ class App extends React.Component {
         <Menu burger={this.state.burger} />
         {/* <Slider burger={this.state.burger} /> */}
         <Order burger={this.state.burger} cars={cars} />
+        {/* <Verification /> */}
       </div>
     );
   }

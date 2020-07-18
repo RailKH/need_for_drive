@@ -1,10 +1,10 @@
 import React from "react";
 import classnames from "classnames";
-
-import car0 from "../img/bg_slider_0.jpg";
-import car1 from "../img/bg_slider_1.jpg";
-import car2 from "../img/bg_slider_2.jpg";
-import car3 from "../img/bg_slider_3.jpg";
+import "./slider.scss";
+import car0 from "../../assets/img/bg_slider_0.jpg";
+import car1 from "../../assets/img/bg_slider_1.jpg";
+import car2 from "../../assets/img/bg_slider_2.jpg";
+import car3 from "../../assets/img/bg_slider_3.jpg";
 
 // swiper library
 import SwiperCore, { Navigation, Pagination } from "swiper";
@@ -22,22 +22,22 @@ export default function Slider(props) {
       name: "Бесплатная парковка",
       desc:
         "Оставляйте машину на платных городских парковках и разрешенных местах, не нарушая ПДД, а также в аэропортах.",
-      color: "",
+      color: "green",
     },
     {
       name: "Страховка",
       desc: "Полная страховка страховка автомобиля",
-      color: "",
+      color: "blue",
     },
     {
       name: "Бензин",
       desc: "Полный бак на любой заправке города за наш счёт",
-      color: "",
+      color: "red",
     },
     {
       name: "Обслуживание",
       desc: "Автомобиль проходит еженедельное ТО",
-      color: "",
+      color: "violet",
     },
   ];
 
@@ -55,7 +55,8 @@ export default function Slider(props) {
                 <div className="slider__content__wrapper">
                   <div className="slider__content__title">{item.name}</div>
                   <p className="slider__content__text">{item.desc}</p>
-                  <button className="slider__content__button button">
+                  <button
+                    className={`slider__content__button button ${item.color}`}>
                     Подробнее
                   </button>
                 </div>

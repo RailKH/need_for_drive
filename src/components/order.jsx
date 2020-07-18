@@ -157,7 +157,7 @@ class Order extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="order__content__extra">
+            <div className="order__content__extra disabled">
               <div className="extra__form">
                 <div className="extra__form__color">
                   <p>Цвет</p>
@@ -239,7 +239,21 @@ class Order extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="order__content__total disabled"></div>
+            <div className="order__content__total">
+              <div className="total__form">
+                <div className="total__form__name">Hyndai, i30 N</div>
+                <div className="total__form__number">K 761 HA 73</div>
+                <div className="total__form__tank">
+                  <span>Топливо</span> 100%
+                </div>
+                <div className="total__form__date">
+                  <span>Доступна с</span> 12.06.2019 12:00
+                </div>
+              </div>
+              <div>
+                <img src={car_1} />
+              </div>
+            </div>
             <div className="order__content__cost">
               <p className="title">Ваш заказ:</p>
               <div className="param">
