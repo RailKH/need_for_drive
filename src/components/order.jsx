@@ -124,17 +124,17 @@ class Order extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="order__content__model">
-              <div className="form__radio">
-                <input type="radio" id="r1" name="rr" />
+            <div className="order__content__model disabled">
+              <div className="form__model">
+                <input type="radio" id="r1" name="model" />
                 <label for="r1">
                   <span></span>Все модели
                 </label>
-                <input type="radio" id="r2" name="rr" />
+                <input type="radio" id="r2" name="model" />
                 <label for="r2">
                   <span></span>Эконом
                 </label>
-                <input type="radio" id="r3" name="rr" />
+                <input type="radio" id="r3" name="model" />
                 <label for="r3">
                   <span></span>Премиум
                 </label>
@@ -157,7 +157,88 @@ class Order extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="order__content__extra disabled"></div>
+            <div className="order__content__extra">
+              <div className="extra__form">
+                <div className="extra__form__color">
+                  <p>Цвет</p>
+                  <input type="radio" id="m1" name="color" />
+                  <label for="m1">
+                    <span></span>Любой
+                  </label>
+                  <input type="radio" id="m2" name="color" />
+                  <label for="m2">
+                    <span></span>Красный
+                  </label>
+                  <input type="radio" id="m3" name="color" />
+                  <label for="m3">
+                    <span></span>Голубой
+                  </label>
+                </div>
+                <div className="extra__form__date">
+                  <p>Дата аренды</p>
+                  <div>
+                    <label>С</label>
+                    <input
+                      type="text"
+                      placeholder="Введите дату и время"></input>
+                  </div>
+                  <label>По</label>
+                  <input type="text" placeholder="Введите дату и время"></input>
+                </div>
+                <div className="extra__form__rate">
+                  <p>Тариф</p>
+                  <div className="wrap">
+                    <input type="radio" id="t1" name="rate" />
+                    <label for="t1">
+                      <span></span>Поминутно, 7₽/мин
+                    </label>
+                  </div>
+                  <input type="radio" id="t2" name="rate" />
+                  <label for="t2">
+                    <span></span>На сутки, 1999 ₽/сутки
+                  </label>
+                </div>
+                <div className="extra__form__additional">
+                  <p>Доп услуги</p>
+                  <div className="additional__checkbox">
+                    <input
+                      type="checkbox"
+                      className="additional__checkbox__custom"
+                      id="tank"
+                      name="tank"
+                      value="tank"
+                    />
+                    <label htmlFor="tank">
+                      <span></span>Полный бак, 500р
+                    </label>
+                  </div>
+                  <div className="additional__checkbox">
+                    <input
+                      type="checkbox"
+                      className="additional__checkbox__custom"
+                      id="chair"
+                      name="chair"
+                      value="chair"
+                    />
+                    <label htmlFor="chair">
+                      <span></span>Детское кресло, 200р
+                    </label>
+                  </div>
+                  <div className="additional__checkbox">
+                    <input
+                      type="checkbox"
+                      className="additional__checkbox__custom"
+                      id="wheel"
+                      name="wheel"
+                      value="wheel"
+                    />
+                    <label htmlFor="wheel">
+                      <span></span>Правый руль, 1600р
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="order__content__total disabled"></div>
             <div className="order__content__cost">
               <p className="title">Ваш заказ:</p>
