@@ -3,7 +3,8 @@ import Navigation from "./components/navigation/navigation";
 import Content from "./components/content/content";
 import Menu from "./components/menu/menu";
 import Slider from "./components/slider/slider";
-import Order from "./components/order";
+import Order from "./components/order/order";
+
 import car_1 from "./assets/img/cars/image_1.png";
 import car_2 from "./assets/img/cars/image_2.png";
 import car_3 from "./assets/img/cars/image_3.png";

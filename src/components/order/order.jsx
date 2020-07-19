@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
-
-const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
+import "./order.scss";
+import LocationPage from "./locat-page/location";
 
 class Order extends React.Component {
   constructor(props) {
@@ -9,56 +9,51 @@ class Order extends React.Component {
     this.state = {
       valueCity: "",
       valueCityPoint: "",
-      filterCity: [],
+      // filterCity: [],
       valueCar: "",
     };
-    this.addCity = this.addCity.bind(this);
-    this.selectCity = this.selectCity.bind(this);
-    this.clearInput = this.clearInput.bind(this);
+    this.test = this.test.bind(this);
+    // this.selectCity = this.selectCity.bind(this);
+    // this.clearInput = this.clearInput.bind(this);
   }
   //актвирует выпадающий список
-  addCity(e) {
-    this.state.filterCity = [];
-    if (e.target.value !== "") {
-      this.state.filterCity = CITY;
-    }
-    this.setState({
-      valueCity: e.target.value,
-    });
+  // addCity(e) {
+  //   this.state.filterCity = [];
+  //   if (e.target.value !== "") {
+  //     this.state.filterCity = CITY;
+  //   }
+  //   this.setState({
+  //     valueCity: e.target.value,
+  //   });
+  // }
+  // //срабатывает при нажатии на город из списка
+  // selectCity(e) {
+  //   this.setState({
+  //     filterCity: [],
+  //     valueCity: e.target.textContent,
+  //   });
+  // }
+  // //очистка inputs
+  // clearInput(item) {
+  //   if (item == "valueCity") {
+  //     this.setState({
+  //       valueCity: "",
+  //     });
+  //   } else {
+  //     this.setState({
+  //       valueCityPoint: "",
+  //     });
+  //   }
+  // }
+  test() {
+    console.log(this.state.valueCity);
   }
-  //срабатывает при нажатии на город из списка
-  selectCity(e) {
-    this.setState({
-      filterCity: [],
-      valueCity: e.target.textContent,
-    });
-  }
-  //очистка inputs
-  clearInput(item) {
-    if (item == "valueCity") {
-      this.setState({
-        valueCity: "",
-      });
-    } else {
-      this.setState({
-        valueCityPoint: "",
-      });
-    }
-  }
-
   render() {
     const [car_1, car_2, car_3] = this.props.cars;
-    const list = this.state.filterCity.map((item, id) => {
-      return (
-        <li onClick={(e) => this.selectCity(e)} key={id} className="dropdown">
-          {item}
-        </li>
-      );
-    });
     return (
       <section className={classnames("order", this.props.burger && "disabled")}>
         <div className="order__header">
-          <header className="content__header">
+          <header className="content__header" onClick={this.test}>
             <a href="#" className="content__header__logo">
               Need for drive
             </a>
@@ -78,52 +73,10 @@ class Order extends React.Component {
         </div>
         <section className="order__content">
           <div className="wrapper">
-            <div className="order__content__location disabled">
-              <div className="form">
-                <div className="form__input">
-                  <label htmlFor="city">Город</label>
-                  <div className="wrap__location">
-                    <input
-                      id="city"
-                      type="text"
-                      onChange={this.addCity}
-                      value={this.state.valueCity}
-                      placeholder="Начните вводить город..."
-                    />
-                    {this.state.valueCity && (
-                      <span
-                        class="close"
-                        onClick={() => this.clearInput("valueCity")}>
-                        &times;
-                      </span>
-                    )}
-                    <ul className="dropdown-list">{list}</ul>
-                  </div>
-                </div>
-                <div className="form__input">
-                  <label htmlFor="delivery_point">Пункт выдачи</label>
-                  <div className="wrap__location">
-                    <input
-                      id="delivery_point"
-                      type="text"
-                      // value={this.state.valueCityPoint}
-                      placeholder="Начните вводить пункт..."
-                    />
-                    <span
-                      class="close"
-                      onClick={() => this.clearInput("valueCityPoint")}>
-                      &times;
-                    </span>
-                    <ul className="dropdown-list delivery"></ul>
-                  </div>
-                </div>
-                <div className="map">
-                  <p>Выбрать на карте:</p>
-
-                  <div className="map__area"></div>
-                </div>
-              </div>
-            </div>
+            <LocationPage
+              valueCity={this.state.valueCity}
+              valueCityPoint={this.state.valueCityPoint}
+            />
             <div className="order__content__model disabled">
               <div className="form__model">
                 <input type="radio" id="r1" name="model" />
@@ -239,7 +192,7 @@ class Order extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="order__content__total">
+            <div className="order__content__total disabled">
               <div className="total__form">
                 <div className="total__form__name">Hyndai, i30 N</div>
                 <div className="total__form__number">K 761 HA 73</div>
