@@ -58,4 +58,7 @@
     color: $light-gray;
     cursor: url(../../assets/icons/Cursor.png), pointer;
   }
+  &__lanSwitch:active {
+    color: $green;
+  }
 }

@@ -73,7 +73,9 @@
       padding: 16px;
       flex-direction: column-reverse;
       align-items: flex-end;
-      color: $green;
+      &__phone {
+        color: $green;
+      }
       span {
         color: $light-gray;
         margin-top: 8px;

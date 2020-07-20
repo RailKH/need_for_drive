@@ -10,8 +10,16 @@
   position: absolute;
   margin-left: 57px;
   z-index: 3;
+  transition: all 1s;
+  opacity: 1;
+
   &.disabled {
-    display: none;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    .menu__content {
+      display: none;
+    }
   }
   ul {
     margin-bottom: 38px;
