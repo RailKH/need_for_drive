@@ -38,6 +38,9 @@
   &__content__icons svg:hover .icon {
     fill: $green;
   }
+  &__content__icons a:hover {
+    cursor: url(../../assets/icons/Pointer.svg), pointer;
+  }
   &__content li:hover {
     color: $green;
     cursor: url(../../assets/icons/Pointer.svg), pointer;
