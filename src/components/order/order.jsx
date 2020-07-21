@@ -2,21 +2,10 @@ import React from "react";
 import classnames from "classnames";
 import "./order.scss";
 import LocationPage from "./locat-page/location";
+const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
 
 class Order extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      valueCity: "",
-      valueCityPoint: "",
-      // filterCity: [],
-      valueCar: "",
-    };
-    this.test = this.test.bind(this);
-    // this.selectCity = this.selectCity.bind(this);
-    // this.clearInput = this.clearInput.bind(this);
-  }
-  //актвирует выпадающий список
+  // //актвирует выпадающий список
   // addCity(e) {
   //   this.state.filterCity = [];
   //   if (e.target.value !== "") {
@@ -45,15 +34,13 @@ class Order extends React.Component {
   //     });
   //   }
   // }
-  test() {
-    console.log(this.state.valueCity);
-  }
+
   render() {
     const [car_1, car_2, car_3] = this.props.cars;
     return (
       <section className={classnames("order", this.props.burger && "disabled")}>
         <div className="order__header">
-          <header className="content__header" onClick={this.test}>
+          <header className="content__header">
             <a href="#" className="content__header__logo">
               Need for drive
             </a>
@@ -73,10 +60,7 @@ class Order extends React.Component {
         </div>
         <section className="order__content">
           <div className="wrapper">
-            <LocationPage
-              valueCity={this.state.valueCity}
-              valueCityPoint={this.state.valueCityPoint}
-            />
+            <LocationPage />
             <div className="order__content__model disabled">
               <div className="form__model">
                 <input type="radio" id="r1" name="model" />

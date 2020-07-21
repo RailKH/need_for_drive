@@ -7,9 +7,28 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
   &.disabled {
     &::before {
+      height: 100%;
       z-index: 2;
+      animation: openMenu 1s;
+    }
+  }
+  @keyframes openMenu {
+    from {
+      height: 0;
+    }
+    to {
+      height: 100%;
+    }
+  }
+  @keyframes closeMenu {
+    from {
+      height: 100%;
+    }
+    to {
+      height: 0;
     }
   }
   &::before {
@@ -17,9 +36,9 @@
     position: absolute;
     display: block;
     width: 100%;
-    height: 100%;
     background: $black;
-    z-index: -1;
+    animation: closeMenu 1s;
+    z-index: 2;
   }
   input[type="radio"],
   input[type="checkbox"] {
@@ -144,7 +163,7 @@
       .form .dropdown-list {
         width: 100%;
         max-height: 106px;
-        z-index: 2;
+        z-index: 1;
         border: 1px solid $light-gray;
         border-top: none;
         position: absolute;
@@ -153,7 +172,7 @@
         border-top: 1px solid $dark-gray;
         top: 19px;
         &.delivery {
-          z-index: 1;
+          z-index: 0;
         }
         .dropdown {
           padding: 3px 6px;
