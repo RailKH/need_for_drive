@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import classnames from "classnames";
+
 import { connect } from "react-redux";
 import { setCityText, setCityPointText } from "../../../store/location/action";
 const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
@@ -30,7 +32,6 @@ function Location(props) {
     setfilterCity([]);
   }
 
-  // список с городами
   const list = filterCity.map((item, id) => {
     return (
       <li
@@ -43,7 +44,11 @@ function Location(props) {
   });
 
   return (
-    <div className="order__content__location">
+    <div
+      className={classnames(
+        "order__content__location",
+        props.id != "0" && "disabled"
+      )}>
       <div className="form">
         <div className="form__input">
           <label htmlFor="city">Город</label>

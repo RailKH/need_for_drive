@@ -10,32 +10,32 @@
 
   &.disabled {
     &::before {
-      height: 100%;
+      width: 100%;
       z-index: 2;
       animation: openMenu 1s;
     }
   }
   @keyframes openMenu {
     from {
-      height: 0;
+      width: 0;
     }
     to {
-      height: 100%;
+      width: 100%;
     }
   }
   @keyframes closeMenu {
     from {
-      height: 100%;
+      width: 100%;
     }
     to {
-      height: 0;
+      width: 0;
     }
   }
   &::before {
     content: "";
     position: absolute;
     display: block;
-    width: 100%;
+    height: 100%;
     background: $black;
     animation: closeMenu 1s;
     z-index: 2;
@@ -99,6 +99,9 @@
       max-width: 1250px;
       margin: 0 auto;
       box-sizing: content-box;
+      &__logo:hover {
+        cursor: url(../../assets/icons/Pointer.svg), pointer;
+      }
     }
   }
 
@@ -116,6 +119,9 @@
       max-width: 1250px;
       padding: 7px 64px;
       margin: 0 auto;
+      &__text:hover {
+        cursor: url(../../assets/icons/Pointer.svg), pointer;
+      }
     }
     span {
       background: url(../../assets/icons/Vector.svg) no-repeat center center;

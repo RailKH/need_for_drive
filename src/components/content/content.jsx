@@ -1,5 +1,6 @@
 import React from "react";
 import "./content.scss";
+import { Link } from "react-router-dom";
 
 export default function Content(props) {
   return (
@@ -18,7 +19,11 @@ export default function Content(props) {
         <p className="content__desc__text">
           Поминутная аренда авто твоего города
         </p>
-        <button className="content__desc__button button">Забронировать</button>
+        <Link to="/order">
+          <button className="content__desc__button button">
+            Забронировать
+          </button>
+        </Link>
       </main>
       <footer className="content__footer">
         <span className="content__footer__copyright">

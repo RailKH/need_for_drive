@@ -1,9 +1,9 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navigation from "./components/navigation/navigation";
-import Content from "./components/content/content";
 import Menu from "./components/menu/menu";
-import Slider from "./components/slider/slider";
 import Order from "./components/order/order";
+import FirstPage from "./components/first-page/first-page";
 
 import car_1 from "./assets/img/cars/image_1.png";
 import car_2 from "./assets/img/cars/image_2.png";
@@ -29,14 +29,29 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="main">
-        <Navigation openMenu={this.openMenu} burger={this.state.burger} />
-        {/* <Content burger={this.state.burger} /> */}
-        <Menu burger={this.state.burger} />
-        {/* <Slider burger={this.state.burger} /> */}
-        <Order burger={this.state.burger} cars={cars} />
-        {/* <Verification /> */}
-      </div>
+      <Router>
+        <div className="main">
+          <Navigation openMenu={this.openMenu} burger={this.state.burger} />
+          <Menu burger={this.state.burger} />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <FirstPage burger={this.state.burger} {...props} />
+              )}
+            />
+            <Route
+              exact
+              path="/order"
+              render={(props) => (
+                <Order cars={cars} burger={this.state.burger} {...props} />
+              )}
+            />
+          </Switch>
+          {/* <Verification /> */}
+        </div>
+      </Router>
     );
   }
 }

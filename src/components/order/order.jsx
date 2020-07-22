@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import "./order.scss";
 import LocationPage from "./location-page/location";
-
+import { Link } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "../../store/reducers";
@@ -10,37 +10,83 @@ const CITY = ["Москва", "Ульяновск", "Санкт-Петербур
 const store = createStore(rootReducer);
 
 class Order extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      id: 1,
+    };
+    this.nextWrapper = this.nextWrapper.bind(this);
+  }
+  nextWrapper(item) {
+    this.setState({
+      id: item,
+    });
+  }
+
   render() {
     const [car_1, car_2, car_3] = this.props.cars;
+    const { id } = this.state;
     return (
       <Provider store={store}>
         <section
           className={classnames("order", this.props.burger && "disabled")}>
           <div className="order__header">
             <header className="content__header">
-              <a href="#" className="content__header__logo">
-                Need for drive
-              </a>
+              <Link to="/">
+                <a href="#" className="content__header__logo">
+                  Need for drive
+                </a>
+              </Link>
               <span className="content__header__location">Ульяновск</span>
             </header>
           </div>
           <div className="link">
             <div className="link__content">
-              <div className="link__content__location ready">
+              <div
+                onClick={(e) => this.nextWrapper("0")}
+                className={classnames(
+                  "link__content__text",
+                  id == "0" && "active"
+                )}>
                 Местоположение
               </div>
               <span></span>
-              <div className="link__content__model active">Модель</div>
+              <div
+                onClick={(e) => this.nextWrapper("1")}
+                className={classnames(
+                  "link__content__text",
+                  id == "1" && "active"
+                )}>
+                Модель
+              </div>
               <span></span>
-              <div className="link__content__extra">Дополнительно</div>
+              <div
+                onClick={(e) => this.nextWrapper("2")}
+                className={classnames(
+                  "link__content__text",
+                  id == "2" && "active"
+                )}>
+                Дополнительно
+              </div>
               <span></span>
-              <div className="link__content__total">Итого</div>
+              <div
+                onClick={(e) => this.nextWrapper("3")}
+                className={classnames(
+                  "link__content__text",
+                  id == "3" && "active"
+                )}>
+                Итого
+              </div>
             </div>
           </div>
           <section className="order__content">
             <div className="wrapper">
-              <LocationPage />
-              <div className="order__content__model disabled">
+              <LocationPage id={id} />
+              <div
+                className={classnames(
+                  "order__content__model",
+                  id != "1" && "disabled"
+                )}>
                 <div className="form__model">
                   <input type="radio" id="r1" name="model" />
                   <label for="r1">
@@ -73,7 +119,11 @@ class Order extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="order__content__extra disabled">
+              <div
+                className={classnames(
+                  "order__content__extra",
+                  id != "2" && "disabled"
+                )}>
                 <div className="extra__form">
                   <div className="extra__form__color">
                     <p>Цвет</p>
@@ -157,7 +207,11 @@ class Order extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="order__content__total disabled">
+              <div
+                className={classnames(
+                  "order__content__total",
+                  id != "3" && "disabled"
+                )}>
                 <div className="total__form">
                   <div className="total__form__name">Hyndai, i30 N</div>
                   <div className="total__form__number">K 761 HA 73</div>
