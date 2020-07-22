@@ -48,6 +48,7 @@ class App extends React.Component {
                 <Order cars={cars} burger={this.state.burger} {...props} />
               )}
             />
+            <Redirect from="/" to="/need_for_drive" />
           </Switch>
           {/* <Verification /> */}
         </div>
