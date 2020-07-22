@@ -12,9 +12,12 @@
   z-index: 3;
   transition: all 1s;
   opacity: 1;
-
+  color: #ffffff;
+  .icon {
+    fill: currentColor;
+  }
   &.disabled {
-    height: 0;
+    width: 0;
     padding: 0;
     opacity: 0;
     .menu__content {
@@ -29,12 +32,20 @@
     font-size: 32px;
     line-height: 37px;
     margin-bottom: 24px;
-    color: #ffffff;
+
     list-style-type: none;
   }
+
   &__content__icons a {
     margin-right: 24px;
+    color: #ffffff;
+
+    &:hover {
+      color: $green;
+      cursor: url(../../assets/icons/Pointer.svg), pointer;
+    }
   }
+
   &__content__icons svg:hover .icon {
     fill: $green;
   }

@@ -7,19 +7,38 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
   &.disabled {
     &::before {
+      width: 100%;
       z-index: 2;
+      animation: openMenu 1s;
+    }
+  }
+  @keyframes openMenu {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  @keyframes closeMenu {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0;
     }
   }
   &::before {
     content: "";
     position: absolute;
     display: block;
-    width: 100%;
     height: 100%;
     background: $black;
-    z-index: -1;
+    animation: closeMenu 1s;
+    z-index: 2;
   }
   input[type="radio"],
   input[type="checkbox"] {
@@ -80,6 +99,9 @@
       max-width: 1250px;
       margin: 0 auto;
       box-sizing: content-box;
+      &__logo:hover {
+        cursor: url(../../assets/icons/Pointer.svg), pointer;
+      }
     }
   }
 
@@ -97,6 +119,9 @@
       max-width: 1250px;
       padding: 7px 64px;
       margin: 0 auto;
+      &__text:hover {
+        cursor: url(../../assets/icons/Pointer.svg), pointer;
+      }
     }
     span {
       background: url(../../assets/icons/Vector.svg) no-repeat center center;
@@ -144,7 +169,7 @@
       .form .dropdown-list {
         width: 100%;
         max-height: 106px;
-        z-index: 2;
+        z-index: 1;
         border: 1px solid $light-gray;
         border-top: none;
         position: absolute;
@@ -153,7 +178,7 @@
         border-top: 1px solid $dark-gray;
         top: 19px;
         &.delivery {
-          z-index: 1;
+          z-index: 0;
         }
         .dropdown {
           padding: 3px 6px;
@@ -168,6 +193,7 @@
         position: relative;
         width: 224px;
         margin-right: 30px;
+        padding-right: 5px;
         .close:hover {
           cursor: url(../../assets/icons/Cursor.png), pointer;
         }
