@@ -22,7 +22,6 @@ class App extends React.Component {
     };
     this.openMenu = this.openMenu.bind(this);
   }
-  // смена state burger, открытие/закрытие меню
   openMenu() {
     this.setState((state) => ({
       burger: !state.burger,
