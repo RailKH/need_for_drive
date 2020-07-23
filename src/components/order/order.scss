@@ -127,11 +127,12 @@
       background: url(../../assets/icons/Vector.svg) no-repeat center center;
       width: 38px;
     }
-    .active {
-      color: $green;
-    }
+
     .ready {
       color: $black;
+    }
+    .active {
+      color: $green;
     }
   }
   &__content {
