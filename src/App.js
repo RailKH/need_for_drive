@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Navigation from "./components/navigation/navigation";
 import Menu from "./components/menu/menu";
 import Order from "./components/order/order";
@@ -36,7 +41,7 @@ class App extends React.Component {
           <Switch>
             <Route
               exact
-              path="/"
+              path="/need_for_drive"
               render={(props) => (
                 <FirstPage burger={this.state.burger} {...props} />
               )}
