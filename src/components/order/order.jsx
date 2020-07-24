@@ -18,13 +18,22 @@ class Order extends React.Component {
     super();
     this.state = {
       id: 0,
-      paramLocation: true,
-      paramModel: true,
-      paramExtra: true,
+      paramLocation: false,
+      paramModel: false,
+      paramExtra: false,
     };
     this.nextWrapper = this.nextWrapper.bind(this);
+    this.changeProps = this.changeProps.bind(this);
+  }
+  changeProps(value, item) {
+    console.log(value, item);
+
+    this.setState({
+      item: value,
+    });
   }
   nextWrapper(item) {
+    console.log("page");
     this.setState({
       id: item,
     });
@@ -50,7 +59,7 @@ class Order extends React.Component {
           <div className="link">
             <div className="link__content">
               <div
-                onClick={(e) => this.nextWrapper("0")}
+                onClick={(e) => this.nextWrapper(0)}
                 className={classnames(
                   "link__content__text",
                   id == "0" && "active",
@@ -60,7 +69,7 @@ class Order extends React.Component {
               </div>
               <span></span>
               <div
-                onClick={(e) => paramLocation && this.nextWrapper("1")}
+                onClick={(e) => paramLocation && this.nextWrapper(1)}
                 className={classnames(
                   "link__content__text",
                   id == "1" && "active",
@@ -70,7 +79,7 @@ class Order extends React.Component {
               </div>
               <span></span>
               <div
-                onClick={(e) => paramModel && this.nextWrapper("2")}
+                onClick={(e) => paramModel && this.nextWrapper(2)}
                 className={classnames(
                   "link__content__text",
                   id == "2" && "active",
@@ -80,7 +89,7 @@ class Order extends React.Component {
               </div>
               <span></span>
               <div
-                onClick={(e) => this.state.paramExtra && this.nextWrapper("3")}
+                onClick={(e) => this.state.paramExtra && this.nextWrapper(3)}
                 className={classnames(
                   "link__content__text",
                   id == "3" && "active",
@@ -92,11 +101,19 @@ class Order extends React.Component {
           </div>
           <section className="order__content">
             <div className="wrapper">
-              <LocationBlock id={id} />
+              <LocationBlock
+                id={id}
+                paramLocation={paramLocation}
+                changeProps={this.changeProps}
+              />
               <ModelBlock id={id} cars={this.props.cars} />
               <ExtraBlock id={id} />
               <TotalBlock id={id} />
-              <CostBlock id={id} />
+              <CostBlock
+                id={id}
+                nextWrapper={this.nextWrapper}
+                state={this.state}
+              />
             </div>
           </section>
         </section>

@@ -1,6 +1,28 @@
 import React, { useState } from "react";
+import classnames from "classnames";
 
-export default function Cost(props) {
+import { connect } from "react-redux";
+
+function Cost(props) {
+  const { id, paramLocation } = props.state;
+  let textButton = "";
+  let value = id;
+  {
+    switch (id) {
+      case 0:
+        textButton = "Выбрать модель";
+        break;
+      case 1:
+        textButton = "Дополнительно";
+        break;
+      case 2:
+        textButton = "Итого";
+        break;
+      case 3:
+        textButton = "Заказать";
+        break;
+    }
+  }
   return (
     <div className="order__content__cost">
       <p className="title">Ваш заказ:</p>
@@ -10,7 +32,7 @@ export default function Cost(props) {
             Пункт выдачи
           </span>
           <span className="delivery_point__value feature-right">
-            Ульяновск, Нариманова 42
+            {`${props.city} ${props.cityPoint}`}
           </span>
         </div>
         <div className="model">
@@ -39,7 +61,21 @@ export default function Cost(props) {
       <p className="cost">
         <span>Цена:</span> от 8 000 до 12 000 ₽
       </p>
-      <button className="button disabled">Выбрать модель</button>
+      <button
+        className={classnames("button", {
+          disabled: !props.city || !props.cityPoint,
+        })}
+        onClick={(e) => paramLocation && props.nextWrapper(++value)}>
+        {textButton}
+      </button>
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    city: state.loc.valueCity,
+    cityPoint: state.loc.valueOfPoint,
+  };
+};
+const mapDispatchToProps = {};
+export default connect(mapStateToProps, mapDispatchToProps)(Cost);
