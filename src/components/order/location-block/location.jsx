@@ -36,6 +36,7 @@ function Location(props) {
   function clearInput(item) {
     item == "city" ? props.setCityText("") : props.setCityPointText("");
     setfilterCity([]);
+    props.changeProps(false, "paramLocation");
   }
 
   const list = filterCity.map((item, id) => {

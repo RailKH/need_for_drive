@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "../../store/reducers";
-const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
 const store = createStore(rootReducer);
 
 class Order extends React.Component {
@@ -18,22 +17,24 @@ class Order extends React.Component {
     super();
     this.state = {
       id: 0,
-      paramLocation: false,
-      paramModel: false,
-      paramExtra: false,
+      paramLocation: true,
+      paramModel: true,
+      paramExtra: true,
+      paramOrder: false,
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
   }
   changeProps(value, item) {
-    console.log(value, item);
-
     this.setState({
-      item: value,
+      [item]: value,
     });
   }
   nextWrapper(item) {
-    console.log("page");
+    if (item == 4) {
+      item = 3;
+      this.props.changeVerification("verification");
+    }
     this.setState({
       id: item,
     });

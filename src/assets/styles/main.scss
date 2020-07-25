@@ -65,6 +65,15 @@ body {
       &.false {
         background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
         border-radius: 4px;
+
+        &:hover,
+        &:focus {
+          background: linear-gradient(90deg, #35220c 2.61%, #641938 112.6%);
+        }
+
+        &:active {
+          background: linear-gradient(90deg, #160e05 2.61%, #38051a 112.6%);
+        }
       }
     }
   }

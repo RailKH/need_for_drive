@@ -5,7 +5,6 @@ const defaultState = {
 };
 
 export const locReducer = (state = defaultState, action) => {
-  console.log(state);
   switch (action.type) {
     case LOC_CHANGE_CITY_TEXT:
       return {

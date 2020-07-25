@@ -4,22 +4,27 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 
 function Cost(props) {
-  const { id, paramLocation } = props.state;
+  const { id, paramLocation, paramExtra, paramModel } = props.state;
   let textButton = "";
+  let paramButton;
   let value = id;
   {
     switch (id) {
       case 0:
         textButton = "Выбрать модель";
+        paramButton = paramLocation;
         break;
       case 1:
         textButton = "Дополнительно";
+        paramButton = paramExtra;
         break;
       case 2:
         textButton = "Итого";
+        paramButton = paramModel;
         break;
       case 3:
         textButton = "Заказать";
+        paramButton = paramModel;
         break;
     }
   }
@@ -37,7 +42,7 @@ function Cost(props) {
         </div>
         <div className="model">
           <span className="model__prop feature-left">Модель</span>
-          <span className="model__value feature-right">Hyndai, i30 N</span>
+          <span className="model__value feature-right">{`${props.car}`}</span>
         </div>
         <div className="color">
           <span className="color__prop feature-left">Цвет</span>
@@ -65,7 +70,7 @@ function Cost(props) {
         className={classnames("button", {
           disabled: !props.city || !props.cityPoint,
         })}
-        onClick={(e) => paramLocation && props.nextWrapper(++value)}>
+        onClick={(e) => paramButton && props.nextWrapper(++value)}>
         {textButton}
       </button>
     </div>
@@ -75,6 +80,7 @@ const mapStateToProps = (state) => {
   return {
     city: state.loc.valueCity,
     cityPoint: state.loc.valueOfPoint,
+    car: state.mod.selectCar,
   };
 };
 const mapDispatchToProps = {};
