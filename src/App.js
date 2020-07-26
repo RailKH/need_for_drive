@@ -24,14 +24,31 @@ class App extends React.Component {
     super();
     this.state = {
       burger: false,
+      verification: false,
+      paramOrder: false,
     };
+    this.changeVerification = this.changeVerification.bind(this);
+    this.changeOrder = this.changeOrder.bind(this);
     this.openMenu = this.openMenu.bind(this);
   }
+  changeVerification() {
+    this.setState((state) => ({
+      verification: !state.verification,
+    }));
+  }
+  changeOrder() {
+    this.setState((state) => ({
+      paramOrder: !state.paramOrder,
+      verification: !state.verification,
+    }));
+  }
+
   openMenu() {
     this.setState((state) => ({
       burger: !state.burger,
     }));
   }
+
   render() {
     return (
       <Router>
@@ -50,12 +67,24 @@ class App extends React.Component {
               exact
               path="/order"
               render={(props) => (
-                <Order cars={cars} burger={this.state.burger} {...props} />
+                <Order
+                  cars={cars}
+                  changeVerification={this.changeVerification}
+                  burger={this.state.burger}
+                  paramOrder={this.state.paramOrder}
+                  changeOrder={this.changeOrder}
+                  {...props}
+                />
               )}
             />
             <Redirect from="/" to="/need_for_drive" />
           </Switch>
-          {/* <Verification /> */}
+          {this.state.verification && (
+            <Verification
+              changeVerification={this.changeVerification}
+              changeOrder={this.changeOrder}
+            />
+          )}
         </div>
       </Router>
     );

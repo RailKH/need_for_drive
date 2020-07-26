@@ -35,6 +35,28 @@ body {
   &:active {
     background: linear-gradient(90deg, #076432 2.61%, #013c27 112.6%);
   }
+  &.true {
+    margin-right: 16px;
+  }
+  &.disabled {
+    display: block;
+    background: $light-gray;
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  &.false {
+    background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
+    border-radius: 4px;
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(90deg, #35220c 2.61%, #641938 112.6%);
+    }
+
+    &:active {
+      background: linear-gradient(90deg, #160e05 2.61%, #38051a 112.6%);
+    }
+  }
 }
 
 .main {
@@ -59,13 +81,22 @@ body {
     }
     .button {
       padding: 15px 33px;
-      &.true {
-        margin-right: 16px;
-      }
-      &.false {
-        background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
-        border-radius: 4px;
-      }
+      // &.true {
+      //   margin-right: 16px;
+      // }
+      // &.false {
+      //   background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
+      //   border-radius: 4px;
+
+      //   &:hover,
+      //   &:focus {
+      //     background: linear-gradient(90deg, #35220c 2.61%, #641938 112.6%);
+      //   }
+
+      //   &:active {
+      //     background: linear-gradient(90deg, #160e05 2.61%, #38051a 112.6%);
+      //   }
+      // }
     }
   }
 }

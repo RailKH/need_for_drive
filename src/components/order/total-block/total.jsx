@@ -10,6 +10,11 @@ export default function Total(props) {
         props.id != "3" && "disabled"
       )}>
       <div className="total__form">
+        {props.paramOrder && (
+          <div className="total__form__title">
+            <div>Ваш заказ подтверждён</div>
+          </div>
+        )}
         <div className="total__form__name">Hyndai, i30 N</div>
         <div className="total__form__number">K 761 HA 73</div>
         <div className="total__form__tank">

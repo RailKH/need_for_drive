@@ -119,6 +119,10 @@
       max-width: 1250px;
       padding: 7px 64px;
       margin: 0 auto;
+      &__title {
+        font-weight: bold;
+        color: $black;
+      }
       &__text:hover {
         cursor: url(../../assets/icons/Pointer.svg), pointer;
       }
@@ -152,6 +156,7 @@
         padding-top: 33px;
       }
     }
+
     &__location {
       .form > div {
         margin-bottom: 13px;
@@ -299,11 +304,18 @@
       .total__form > div {
         margin-bottom: 8px;
       }
+
       .total__form {
         width: 50%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        &__title div {
+          font-size: 24px;
+          line-height: 28px;
+          margin-bottom: 8px;
+          font-weight: normal;
+        }
         &__name {
           font-style: normal;
           font-weight: normal;
@@ -374,9 +386,9 @@
         width: 100%;
         &.disabled {
           display: block;
-          background: $light-gray;
-          color: white;
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          // background: $light-gray;
+          // color: white;
+          // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
       }
     }

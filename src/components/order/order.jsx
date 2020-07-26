@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "../../store/reducers";
-const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
 const store = createStore(rootReducer);
 
 class Order extends React.Component {
@@ -18,13 +17,33 @@ class Order extends React.Component {
     super();
     this.state = {
       id: 0,
-      paramLocation: true,
+      paramLocation: false,
       paramModel: true,
       paramExtra: true,
     };
     this.nextWrapper = this.nextWrapper.bind(this);
+    this.changeProps = this.changeProps.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.paramOrder) {
+      this.setState({
+        id: 3,
+      });
+    }
+  }
+  changeProps(value, item) {
+    this.setState({
+      [item]: value,
+    });
   }
   nextWrapper(item) {
+    if (item == 4) {
+      item = 3;
+      if (this.props.paramOrder) {
+        this.props.changeOrder();
+      }
+      this.props.changeVerification("verification");
+    }
     this.setState({
       id: item,
     });
@@ -49,54 +68,73 @@ class Order extends React.Component {
           </div>
           <div className="link">
             <div className="link__content">
-              <div
-                onClick={(e) => this.nextWrapper("0")}
-                className={classnames(
-                  "link__content__text",
-                  id == "0" && "active",
-                  paramLocation && "ready"
-                )}>
-                Местоположение
-              </div>
-              <span></span>
-              <div
-                onClick={(e) => paramLocation && this.nextWrapper("1")}
-                className={classnames(
-                  "link__content__text",
-                  id == "1" && "active",
-                  paramModel && "ready"
-                )}>
-                Модель
-              </div>
-              <span></span>
-              <div
-                onClick={(e) => paramModel && this.nextWrapper("2")}
-                className={classnames(
-                  "link__content__text",
-                  id == "2" && "active",
-                  paramExtra && "ready"
-                )}>
-                Дополнительно
-              </div>
-              <span></span>
-              <div
-                onClick={(e) => this.state.paramExtra && this.nextWrapper("3")}
-                className={classnames(
-                  "link__content__text",
-                  id == "3" && "active",
-                  paramExtra && "ready"
-                )}>
-                Итого
-              </div>
+              {this.props.paramOrder ? (
+                <div className="link__content__title">
+                  Заказ номер RU58491823
+                </div>
+              ) : (
+                <>
+                  <div
+                    onClick={(e) => this.nextWrapper(0)}
+                    className={classnames(
+                      "link__content__text",
+                      id == "0" && "active",
+                      paramLocation && "ready"
+                    )}>
+                    Местоположение
+                  </div>
+                  <span></span>
+                  <div
+                    onClick={(e) => paramLocation && this.nextWrapper(1)}
+                    className={classnames(
+                      "link__content__text",
+                      id == "1" && "active",
+                      paramModel && "ready"
+                    )}>
+                    Модель
+                  </div>
+                  <span></span>
+                  <div
+                    onClick={(e) => paramModel && this.nextWrapper(2)}
+                    className={classnames(
+                      "link__content__text",
+                      id == "2" && "active",
+                      paramExtra && "ready"
+                    )}>
+                    Дополнительно
+                  </div>
+                  <span></span>
+                  <div
+                    onClick={(e) =>
+                      this.state.paramExtra && this.nextWrapper(3)
+                    }
+                    className={classnames(
+                      "link__content__text",
+                      id == "3" && "active",
+                      paramExtra && "ready"
+                    )}>
+                    Итого
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <section className="order__content">
             <div className="wrapper">
-              <LocationBlock id={id} />
+              <LocationBlock
+                id={id}
+                paramLocation={paramLocation}
+                changeProps={this.changeProps}
+              />
               <ModelBlock id={id} cars={this.props.cars} />
               <ExtraBlock id={id} />
-              <TotalBlock id={id} />
-              <CostBlock id={id} />
+              <TotalBlock id={id} paramOrder={this.props.paramOrder} />
+              <CostBlock
+                id={id}
+                nextWrapper={this.nextWrapper}
+                state={this.state}
+                paramOrder={this.props.paramOrder}
+              />
             </div>
           </section>
         </section>
