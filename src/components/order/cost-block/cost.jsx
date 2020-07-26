@@ -27,6 +27,9 @@ function Cost(props) {
         paramButton = paramModel;
         break;
     }
+    if (props.paramOrder) {
+      textButton = "Отменить";
+    }
   }
   return (
     <div className="order__content__cost">
@@ -67,9 +70,13 @@ function Cost(props) {
         <span>Цена:</span> от 8 000 до 12 000 ₽
       </p>
       <button
-        className={classnames("button", {
-          disabled: !props.city || !props.cityPoint,
-        })}
+        className={classnames(
+          "button",
+          {
+            disabled: !paramButton,
+          },
+          { false: props.paramOrder }
+        )}
         onClick={(e) => paramButton && props.nextWrapper(++value)}>
         {textButton}
       </button>

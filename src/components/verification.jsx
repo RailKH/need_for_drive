@@ -6,14 +6,12 @@ export default function Verification(props) {
       <div className="verification__content">
         <p className="title">Подтвердить заказ</p>
         <div>
-          <button
-            className="button true"
-            onClick={() => props.changeVerification("paramOrder")}>
+          <button className="button true" onClick={() => props.changeOrder()}>
             Подтвердить
           </button>
           <button
             className="button false"
-            onClick={() => props.changeVerification("verification")}>
+            onClick={() => props.changeVerification()}>
             Вернуться
           </button>
         </div>
