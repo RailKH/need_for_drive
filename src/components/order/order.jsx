@@ -11,6 +11,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "../../store/reducers";
 const store = createStore(rootReducer);
+const URL = "http://api-factory.simbirsoft1.com/api/db/";
 
 class Order extends React.Component {
   constructor() {
@@ -18,19 +19,49 @@ class Order extends React.Component {
     this.state = {
       id: 0,
       paramLocation: false,
-      paramModel: true,
-      paramExtra: true,
+      paramModel: false,
+      paramExtra: false,
+      city: [],
+      point: [],
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
+    this.getData = this.getData.bind(this);
   }
   componentDidMount() {
     if (this.props.paramOrder) {
       this.setState({
         id: 3,
       });
+      return;
     }
+    this.getData("city").then((json) => {
+      let data = [];
+      json.data.forEach((elem) => data.push(elem.name));
+      data.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
+      this.setState({
+        city: data,
+      });
+    });
+
+    this.getData("point").then((json) => {
+      const cityPoint = json.data.filter((item) => item.name);
+      this.setState({
+        point: cityPoint,
+      });
+      console.log(this.state);
+    });
   }
+
+  getData = async (item) => {
+    let data = await fetch(`${URL}${item}`, {
+      method: "GET",
+      headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
+    }).then((res) => res.json());
+
+    return data;
+  };
+
   changeProps(value, item) {
     this.setState({
       [item]: value,
@@ -59,9 +90,9 @@ class Order extends React.Component {
           <div className="order__header">
             <header className="content__header">
               <Link to="/">
-                <a href="#" className="content__header__logo">
+                <span href="#" className="content__header__logo">
                   Need for drive
-                </a>
+                </span>
               </Link>
               <span className="content__header__location">Ульяновск</span>
             </header>
@@ -125,6 +156,8 @@ class Order extends React.Component {
                 id={id}
                 paramLocation={paramLocation}
                 changeProps={this.changeProps}
+                listCity={this.state.city}
+                listPoint={this.state.point}
               />
               <ModelBlock id={id} cars={this.props.cars} />
               <ExtraBlock id={id} />

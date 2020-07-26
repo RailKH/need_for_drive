@@ -16,15 +16,15 @@ function Model(props) {
       )}>
       <div className="form__model">
         <input type="radio" id="r1" name="model" />
-        <label for="r1">
+        <label htmlFor="r1">
           <span></span>Все модели
         </label>
         <input type="radio" id="r2" name="model" />
-        <label for="r2">
+        <label htmlFor="r2">
           <span></span>Эконом
         </label>
         <input type="radio" id="r3" name="model" />
-        <label for="r3">
+        <label htmlFor="r3">
           <span></span>Премиум
         </label>
       </div>

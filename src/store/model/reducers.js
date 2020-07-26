@@ -4,7 +4,6 @@ const defaultState = {
 };
 
 export const modReducer = (state = defaultState, action) => {
-  console.log(state);
   switch (action.type) {
     case MOD_CHANGE_CAR_TEXT:
       return {
