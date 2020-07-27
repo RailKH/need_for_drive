@@ -25,7 +25,6 @@ function Location(props) {
           return fixItem.startsWith(props.city.toLowerCase());
         });
         setfilterCityPoint(filterCityPoint);
-        console.log(filterCityPoint);
         props.changeProps(true, "paramLocation");
       }
     }

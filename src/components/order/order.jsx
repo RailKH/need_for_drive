@@ -20,9 +20,10 @@ class Order extends React.Component {
       id: 0,
       paramLocation: false,
       paramModel: false,
-      paramExtra: false,
+      paramExtra: true,
       city: [],
       point: [],
+      cars: [],
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
@@ -49,7 +50,6 @@ class Order extends React.Component {
       this.setState({
         point: cityPoint,
       });
-      console.log(this.state);
     });
   }
 
@@ -67,7 +67,7 @@ class Order extends React.Component {
       [item]: value,
     });
   }
-  nextWrapper(item) {
+  nextWrapper(item, textButton) {
     if (item == 4) {
       item = 3;
       if (this.props.paramOrder) {
@@ -75,6 +75,20 @@ class Order extends React.Component {
       }
       this.props.changeVerification("verification");
     }
+    switch (textButton) {
+      case "Выбрать модель":
+        this.getData("car").then((json) => {
+          const cars = json.data.filter((item) => item.name);
+          this.setState({
+            cars,
+          });
+        });
+        break;
+      case "Дополнительно":
+        alert("Запрос");
+        break;
+    }
+
     this.setState({
       id: item,
     });
@@ -159,7 +173,11 @@ class Order extends React.Component {
                 listCity={this.state.city}
                 listPoint={this.state.point}
               />
-              <ModelBlock id={id} cars={this.props.cars} />
+              <ModelBlock
+                id={id}
+                cars={this.state.cars}
+                changeProps={this.changeProps}
+              />
               <ExtraBlock id={id} />
               <TotalBlock id={id} paramOrder={this.props.paramOrder} />
               <CostBlock

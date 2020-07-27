@@ -238,6 +238,10 @@
           flex-direction: column;
           padding: 16px;
           border: 1px solid $light-gray;
+          &:hover {
+            cursor: url(../../assets/icons/Pointer.svg), pointer;
+            border: 1px solid $dark-gray;
+          }
           &.active {
             border: 1px solid $green;
           }
@@ -250,10 +254,7 @@
           .cost {
             color: $dark-gray;
           }
-          &:hover {
-            cursor: url(../../assets/icons/Pointer.svg), pointer;
-            border: 1px solid $dark-gray;
-          }
+
           img {
             width: 80%;
             align-self: flex-end;
@@ -386,9 +387,6 @@
         width: 100%;
         &.disabled {
           display: block;
-          // background: $light-gray;
-          // color: white;
-          // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
       }
     }

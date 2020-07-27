@@ -16,15 +16,15 @@ function Cost(props) {
         break;
       case 1:
         textButton = "Дополнительно";
-        paramButton = paramExtra;
+        paramButton = paramModel;
         break;
       case 2:
         textButton = "Итого";
-        paramButton = paramModel;
+        paramButton = paramExtra;
         break;
       case 3:
         textButton = "Заказать";
-        paramButton = paramModel;
+        paramButton = paramExtra;
         break;
     }
     if (props.paramOrder) {
@@ -77,7 +77,7 @@ function Cost(props) {
           },
           { false: props.paramOrder }
         )}
-        onClick={(e) => paramButton && props.nextWrapper(++value)}>
+        onClick={(e) => paramButton && props.nextWrapper(++value, textButton)}>
         {textButton}
       </button>
     </div>
