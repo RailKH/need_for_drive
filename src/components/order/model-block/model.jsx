@@ -4,10 +4,17 @@ import { connect } from "react-redux";
 import { setCarText } from "../../../store/model/action";
 
 function Model(props) {
-  const [car_1, car_2, car_3] = props.cars;
-  function selectModel(e) {
-    console.log(e.target);
+  const [modelCar, setModelCar] = useState("Все модели");
+  const [carName, setCarName] = useState("");
+  const filterCars = props.cars.filter((item) =>
+    modelCar == "Все модели" ? true : item.categoryId.name == modelCar
+  );
+  function selectCar(name) {
+    setCarName(name);
+    props.setCarText(name);
+    props.changeProps(true, "paramModel");
   }
+
   return (
     <div
       className={classnames(
@@ -15,36 +22,57 @@ function Model(props) {
         props.id != "1" && "disabled"
       )}>
       <div className="form__model">
-        <input type="radio" id="r1" name="model" />
-        <label for="r1">
+        <input
+          type="radio"
+          id="r1"
+          name="model"
+          defaultChecked
+          onClick={() => setModelCar("Все модели")}
+        />
+        <label htmlFor="r1">
           <span></span>Все модели
         </label>
-        <input type="radio" id="r2" name="model" />
-        <label for="r2">
+        <input
+          type="radio"
+          id="r2"
+          name="model"
+          onClick={() => setModelCar("Эконом")}
+        />
+        <label htmlFor="r2">
           <span></span>Эконом
         </label>
-        <input type="radio" id="r3" name="model" />
-        <label for="r3">
+        <input
+          type="radio"
+          id="r3"
+          name="model"
+          onClick={() => setModelCar("Премиум")}
+        />
+        <label htmlFor="r3">
           <span></span>Премиум
         </label>
       </div>
-      <div className="form__selectCar">
-        <div className="form__selectCar__item" onClick={selectModel}>
-          <p className="title">Elantra</p>
-          <p className="cost">12000-25000P</p>
-          <img src={car_1} />
+      {props.cars && (
+        <div className="form__selectCar">
+          {filterCars.map((item, id) => {
+            return (
+              <div
+                className={classnames(
+                  "form__selectCar__item",
+                  carName == item.name && "active"
+                )}
+                onClick={() => selectCar(item.name)}>
+                <p className="title">{item.name}</p>
+                <p className="cost">
+                  {item.priceMin}-{item.priceMax}P
+                </p>
+                <img
+                  src={`http://api-factory.simbirsoft1.com${item.thumbnail.path}`}
+                />
+              </div>
+            );
+          })}
         </div>
-        <div className="form__selectCar__item active" onClick={selectModel}>
-          <p className="title">i30 N</p>
-          <p className="cost">10000-32000P</p>
-          <img src={car_2} />
-        </div>
-        <div className="form__selectCar__item" onClick={selectModel}>
-          <p className="title">CRETA</p>
-          <p className="cost">12000-25000P</p>
-          <img src={car_3} />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

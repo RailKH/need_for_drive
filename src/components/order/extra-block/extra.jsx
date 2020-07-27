@@ -12,15 +12,15 @@ export default function Extra(props) {
         <div className="extra__form__color">
           <p>Цвет</p>
           <input type="radio" id="m1" name="color" />
-          <label for="m1">
+          <label htmlFor="m1">
             <span></span>Любой
           </label>
           <input type="radio" id="m2" name="color" />
-          <label for="m2">
+          <label htmlFor="m2">
             <span></span>Красный
           </label>
           <input type="radio" id="m3" name="color" />
-          <label for="m3">
+          <label htmlFor="m3">
             <span></span>Голубой
           </label>
         </div>
@@ -37,12 +37,12 @@ export default function Extra(props) {
           <p>Тариф</p>
           <div className="wrap">
             <input type="radio" id="t1" name="rate" />
-            <label for="t1">
+            <label htmlFor="t1">
               <span></span>Поминутно, 7₽/мин
             </label>
           </div>
           <input type="radio" id="t2" name="rate" />
-          <label for="t2">
+          <label htmlFor="t2">
             <span></span>На сутки, 1999 ₽/сутки
           </label>
         </div>

@@ -3,49 +3,66 @@ import classnames from "classnames";
 
 import { connect } from "react-redux";
 import { setCityText, setCityPointText } from "../../../store/location/action";
-const CITY = ["Москва", "Ульяновск", "Санкт-Петербург", "Казань", "Самара"];
 const wordLength = 2;
 
 function Location(props) {
   const [filterCity, setfilterCity] = useState([]);
+  const [filterCityPoint, setfilterCityPoint] = useState([]);
 
-  function onCityChange(event) {
-    props.setCityText(event.target.value);
-    if (event.target.value.length == wordLength) {
-      addCities(event.target.value);
-    }
-  }
-  function onCityPointChange(event) {
-    props.changeProps(true, "paramLocation");
-    props.setCityPointText(event.target.value);
+  function inputChange(event, item) {
+    props[item](event.target.value);
+
     if (event.target.value == "") {
-      props.changeProps(false, "paramLocation");
+      item == "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
+    }
+    if (event.target.value.length >= wordLength) {
+      if (item == "setCityText") {
+        setfilterCity(props.listCity);
+      } else {
+        setfilterCityPoint([]);
+        let filterCityPoint = props.listPoint.filter((item) => {
+          const fixItem = item.cityId.name.toLowerCase();
+          return fixItem.startsWith(props.city.toLowerCase());
+        });
+        setfilterCityPoint(filterCityPoint);
+        props.changeProps(true, "paramLocation");
+      }
     }
   }
 
-  function addCities(value) {
-    setfilterCity([]);
-    if (value !== "") {
-      setfilterCity(CITY);
-    }
-  }
-  function selectCity(value) {
-    setfilterCity([]);
-    props.setCityText(value);
+  function selectCity(value, item) {
+    item == "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
+    props[item](value);
   }
   function clearInput(item) {
-    item == "city" ? props.setCityText("") : props.setCityPointText("");
-    setfilterCity([]);
+    if (item == "city") {
+      props.setCityText("");
+      setfilterCity([]);
+    } else {
+      props.setCityPointText("");
+      setfilterCityPoint([]);
+    }
+
     props.changeProps(false, "paramLocation");
   }
 
-  const list = filterCity.map((item, id) => {
+  const list_City = filterCity.map((item, id) => {
     return (
       <li
-        onClick={(e) => selectCity(e.target.textContent)}
+        onClick={(e) => selectCity(e.target.textContent, "setCityText")}
         key={id}
         className="dropdown">
         {item}
+      </li>
+    );
+  });
+  const list_CityPoint = filterCityPoint.map((item, id) => {
+    return (
+      <li
+        onClick={(e) => selectCity(e.target.textContent, "setCityPointText")}
+        key={id}
+        className="dropdown">
+        {item.address}
       </li>
     );
   });
@@ -65,14 +82,14 @@ function Location(props) {
               type="text"
               value={props.city}
               placeholder="Начните вводить город..."
-              onChange={onCityChange}
+              onChange={(e) => inputChange(e, "setCityText")}
             />
             {props.city && (
-              <span onClick={() => clearInput("city")} class="close">
+              <span onClick={() => clearInput("city")} className="close">
                 &times;
               </span>
             )}
-            <ul className="dropdown-list">{list}</ul>
+            <ul className="dropdown-list">{list_City}</ul>
           </div>
         </div>
         <div className="form__input">
@@ -83,14 +100,14 @@ function Location(props) {
               type="text"
               value={props.cityPoint}
               placeholder="Начните вводить пункт..."
-              onChange={onCityPointChange}
+              onChange={(e) => inputChange(e, "setCityPointText")}
             />
             {props.cityPoint && (
-              <span onClick={() => clearInput("cityPoint")} class="close">
+              <span onClick={() => clearInput("cityPoint")} className="close">
                 &times;
               </span>
             )}
-            <ul className="dropdown-list delivery"></ul>
+            <ul className="dropdown-list delivery">{list_CityPoint}</ul>
           </div>
         </div>
         <div className="map">

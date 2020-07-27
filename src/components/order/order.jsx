@@ -11,6 +11,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "../../store/reducers";
 const store = createStore(rootReducer);
+const URL = "http://api-factory.simbirsoft1.com/api/db/";
 
 class Order extends React.Component {
   constructor() {
@@ -18,25 +19,55 @@ class Order extends React.Component {
     this.state = {
       id: 0,
       paramLocation: false,
-      paramModel: true,
+      paramModel: false,
       paramExtra: true,
+      city: [],
+      point: [],
+      cars: [],
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
+    this.getData = this.getData.bind(this);
   }
   componentDidMount() {
     if (this.props.paramOrder) {
       this.setState({
         id: 3,
       });
+      return;
     }
+    this.getData("city").then((json) => {
+      let data = [];
+      json.data.forEach((elem) => data.push(elem.name));
+      data.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
+      this.setState({
+        city: data,
+      });
+    });
+
+    this.getData("point").then((json) => {
+      const cityPoint = json.data.filter((item) => item.name);
+      this.setState({
+        point: cityPoint,
+      });
+    });
   }
+
+  getData = async (item) => {
+    let data = await fetch(`${URL}${item}`, {
+      method: "GET",
+      headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
+    }).then((res) => res.json());
+
+    return data;
+  };
+
   changeProps(value, item) {
     this.setState({
       [item]: value,
     });
   }
-  nextWrapper(item) {
+  nextWrapper(item, textButton) {
     if (item == 4) {
       item = 3;
       if (this.props.paramOrder) {
@@ -44,6 +75,20 @@ class Order extends React.Component {
       }
       this.props.changeVerification("verification");
     }
+    switch (textButton) {
+      case "Выбрать модель":
+        this.getData("car").then((json) => {
+          const cars = json.data.filter((item) => item.name);
+          this.setState({
+            cars,
+          });
+        });
+        break;
+      case "Дополнительно":
+        alert("Запрос");
+        break;
+    }
+
     this.setState({
       id: item,
     });
@@ -59,9 +104,9 @@ class Order extends React.Component {
           <div className="order__header">
             <header className="content__header">
               <Link to="/">
-                <a href="#" className="content__header__logo">
+                <span href="#" className="content__header__logo">
                   Need for drive
-                </a>
+                </span>
               </Link>
               <span className="content__header__location">Ульяновск</span>
             </header>
@@ -125,8 +170,14 @@ class Order extends React.Component {
                 id={id}
                 paramLocation={paramLocation}
                 changeProps={this.changeProps}
+                listCity={this.state.city}
+                listPoint={this.state.point}
               />
-              <ModelBlock id={id} cars={this.props.cars} />
+              <ModelBlock
+                id={id}
+                cars={this.state.cars}
+                changeProps={this.changeProps}
+              />
               <ExtraBlock id={id} />
               <TotalBlock id={id} paramOrder={this.props.paramOrder} />
               <CostBlock
