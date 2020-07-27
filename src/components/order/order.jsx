@@ -20,7 +20,7 @@ class Order extends React.Component {
     this.state = {
       id: 0,
       paramLocation: false,
-      paramModel: false,
+      paramModel: true,
       paramExtra: true,
       city: [],
       point: [],
@@ -151,9 +151,7 @@ class Order extends React.Component {
                   </div>
                   <span></span>
                   <div
-                    onClick={(e) =>
-                      this.state.paramExtra && this.nextWrapper(3)
-                    }
+                    onClick={(e) => paramExtra && this.nextWrapper(3)}
                     className={classnames(
                       "link__content__text",
                       id == "3" && "active",
@@ -179,7 +177,7 @@ class Order extends React.Component {
                 cars={this.state.cars}
                 changeProps={this.changeProps}
               />
-              <ExtraBlock id={id} />
+              <ExtraBlock id={id} listCars={this.state.cars} />
               <TotalBlock id={id} paramOrder={this.props.paramOrder} />
               <CostBlock
                 id={id}

@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import classnames from "classnames";
+import { connect } from "react-redux";
+import {
+  setColorText,
+  setDateStartText,
+  setDateFinishText,
+  setRateText,
+  setAdditionalText,
+} from "../../../store/extra/action";
 
-export default function Extra(props) {
+function Extra(props) {
+  let colors = props.listCars.find((item) => item.name == props.car);
   return (
     <div
       className={classnames(
@@ -11,18 +20,34 @@ export default function Extra(props) {
       <div className="extra__form">
         <div className="extra__form__color">
           <p>Цвет</p>
-          <input type="radio" id="m1" name="color" />
-          <label htmlFor="m1">
+          <input type="radio" id="m0" name="color" />
+          <label htmlFor="m0">
             <span></span>Любой
           </label>
-          <input type="radio" id="m2" name="color" />
+          {colors &&
+            colors.colors.map((item, id) => (
+              <>
+                <input
+                  type="radio"
+                  id={`m${++id}`}
+                  name="color"
+                  onClick={() => setColorText(item)}
+                />
+                <label htmlFor={`m${id}`}>
+                  <span></span>
+                  {item[0].toUpperCase() + item.slice(1)}
+                </label>
+              </>
+            ))}
+
+          {/* <input type="radio" id="m2" name="color" />
           <label htmlFor="m2">
             <span></span>Красный
           </label>
           <input type="radio" id="m3" name="color" />
           <label htmlFor="m3">
             <span></span>Голубой
-          </label>
+          </label> */}
         </div>
         <div className="extra__form__date">
           <p>Дата аренды</p>
@@ -89,3 +114,23 @@ export default function Extra(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    color: state.ext.color,
+    dateStart: state.ext.dateStart,
+    dateFinish: state.ext.dateFinish,
+    rate: state.ext.rate,
+    additional: state.ext.additional,
+    car: state.mod.selectCar,
+  };
+};
+const mapDispatchToProps = {
+  setColorText,
+  setDateStartText,
+  setDateFinishText,
+  setRateText,
+  setAdditionalText,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Extra);

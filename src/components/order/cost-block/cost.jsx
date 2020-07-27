@@ -49,7 +49,7 @@ function Cost(props) {
         </div>
         <div className="color">
           <span className="color__prop feature-left">Цвет</span>
-          <span className="color__value feature-right">Голубой</span>
+          <span className="color__value feature-right">{props.color}</span>
         </div>
         <div className="duration">
           <span className="duration__prop feature-left">
@@ -88,6 +88,7 @@ const mapStateToProps = (state) => {
     city: state.loc.valueCity,
     cityPoint: state.loc.valueOfPoint,
     car: state.mod.selectCar,
+    color: state.ext.color,
   };
 };
 const mapDispatchToProps = {};
