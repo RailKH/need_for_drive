@@ -8,20 +8,30 @@ import {
   setRateText,
   setAdditionalText,
 } from "../../../store/extra/action";
+let checkboxData = [];
 
 function Extra(props) {
   const [additional, setAdditional] = useState({
-    sel1: true,
-    sel2: false,
-    sel3: true,
+    checkbox1: false,
+    checkbox2: false,
+    checkbox3: false,
   });
   let colorsCar = props.listCars.find((item) => item.name == props.car);
   function selectColor(color) {
     props.setColorText(color[0].toUpperCase() + color.slice(1));
   }
-  function selectAddit() {
-    setAdditional(!sel1);
-    console.log(additional.sel1);
+  function selectAdditional(item, name) {
+    let value = !additional[item];
+    setAdditional((prevState) => {
+      return { ...prevState, [item]: value };
+    });
+    if (value) {
+      checkboxData.push(name);
+    } else {
+      let deletItem = checkboxData.indexOf(name);
+      checkboxData.splice(deletItem, 1);
+    }
+    props.setAdditionalText(checkboxData);
   }
   return (
     <div
@@ -98,8 +108,8 @@ function Extra(props) {
               id="tank"
               name="tank"
               value="tank"
-              checked={additional.sel1}
-              onClick={selectAddit}
+              checked={additional.checkbox1}
+              onClick={() => selectAdditional("checkbox1", "Полный бак")}
             />
             <label htmlFor="tank">
               <span></span>Полный бак, 500р
@@ -112,7 +122,8 @@ function Extra(props) {
               id="chair"
               name="chair"
               value="chair"
-              checked={additional.sel2}
+              checked={additional.checkbox2}
+              onClick={() => selectAdditional("checkbox2", "Детское кресло")}
             />
             <label htmlFor="chair">
               <span></span>Детское кресло, 200р
@@ -125,7 +136,8 @@ function Extra(props) {
               id="wheel"
               name="wheel"
               value="wheel"
-              checked={additional.sel3}
+              checked={additional.checkbox3}
+              onClick={() => selectAdditional("checkbox3", "Правый руль")}
             />
             <label htmlFor="wheel">
               <span></span>Правый руль, 1600р

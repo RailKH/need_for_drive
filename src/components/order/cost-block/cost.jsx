@@ -61,10 +61,20 @@ function Cost(props) {
           <span className="rate__prop feature-left">Тариф</span>
           <span className="rate__value feature-right">{props.rate}</span>
         </div>
-        <div className="oil">
+
+        {props.additional.map((item, id) => {
+          return (
+            <div key={`${item}${id}`}>
+              <span className="oil__prop feature-left">{item}</span>
+              <span className="oil__value feature-right">Да</span>
+            </div>
+          );
+        })}
+
+        {/* <div className="oil">
           <span className="oil__prop feature-left">Полный бак</span>
           <span className="oil__value feature-right">Да</span>
-        </div>
+        </div> */}
       </div>
       <p className="cost">
         <span>Цена:</span> от 8 000 до 12 000 ₽
@@ -90,6 +100,7 @@ const mapStateToProps = (state) => {
     car: state.mod.selectCar,
     color: state.ext.color,
     rate: state.ext.rate,
+    additional: state.ext.additional,
   };
 };
 const mapDispatchToProps = {};
