@@ -10,7 +10,19 @@ import {
 } from "../../../store/extra/action";
 
 function Extra(props) {
-  let colors = props.listCars.find((item) => item.name == props.car);
+  const [additional, setAdditional] = useState({
+    sel1: true,
+    sel2: false,
+    sel3: true,
+  });
+  let colorsCar = props.listCars.find((item) => item.name == props.car);
+  function selectColor(color) {
+    props.setColorText(color[0].toUpperCase() + color.slice(1));
+  }
+  function selectAddit() {
+    setAdditional(!sel1);
+    console.log(additional.sel1);
+  }
   return (
     <div
       className={classnames(
@@ -20,18 +32,23 @@ function Extra(props) {
       <div className="extra__form">
         <div className="extra__form__color">
           <p>Цвет</p>
-          <input type="radio" id="m0" name="color" />
+          <input
+            type="radio"
+            id="m0"
+            name="color"
+            onClick={() => selectColor("Любой")}
+          />
           <label htmlFor="m0">
             <span></span>Любой
           </label>
-          {colors &&
-            colors.colors.map((item, id) => (
+          {colorsCar &&
+            colorsCar.colors.map((item, id) => (
               <>
                 <input
                   type="radio"
                   id={`m${++id}`}
                   name="color"
-                  onClick={() => setColorText(item)}
+                  onClick={() => selectColor(item)}
                 />
                 <label htmlFor={`m${id}`}>
                   <span></span>
@@ -39,15 +56,6 @@ function Extra(props) {
                 </label>
               </>
             ))}
-
-          {/* <input type="radio" id="m2" name="color" />
-          <label htmlFor="m2">
-            <span></span>Красный
-          </label>
-          <input type="radio" id="m3" name="color" />
-          <label htmlFor="m3">
-            <span></span>Голубой
-          </label> */}
         </div>
         <div className="extra__form__date">
           <p>Дата аренды</p>
@@ -60,16 +68,26 @@ function Extra(props) {
         </div>
         <div className="extra__form__rate">
           <p>Тариф</p>
-          <div className="wrap">
-            <input type="radio" id="t1" name="rate" />
-            <label htmlFor="t1">
-              <span></span>Поминутно, 7₽/мин
-            </label>
-          </div>
-          <input type="radio" id="t2" name="rate" />
-          <label htmlFor="t2">
-            <span></span>На сутки, 1999 ₽/сутки
-          </label>
+          {props.listRate && (
+            <>
+              {props.listRate.map((item, id) => {
+                return (
+                  <div className="wrap">
+                    <input
+                      type="radio"
+                      id={`t${id}`}
+                      name="rate"
+                      onClick={() => props.setRateText(item.rateTypeId.name)}
+                    />
+                    <label htmlFor={`t${id}`}>
+                      <span></span>
+                      {`${item.rateTypeId.name}, ${item.price}₽/${item.rateTypeId.unit}`}
+                    </label>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
         <div className="extra__form__additional">
           <p>Доп услуги</p>
@@ -80,6 +98,8 @@ function Extra(props) {
               id="tank"
               name="tank"
               value="tank"
+              checked={additional.sel1}
+              onClick={selectAddit}
             />
             <label htmlFor="tank">
               <span></span>Полный бак, 500р
@@ -92,6 +112,7 @@ function Extra(props) {
               id="chair"
               name="chair"
               value="chair"
+              checked={additional.sel2}
             />
             <label htmlFor="chair">
               <span></span>Детское кресло, 200р
@@ -104,6 +125,7 @@ function Extra(props) {
               id="wheel"
               name="wheel"
               value="wheel"
+              checked={additional.sel3}
             />
             <label htmlFor="wheel">
               <span></span>Правый руль, 1600р

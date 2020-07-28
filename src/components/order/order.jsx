@@ -25,6 +25,7 @@ class Order extends React.Component {
       city: [],
       point: [],
       cars: [],
+      rate: [],
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
@@ -86,7 +87,12 @@ class Order extends React.Component {
         });
         break;
       case "Дополнительно":
-        alert("Запрос");
+        this.getData("rate").then((json) => {
+          const rate = json.data.filter((item) => item);
+          this.setState({
+            rate,
+          });
+        });
         break;
     }
 
@@ -177,7 +183,11 @@ class Order extends React.Component {
                 cars={this.state.cars}
                 changeProps={this.changeProps}
               />
-              <ExtraBlock id={id} listCars={this.state.cars} />
+              <ExtraBlock
+                id={id}
+                listCars={this.state.cars}
+                listRate={this.state.rate}
+              />
               <TotalBlock id={id} paramOrder={this.props.paramOrder} />
               <CostBlock
                 id={id}
