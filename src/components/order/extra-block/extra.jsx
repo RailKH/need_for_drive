@@ -8,7 +8,7 @@ import {
   setRateText,
   setAdditionalText,
 } from "../../../store/extra/action";
-let checkboxData = [];
+// let checkboxData = [];
 
 function Extra(props) {
   const [additional, setAdditional] = useState({
@@ -16,6 +16,8 @@ function Extra(props) {
     checkbox2: false,
     checkbox3: false,
   });
+  const [checkboxData, setCheckboxData] = useState([]);
+
   let colorsCar = props.listCars.find((item) => item.name == props.car);
   function selectColor(color) {
     props.setColorText(color[0].toUpperCase() + color.slice(1));
@@ -26,12 +28,15 @@ function Extra(props) {
       return { ...prevState, [item]: value };
     });
     if (value) {
-      checkboxData.push(name);
+      setCheckboxData((prevState) => {
+        return [...prevState, name];
+      });
     } else {
       let deletItem = checkboxData.indexOf(name);
       checkboxData.splice(deletItem, 1);
     }
     props.setAdditionalText(checkboxData);
+    console.log(props.additional);
   }
   return (
     <div
@@ -49,7 +54,8 @@ function Extra(props) {
             onClick={() => selectColor("Любой")}
           />
           <label htmlFor="m0">
-            <span></span>Любой
+            <span />
+            Любой
           </label>
           {colorsCar &&
             colorsCar.colors.map((item, id) => (
@@ -61,7 +67,7 @@ function Extra(props) {
                   onClick={() => selectColor(item)}
                 />
                 <label htmlFor={`m${id}`}>
-                  <span></span>
+                  <span />
                   {item[0].toUpperCase() + item.slice(1)}
                 </label>
               </>
@@ -112,7 +118,8 @@ function Extra(props) {
               onClick={() => selectAdditional("checkbox1", "Полный бак")}
             />
             <label htmlFor="tank">
-              <span></span>Полный бак, 500р
+              <span />
+              Полный бак, 500р
             </label>
           </div>
           <div className="additional__checkbox">
@@ -126,7 +133,8 @@ function Extra(props) {
               onClick={() => selectAdditional("checkbox2", "Детское кресло")}
             />
             <label htmlFor="chair">
-              <span></span>Детское кресло, 200р
+              <span />
+              Детское кресло, 200р
             </label>
           </div>
           <div className="additional__checkbox">
@@ -140,7 +148,8 @@ function Extra(props) {
               onClick={() => selectAdditional("checkbox3", "Правый руль")}
             />
             <label htmlFor="wheel">
-              <span></span>Правый руль, 1600р
+              <span />
+              Правый руль, 1600р
             </label>
           </div>
         </div>

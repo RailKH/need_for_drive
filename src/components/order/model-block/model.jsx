@@ -30,7 +30,8 @@ function Model(props) {
           onClick={() => setModelCar("Все модели")}
         />
         <label htmlFor="r1">
-          <span></span>Все модели
+          <span />
+          Все модели
         </label>
         <input
           type="radio"
@@ -39,7 +40,8 @@ function Model(props) {
           onClick={() => setModelCar("Эконом")}
         />
         <label htmlFor="r2">
-          <span></span>Эконом
+          <span />
+          Эконом
         </label>
         <input
           type="radio"
@@ -48,7 +50,8 @@ function Model(props) {
           onClick={() => setModelCar("Премиум")}
         />
         <label htmlFor="r3">
-          <span></span>Премиум
+          <span />
+          Премиум
         </label>
       </div>
       {props.cars && (
