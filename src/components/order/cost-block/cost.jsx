@@ -4,6 +4,7 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 
 function Cost(props) {
+  console.log(props.additional);
   const { id, paramLocation, paramExtra, paramModel } = props.state;
   let textButton = "";
   let paramButton;
@@ -62,14 +63,15 @@ function Cost(props) {
           <span className="rate__value feature-right">{props.rate}</span>
         </div>
 
-        {props.additional.map((item, id) => {
-          return (
-            <div key={`${item}${id}`}>
-              <span className="oil__prop feature-left">{item}</span>
-              <span className="oil__value feature-right">Да</span>
-            </div>
-          );
-        })}
+        {props.additional &&
+          props.additional.map((item, id) => {
+            return (
+              <div key={`${item}${id}`}>
+                <span className="oil__prop feature-left">{item}</span>
+                <span className="oil__value feature-right">Да</span>
+              </div>
+            );
+          })}
 
         {/* <div className="oil">
           <span className="oil__prop feature-left">Полный бак</span>
@@ -80,13 +82,10 @@ function Cost(props) {
         <span>Цена:</span> от 8 000 до 12 000 ₽
       </p>
       <button
-        className={classnames(
-          "button",
-          {
-            disabled: !paramButton,
-          },
-          { false: props.paramOrder }
-        )}
+        className={classnames("button", {
+          disabled: !paramButton,
+          false: props.paramOrder,
+        })}
         onClick={(e) => paramButton && props.nextWrapper(++value, textButton)}>
         {textButton}
       </button>

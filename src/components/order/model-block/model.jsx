@@ -19,7 +19,7 @@ function Model(props) {
     <div
       className={classnames(
         "order__content__model",
-        props.id != "1" && "disabled"
+        {disabled: props.id != "1"}
       )}>
       <div className="form__model">
         <input
@@ -61,7 +61,7 @@ function Model(props) {
               <div
                 className={classnames(
                   "form__selectCar__item",
-                  carName == item.name && "active"
+                  {active: carName == item.name}
                 )}
                 onClick={() => selectCar(item.name)}>
                 <p className="title">{item.name}</p>

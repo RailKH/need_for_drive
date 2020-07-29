@@ -8,7 +8,7 @@ export default function Navigation(props) {
     <nav className="nav">
       <div
         onClick={props.openMenu}
-        className={classnames("nav__burger", props.burger && "active")}>
+        className={classnames("nav__burger", { active: props.burger })}>
         <span className="menu-top"></span>
         <span className="menu-middle"></span>
         <span className="menu-bottom"></span>

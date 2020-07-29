@@ -4,7 +4,7 @@ import "./menu.scss";
 
 export default function Menu(props) {
   return (
-    <section className={classnames("menu", !props.burger && "disabled")}>
+    <section className={classnames("menu", { disabled: !props.burger })}>
       <div className="menu__content">
         <ul>
           <li>ПАРКОВКА</li>

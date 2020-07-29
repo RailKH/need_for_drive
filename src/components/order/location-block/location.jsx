@@ -69,10 +69,9 @@ function Location(props) {
 
   return (
     <div
-      className={classnames(
-        "order__content__location",
-        props.id != "0" && "disabled"
-      )}>
+      className={classnames("order__content__location", {
+        disabled: props.id != "0",
+      })}>
       <div className="form">
         <div className="form__input">
           <label htmlFor="city">Город</label>

@@ -42,7 +42,7 @@ export default function Slider(props) {
   ];
 
   return (
-    <section className={classnames("slider", props.burger && "disabled")}>
+    <section className={classnames("slider", { disabled: props.burger })}>
       <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
         {dataSlider.map((item, ind) => {
           return (

@@ -18,7 +18,7 @@ export const extReducer = (state = defaultState, action) => {
   switch (action.type) {
     case EXT_CHANGE_COLOR_TEXT:
       return {
-        ...state,
+        // ...state,
         color: action.payload,
       };
     case EXT_CHANGE_DATESTART_TEXT:

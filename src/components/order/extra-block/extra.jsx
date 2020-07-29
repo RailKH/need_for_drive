@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import {
@@ -8,42 +8,53 @@ import {
   setRateText,
   setAdditionalText,
 } from "../../../store/extra/action";
-// let checkboxData = [];
-
-function Extra(props) {
-  const [additional, setAdditional] = useState({
+let checkboxData = [];
+function Extra({
+  id,
+  listCars,
+  listRate,
+  setAdditionalText,
+  setColorText,
+  car,
+  setRateText,
+  additional,
+}) {
+  const [additional77, setAdditional] = useState({
     checkbox1: false,
     checkbox2: false,
     checkbox3: false,
   });
-  const [checkboxData, setCheckboxData] = useState([]);
+  // const [checkboxData, setCheckboxData] = useState([]);
 
-  let colorsCar = props.listCars.find((item) => item.name == props.car);
+  let colorsCar = listCars.find((item) => item.name == car);
   function selectColor(color) {
-    props.setColorText(color[0].toUpperCase() + color.slice(1));
+    setColorText(color[0].toUpperCase() + color.slice(1));
   }
+
   function selectAdditional(item, name) {
-    let value = !additional[item];
+    let value = !additional77[item];
     setAdditional((prevState) => {
       return { ...prevState, [item]: value };
     });
+
     if (value) {
-      setCheckboxData((prevState) => {
-        return [...prevState, name];
-      });
+      checkboxData.push(name);
     } else {
       let deletItem = checkboxData.indexOf(name);
       checkboxData.splice(deletItem, 1);
     }
-    props.setAdditionalText(checkboxData);
-    console.log(props.additional);
+    // console.log(checkboxData);
+
+    setAdditionalText(checkboxData);
+    console.log("extra", additional);
+
+    // console.log(additional);
   }
   return (
     <div
-      className={classnames(
-        "order__content__extra",
-        props.id != "2" && "disabled"
-      )}>
+      className={classnames("order__content__extra", {
+        disabled: id != "2",
+      })}>
       <div className="extra__form">
         <div className="extra__form__color">
           <p>Цвет</p>
@@ -84,19 +95,19 @@ function Extra(props) {
         </div>
         <div className="extra__form__rate">
           <p>Тариф</p>
-          {props.listRate && (
+          {listRate && (
             <>
-              {props.listRate.map((item, id) => {
+              {listRate.map((item, id) => {
                 return (
                   <div className="wrap">
                     <input
                       type="radio"
                       id={`t${id}`}
                       name="rate"
-                      onClick={() => props.setRateText(item.rateTypeId.name)}
+                      onClick={() => setRateText(item.rateTypeId.name)}
                     />
                     <label htmlFor={`t${id}`}>
-                      <span></span>
+                      <span />
                       {`${item.rateTypeId.name}, ${item.price}₽/${item.rateTypeId.unit}`}
                     </label>
                   </div>
@@ -114,7 +125,7 @@ function Extra(props) {
               id="tank"
               name="tank"
               value="tank"
-              checked={additional.checkbox1}
+              checked={additional77.checkbox1}
               onClick={() => selectAdditional("checkbox1", "Полный бак")}
             />
             <label htmlFor="tank">
@@ -129,7 +140,7 @@ function Extra(props) {
               id="chair"
               name="chair"
               value="chair"
-              checked={additional.checkbox2}
+              checked={additional77.checkbox2}
               onClick={() => selectAdditional("checkbox2", "Детское кресло")}
             />
             <label htmlFor="chair">
@@ -144,7 +155,7 @@ function Extra(props) {
               id="wheel"
               name="wheel"
               value="wheel"
-              checked={additional.checkbox3}
+              checked={additional77.checkbox3}
               onClick={() => selectAdditional("checkbox3", "Правый руль")}
             />
             <label htmlFor="wheel">

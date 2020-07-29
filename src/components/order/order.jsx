@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import rootReducer from "../../store/reducers";
 const store = createStore(rootReducer);
 const URL = "http://api-factory.simbirsoft1.com/api/db/";
-const PROXY = "https://cors-anywhere.herokuapp.com/";
+// const PROXY = "https://cors-anywhere.herokuapp.com/";
 
 class Order extends React.Component {
   constructor() {
@@ -56,7 +56,7 @@ class Order extends React.Component {
   }
 
   getData = async (item) => {
-    let data = await fetch(`${PROXY}${URL}${item}`, {
+    let data = await fetch(`${URL}${item}`, {
       method: "GET",
       headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
     }).then((res) => res.json());
@@ -107,7 +107,7 @@ class Order extends React.Component {
     return (
       <Provider store={store}>
         <section
-          className={classnames("order", this.props.burger && "disabled")}>
+          className={classnames("order", { disabled: this.props.burger })}>
           <div className="order__header">
             <header className="content__header">
               <Link to="/">
@@ -128,41 +128,37 @@ class Order extends React.Component {
                 <>
                   <div
                     onClick={(e) => this.nextWrapper(0)}
-                    className={classnames(
-                      "link__content__text",
-                      id == "0" && "active",
-                      paramLocation && "ready"
-                    )}>
+                    className={classnames("link__content__text", {
+                      active: id == "0",
+                      ready: paramLocation,
+                    })}>
                     Местоположение
                   </div>
-                  <span></span>
+                  <span />
                   <div
                     onClick={(e) => paramLocation && this.nextWrapper(1)}
-                    className={classnames(
-                      "link__content__text",
-                      id == "1" && "active",
-                      paramModel && "ready"
-                    )}>
+                    className={classnames("link__content__text", {
+                      active: id == "1",
+                      ready: paramModel,
+                    })}>
                     Модель
                   </div>
-                  <span></span>
+                  <span />
                   <div
                     onClick={(e) => paramModel && this.nextWrapper(2)}
-                    className={classnames(
-                      "link__content__text",
-                      id == "2" && "active",
-                      paramExtra && "ready"
-                    )}>
+                    className={classnames("link__content__text", {
+                      active: id == "2",
+                      ready: paramExtra,
+                    })}>
                     Дополнительно
                   </div>
-                  <span></span>
+                  <span />
                   <div
                     onClick={(e) => paramExtra && this.nextWrapper(3)}
-                    className={classnames(
-                      "link__content__text",
-                      id == "3" && "active",
-                      paramExtra && "ready"
-                    )}>
+                    className={classnames("link__content__text", {
+                      active: id == "3",
+                      ready: paramExtra,
+                    })}>
                     Итого
                   </div>
                 </>
