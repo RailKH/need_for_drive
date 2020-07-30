@@ -17,9 +17,8 @@ function Extra({
   setColorText,
   car,
   setRateText,
-  additional,
 }) {
-  const [additional77, setAdditional] = useState({
+  const [additional, setAdditional] = useState({
     checkbox1: false,
     checkbox2: false,
     checkbox3: false,
@@ -32,7 +31,7 @@ function Extra({
   }
 
   function selectAdditional(item, name) {
-    let value = !additional77[item];
+    let value = !additional[item];
     setAdditional((prevState) => {
       return { ...prevState, [item]: value };
     });
@@ -43,12 +42,10 @@ function Extra({
       let deletItem = checkboxData.indexOf(name);
       checkboxData.splice(deletItem, 1);
     }
-    // console.log(checkboxData);
-
     setAdditionalText(checkboxData);
-    console.log("extra", additional);
-
-    // console.log(additional);
+  }
+  function test(e) {
+    console.log(e.target.value);
   }
   return (
     <div
@@ -88,7 +85,7 @@ function Extra({
           <p>Дата аренды</p>
           <div>
             <label>С</label>
-            <input type="text" placeholder="Введите дату и время"></input>
+            <input type="datetime-local" onChange={test} />
           </div>
           <label>По</label>
           <input type="text" placeholder="Введите дату и время"></input>
@@ -125,8 +122,8 @@ function Extra({
               id="tank"
               name="tank"
               value="tank"
-              checked={additional77.checkbox1}
-              onClick={() => selectAdditional("checkbox1", "Полный бак")}
+              checked={additional.checkbox1}
+              onChange={() => selectAdditional("checkbox1", "Полный бак")}
             />
             <label htmlFor="tank">
               <span />
@@ -140,8 +137,8 @@ function Extra({
               id="chair"
               name="chair"
               value="chair"
-              checked={additional77.checkbox2}
-              onClick={() => selectAdditional("checkbox2", "Детское кресло")}
+              checked={additional.checkbox2}
+              onChange={() => selectAdditional("checkbox2", "Детское кресло")}
             />
             <label htmlFor="chair">
               <span />
@@ -155,8 +152,8 @@ function Extra({
               id="wheel"
               name="wheel"
               value="wheel"
-              checked={additional77.checkbox3}
-              onClick={() => selectAdditional("checkbox3", "Правый руль")}
+              checked={additional.checkbox3}
+              onChange={() => selectAdditional("checkbox3", "Правый руль")}
             />
             <label htmlFor="wheel">
               <span />
