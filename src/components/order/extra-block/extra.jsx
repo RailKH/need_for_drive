@@ -23,7 +23,7 @@ function Extra({
     checkbox2: false,
     checkbox3: false,
   });
-  // const [checkboxData, setCheckboxData] = useState([]);
+  const [dateStart, setdateStart] = useState(test());
 
   let colorsCar = listCars.find((item) => item.name == car);
   function selectColor(color) {
@@ -44,9 +44,24 @@ function Extra({
     }
     setAdditionalText(checkboxData);
   }
+  useEffect(() => {}, []);
   function test(e) {
-    console.log(e.target.value);
+    let date = new Date();
+    console.log(e);
+    // 2020-07-10T21:34
+    // 2020-06-31T22:34
+    // console.log(date.toLocaleTimeString());
+    let mounth = date.getMonth();
+    ++mounth;
+    console.log(mounth, mounth.toString().length);
+    if (mounth.toString().length < 2) {
+      mounth = `0${mounth}`;
+    }
+    return `${date.getFullYear()}-${mounth}-${date.getDate()}T${date.getHours()}:${date.getMinutes()}`;
+    // return "2020-08-31T22:34";
   }
+  console.log(dateStart);
+
   return (
     <div
       className={classnames("order__content__extra", {
@@ -85,10 +100,15 @@ function Extra({
           <p>Дата аренды</p>
           <div>
             <label>С</label>
-            <input type="datetime-local" onChange={test} />
+            <input
+              type="datetime-local"
+              value={dateStart}
+              min={dateStart}
+              onChange={(e) => test(e.taget)}
+            />
           </div>
           <label>По</label>
-          <input type="text" placeholder="Введите дату и время"></input>
+          <input type="text" type="datetime-local" />
         </div>
         <div className="extra__form__rate">
           <p>Тариф</p>
