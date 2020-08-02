@@ -1,35 +1,43 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0d7f0ef23b2eb9a59fe6daad14c0cdba",
+    "revision": "e6b482e62b775f683953c1562d419955",
     "url": "/need_for_drive/index.html"
   },
   {
-    "revision": "0616d80f92bcbe1a3565",
+    "revision": "1730af7a762b1547bd5b",
     "url": "/need_for_drive/static/css/2.d8100e34.chunk.css"
   },
   {
-    "revision": "4b5d77b562315badf5bc",
-    "url": "/need_for_drive/static/css/main.c76fafbd.chunk.css"
+    "revision": "ba047c23c31a0df6c68b",
+    "url": "/need_for_drive/static/css/main.d752a43a.chunk.css"
   },
   {
-    "revision": "0616d80f92bcbe1a3565",
-    "url": "/need_for_drive/static/js/2.551cdf8a.chunk.js"
+    "revision": "1730af7a762b1547bd5b",
+    "url": "/need_for_drive/static/js/2.ccf605d9.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/need_for_drive/static/js/2.551cdf8a.chunk.js.LICENSE.txt"
+    "url": "/need_for_drive/static/js/2.ccf605d9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4b5d77b562315badf5bc",
-    "url": "/need_for_drive/static/js/main.5ab8d674.chunk.js"
+    "revision": "ba047c23c31a0df6c68b",
+    "url": "/need_for_drive/static/js/main.9d88138d.chunk.js"
   },
   {
     "revision": "2fe2865970048183b964",
     "url": "/need_for_drive/static/js/runtime-main.c644a858.js"
   },
   {
+    "revision": "17b7a8e42ee7d4d0e6cdcb81cb420af6",
+    "url": "/need_for_drive/static/media/Facebook_white.17b7a8e4.svg"
+  },
+  {
     "revision": "111ef1ff111c97e0fd0057c3de8fce31",
     "url": "/need_for_drive/static/media/Group.111ef1ff.svg"
+  },
+  {
+    "revision": "3fe654c77c3ba5333fef7c508c68ff11",
+    "url": "/need_for_drive/static/media/Instagram_white.3fe654c7.svg"
   },
   {
     "revision": "6efdf9275e2822493f8356a1cc894064",
@@ -50,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "11eabca2251325cfc5589c9c6fb57b46",
     "url": "/need_for_drive/static/media/Roboto-Regular.11eabca2.ttf"
+  },
+  {
+    "revision": "f7d762cf59710f4aeb356f58881e49ab",
+    "url": "/need_for_drive/static/media/Telegram_white.f7d762cf.svg"
   },
   {
     "revision": "ef4df2e9934eabeb426ae5045ef0019a",
