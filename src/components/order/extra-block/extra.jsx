@@ -46,20 +46,7 @@ function Extra({
     }
     setAdditionalText(checkboxData);
   }
-  function test(e) {
-    let date = new Date();
-    // 2020-07-10T21:34
-    // 2020-06-31T22:34
-    // console.log(date.toLocaleTimeString());
-    let mounth = date.getMonth();
-    ++mounth;
-    // console.log(mounth, mounth.toString().length);
-    if (mounth.toString().length < 2) {
-      mounth = `0${mounth}`;
-    }
-    return `${date.getFullYear()}-${mounth}-${date.getDate()}T${date.getHours()}:${date.getMinutes()}`;
-    // return "2020-08-31T22:34";
-  }
+  function test(e) {}
   // console.log(dateStart);
 
   return (
