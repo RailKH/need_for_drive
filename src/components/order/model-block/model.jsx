@@ -7,7 +7,7 @@ function Model(props) {
   const [modelCar, setModelCar] = useState("Все модели");
   const [carName, setCarName] = useState("");
   const filterCars = props.cars.filter((item) =>
-    modelCar == "Все модели" ? true : item.categoryId.name == modelCar
+    modelCar === "Все модели" ? true : item.categoryId.name === modelCar
   );
   function selectCar(name) {
     setCarName(name);
@@ -17,10 +17,9 @@ function Model(props) {
 
   return (
     <div
-      className={classnames(
-        "order__content__model",
-        {disabled: props.id != "1"}
-      )}>
+      className={classnames("order__content__model", {
+        disabled: props.id !== 1,
+      })}>
       <div className="form__model">
         <input
           type="radio"
@@ -59,10 +58,9 @@ function Model(props) {
           {filterCars.map((item, id) => {
             return (
               <div
-                className={classnames(
-                  "form__selectCar__item",
-                  {active: carName == item.name}
-                )}
+                className={classnames("form__selectCar__item", {
+                  active: carName == item.name,
+                })}
                 onClick={() => selectCar(item.name)}>
                 <p className="title">{item.name}</p>
                 <p className="cost">

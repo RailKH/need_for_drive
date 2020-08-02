@@ -17,6 +17,7 @@ function Extra({
   setColorText,
   car,
   setRateText,
+  changeProps,
 }) {
   const [additional, setAdditional] = useState({
     checkbox1: false,
@@ -25,9 +26,10 @@ function Extra({
   });
   const [dateStart, setdateStart] = useState(test());
 
-  let colorsCar = listCars.find((item) => item.name == car);
+  let colorsCar = listCars.find((item) => item.name === car);
   function selectColor(color) {
     setColorText(color[0].toUpperCase() + color.slice(1));
+    changeProps(true, "paramExtra");
   }
 
   function selectAdditional(item, name) {
@@ -44,45 +46,45 @@ function Extra({
     }
     setAdditionalText(checkboxData);
   }
-  useEffect(() => {}, []);
   function test(e) {
     let date = new Date();
-    console.log(e);
     // 2020-07-10T21:34
     // 2020-06-31T22:34
     // console.log(date.toLocaleTimeString());
     let mounth = date.getMonth();
     ++mounth;
-    console.log(mounth, mounth.toString().length);
+    // console.log(mounth, mounth.toString().length);
     if (mounth.toString().length < 2) {
       mounth = `0${mounth}`;
     }
     return `${date.getFullYear()}-${mounth}-${date.getDate()}T${date.getHours()}:${date.getMinutes()}`;
     // return "2020-08-31T22:34";
   }
-  console.log(dateStart);
+  // console.log(dateStart);
 
   return (
     <div
       className={classnames("order__content__extra", {
-        disabled: id != "2",
+        disabled: id !== 2,
       })}>
       <div className="extra__form">
         <div className="extra__form__color">
           <p>Цвет</p>
-          <input
-            type="radio"
-            id="m0"
-            name="color"
-            onClick={() => selectColor("Любой")}
-          />
-          <label htmlFor="m0">
-            <span />
-            Любой
-          </label>
+          <div>
+            <input
+              type="radio"
+              id="m0"
+              name="color"
+              onClick={() => selectColor("Любой")}
+            />
+            <label htmlFor="m0">
+              <span />
+              Любой
+            </label>
+          </div>
           {colorsCar &&
             colorsCar.colors.map((item, id) => (
-              <>
+              <div>
                 <input
                   type="radio"
                   id={`m${++id}`}
@@ -93,7 +95,7 @@ function Extra({
                   <span />
                   {item[0].toUpperCase() + item.slice(1)}
                 </label>
-              </>
+              </div>
             ))}
         </div>
         <div className="extra__form__date">

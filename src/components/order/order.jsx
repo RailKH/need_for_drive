@@ -7,10 +7,11 @@ import ExtraBlock from "./extra-block/extra";
 import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
 import { Link } from "react-router-dom";
-import { createStore } from "redux";
+// import { createStore } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "../../store/reducers";
-const store = createStore(rootReducer);
+// import rootReducer from "../../store/reducers";
+import { store } from "../../store/configureStore";
+// const store = createStore(rootReducer);
 const URL = "http://api-factory.simbirsoft1.com/api/db/";
 // const PROXY = "https://cors-anywhere.herokuapp.com/";
 
@@ -20,8 +21,8 @@ class Order extends React.Component {
     this.state = {
       id: 0,
       paramLocation: false,
-      paramModel: true,
-      paramExtra: true,
+      paramModel: false,
+      paramExtra: false,
       city: [],
       point: [],
       cars: [],
@@ -70,7 +71,7 @@ class Order extends React.Component {
     });
   }
   nextWrapper(item, textButton) {
-    if (item == 4) {
+    if (item === 4) {
       item = 3;
       if (this.props.paramOrder) {
         this.props.changeOrder();
@@ -129,7 +130,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => this.nextWrapper(0)}
                     className={classnames("link__content__text", {
-                      active: id == "0",
+                      active: id === "0",
                       ready: paramLocation,
                     })}>
                     Местоположение
@@ -138,7 +139,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => paramLocation && this.nextWrapper(1)}
                     className={classnames("link__content__text", {
-                      active: id == "1",
+                      active: id === "1",
                       ready: paramModel,
                     })}>
                     Модель
@@ -147,7 +148,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => paramModel && this.nextWrapper(2)}
                     className={classnames("link__content__text", {
-                      active: id == "2",
+                      active: id === "2",
                       ready: paramExtra,
                     })}>
                     Дополнительно
@@ -156,7 +157,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => paramExtra && this.nextWrapper(3)}
                     className={classnames("link__content__text", {
-                      active: id == "3",
+                      active: id === "3",
                       ready: paramExtra,
                     })}>
                     Итого
@@ -183,6 +184,7 @@ class Order extends React.Component {
                 id={id}
                 listCars={this.state.cars}
                 listRate={this.state.rate}
+                changeProps={this.changeProps}
               />
               <TotalBlock id={id} paramOrder={this.props.paramOrder} />
               <CostBlock

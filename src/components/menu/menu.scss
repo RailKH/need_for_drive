@@ -1,5 +1,5 @@
 @import "../../assets/styles/variables.scss";
-
+$cursor: url(../../assets/icons/Pointer.svg), pointer;
 .menu {
   width: 50%;
   height: 100vh;
@@ -32,7 +32,6 @@
     font-size: 32px;
     line-height: 37px;
     margin-bottom: 24px;
-
     list-style-type: none;
   }
 
@@ -42,7 +41,7 @@
 
     &:hover {
       color: $green;
-      cursor: url(../../assets/icons/Pointer.svg), pointer;
+      cursor: $cursor;
     }
   }
 
@@ -50,10 +49,10 @@
     fill: $green;
   }
   &__content__icons a:hover {
-    cursor: url(../../assets/icons/Pointer.svg), pointer;
+    cursor: $cursor;
   }
   &__content li:hover {
     color: $green;
-    cursor: url(../../assets/icons/Pointer.svg), pointer;
+    cursor: $cursor;
   }
 }

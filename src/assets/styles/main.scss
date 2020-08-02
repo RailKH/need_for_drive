@@ -28,7 +28,7 @@ body {
   &:hover,
   &:focus {
     background: linear-gradient(90deg, #0b934a 2.61%, #026e47 112.6%);
-    cursor: url(../icons/Pointer.svg), pointer;
+    cursor: $cursor;
     outline: none;
   }
 

@@ -12,11 +12,11 @@ function Location(props) {
   function inputChange(event, item) {
     props[item](event.target.value);
 
-    if (event.target.value == "") {
-      item == "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
+    if (event.target.value === "") {
+      item === "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
     }
     if (event.target.value.length >= wordLength) {
-      if (item == "setCityText") {
+      if (item === "setCityText") {
         setfilterCity(props.listCity);
       } else {
         setfilterCityPoint([]);
@@ -31,11 +31,11 @@ function Location(props) {
   }
 
   function selectCity(value, item) {
-    item == "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
+    item === "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
     props[item](value);
   }
   function clearInput(item) {
-    if (item == "city") {
+    if (item === "city") {
       props.setCityText("");
       setfilterCity([]);
     } else {
@@ -70,7 +70,7 @@ function Location(props) {
   return (
     <div
       className={classnames("order__content__location", {
-        disabled: props.id != "0",
+        disabled: props.id !== 0,
       })}>
       <div className="form">
         <div className="form__input">

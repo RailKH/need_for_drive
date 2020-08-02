@@ -6,7 +6,7 @@ export default function Total(props) {
   return (
     <div
       className={classnames("order__content__total", {
-        disabled: props.id != "3",
+        disabled: props.id !== 3,
       })}>
       <div className="total__form">
         {props.paramOrder && (
