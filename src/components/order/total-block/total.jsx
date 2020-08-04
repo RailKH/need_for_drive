@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import car_1 from "../../../assets/img/cars/image_1.png";
+import { connect } from "react-redux";
 
-export default function Total(props) {
+function Total(props) {
   return (
     <div
       className={classnames("order__content__total", {
@@ -14,13 +15,14 @@ export default function Total(props) {
             <div>Ваш заказ подтверждён</div>
           </div>
         )}
-        <div className="total__form__name">Hyndai, i30 N</div>
+        <div className="total__form__name">{props.car}</div>
         <div className="total__form__number">K 761 HA 73</div>
         <div className="total__form__tank">
           <span>Топливо</span> 100%
         </div>
         <div className="total__form__date">
-          <span>Доступна с</span> 12.06.2019 12:00
+          <span>Доступна с</span>
+          {props.dateStart}
         </div>
       </div>
       <div>
@@ -29,3 +31,12 @@ export default function Total(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    car: state.mod.selectCar,
+
+    dateStart: state.ext.dateStart,
+  };
+};
+export default connect(mapStateToProps)(Total);

@@ -2,6 +2,7 @@ import {
   EXT_CHANGE_COLOR_TEXT,
   EXT_CHANGE_DATESTART_TEXT,
   EXT_CHANGE_DATEFINISH_TEXT,
+  EXT_CHANGE_DATECOUNT_TEXT,
   EXT_CHANGE_RATE_TEXT,
   EXT_CHANGE_ADDITIONAL_TEXT,
 } from "./action";
@@ -10,6 +11,7 @@ const defaultState = {
   color: "",
   dateStart: "",
   dateFinish: "",
+  dateCount: "",
   rate: "",
   additional: [],
 };
@@ -30,6 +32,11 @@ export const extReducer = (state = defaultState, action) => {
       return {
         ...state,
         dateFinish: action.payload,
+      };
+    case EXT_CHANGE_DATECOUNT_TEXT:
+      return {
+        ...state,
+        dateCount: action.payload,
       };
     case EXT_CHANGE_RATE_TEXT:
       return {

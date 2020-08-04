@@ -14,6 +14,7 @@ function Location(props) {
 
     if (event.target.value === "") {
       item === "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
+      props.changeProps(false, "paramLocation");
     }
     if (event.target.value.length >= wordLength) {
       if (item === "setCityText") {

@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 
 function Cost(props) {
-  const { additional } = props;
+  const { additional, dateCount } = props;
   const { id, paramLocation, paramExtra, paramModel } = props.state;
   let textButton = "";
   let paramButton;
@@ -37,32 +37,42 @@ function Cost(props) {
     <div className="order__content__cost">
       <p className="title">Ваш заказ:</p>
       <div className="param">
-        <div className="delivery_point">
-          <span className="delivery_point__prop feature-left">
-            Пункт выдачи
-          </span>
-          <span className="delivery_point__value feature-right">
-            {`${props.city} ${props.cityPoint}`}
-          </span>
-        </div>
-        <div className="model">
-          <span className="model__prop feature-left">Модель</span>
-          <span className="model__value feature-right">{props.car}</span>
-        </div>
-        <div className="color">
-          <span className="color__prop feature-left">Цвет</span>
-          <span className="color__value feature-right">{props.color}</span>
-        </div>
-        <div className="duration">
-          <span className="duration__prop feature-left">
-            Длительность аренды
-          </span>
-          <span className="duration__value feature-right">1д 2ч</span>
-        </div>
-        <div className="rate">
-          <span className="rate__prop feature-left">Тариф</span>
-          <span className="rate__value feature-right">{props.rate}</span>
-        </div>
+        {props.city && (
+          <div className="delivery_point">
+            <span className="delivery_point__prop feature-left">
+              Пункт выдачи
+            </span>
+            <span className="delivery_point__value feature-right">
+              {`${props.city} ${props.cityPoint}`}
+            </span>
+          </div>
+        )}
+        {props.car && (
+          <div className="model">
+            <span className="model__prop feature-left">Модель</span>
+            <span className="model__value feature-right">{props.car}</span>
+          </div>
+        )}
+        {props.color && (
+          <div className="color">
+            <span className="color__prop feature-left">Цвет</span>
+            <span className="color__value feature-right">{props.color}</span>
+          </div>
+        )}
+        {dateCount && (
+          <div className="duration">
+            <span className="duration__prop feature-left">
+              Длительность аренды
+            </span>
+            <span className="duration__value feature-right">{dateCount}</span>
+          </div>
+        )}
+        {props.rate && (
+          <div className="rate">
+            <span className="rate__prop feature-left">Тариф</span>
+            <span className="rate__value feature-right">{props.rate}</span>
+          </div>
+        )}
 
         {additional.map((item, id) => {
           return (
@@ -95,7 +105,7 @@ const mapStateToProps = (state) => {
     color: state.ext.color,
     rate: state.ext.rate,
     additional: state.ext.additional,
+    dateCount: state.ext.dateCount,
   };
 };
-const mapDispatchToProps = {};
-export default connect(mapStateToProps, mapDispatchToProps)(Cost);
+export default connect(mapStateToProps)(Cost);

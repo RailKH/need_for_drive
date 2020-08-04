@@ -7,11 +7,8 @@ import ExtraBlock from "./extra-block/extra";
 import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
 import { Link } from "react-router-dom";
-// import { createStore } from "redux";
 import { Provider } from "react-redux";
-// import rootReducer from "../../store/reducers";
 import { store } from "../../store/configureStore";
-// const store = createStore(rootReducer);
 const URL = "http://api-factory.simbirsoft1.com/api/db/";
 // const PROXY = "https://cors-anywhere.herokuapp.com/";
 

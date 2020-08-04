@@ -5,31 +5,43 @@ import {
   setColorText,
   setDateStartText,
   setDateFinishText,
+  setDateCountText,
   setRateText,
   setAdditionalText,
 } from "../../../store/extra/action";
+
 let checkboxData = [];
 function Extra({
   id,
   listCars,
   listRate,
-  setAdditionalText,
-  setColorText,
-  car,
-  setRateText,
   changeProps,
+
+  setAdditionalText,
+  setDateCountText,
+  setColorText,
+  setRateText,
+  setDateStartText,
+
+  car,
+  color,
+  rate,
+  dateCount,
+  props,
 }) {
   const [additional, setAdditional] = useState({
     checkbox1: false,
     checkbox2: false,
     checkbox3: false,
   });
-  const [dateStart, setdateStart] = useState(test());
-
+  const [dateStart, setDateStart] = useState("");
+  const [dateFinish, setDateFinish] = useState("");
+  useEffect(() => {
+    color && rate && dateCount && changeProps(true, "paramExtra");
+  });
   let colorsCar = listCars.find((item) => item.name === car);
   function selectColor(color) {
     setColorText(color[0].toUpperCase() + color.slice(1));
-    changeProps(true, "paramExtra");
   }
 
   function selectAdditional(item, name) {
@@ -46,22 +58,31 @@ function Extra({
     }
     setAdditionalText(checkboxData);
   }
-  function test(e) {
-    let date = new Date();
-    // 2020-07-10T21:34
-    // 2020-06-31T22:34
-    // console.log(date.toLocaleTimeString());
-    let mounth = date.getMonth();
-    ++mounth;
-    // console.log(mounth, mounth.toString().length);
-    if (mounth.toString().length < 2) {
-      mounth = `0${mounth}`;
+  function selectDate(e, item) {
+    if (item === "setDateStart") {
+      setDateStart(e.target.value);
+      setDateStartText(e.target.value);
+    } else {
+      setDateFinish(e.target.value);
+      setDateCountText(diffDates(e.target.value));
     }
-    return `${date.getFullYear()}-${mounth}-${date.getDate()}T${date.getHours()}:${date.getMinutes()}`;
-    // return "2020-08-31T22:34";
   }
-  // console.log(dateStart);
-
+  function diffDates(date_finish) {
+    if (dateStart) {
+      let diffDate = Math.floor(
+        new Date(new Date(date_finish) - new Date(dateStart)) / (1000 * 60 * 60)
+      );
+      if (diffDate % 24 == 0) {
+        return `${diffDate / 24}д`;
+      } else {
+        let dif = diffDate % 24;
+        if (diffDate < 24) {
+          return `${Math.floor(dif)}ч`;
+        }
+        return `${(diffDate - dif) / 24}д ${Math.floor(dif)}ч`;
+      }
+    }
+  }
   return (
     <div
       className={classnames("order__content__extra", {
@@ -84,7 +105,7 @@ function Extra({
           </div>
           {colorsCar &&
             colorsCar.colors.map((item, id) => (
-              <div>
+              <div key={`${++id}_${item}`}>
                 <input
                   type="radio"
                   id={`m${++id}`}
@@ -105,12 +126,17 @@ function Extra({
             <input
               type="datetime-local"
               value={dateStart}
-              min={dateStart}
-              onChange={(e) => test(e.taget)}
+              onChange={(e) => selectDate(e, "setDateStart")}
             />
           </div>
           <label>По</label>
-          <input type="text" type="datetime-local" />
+          <input
+            type="text"
+            type="datetime-local"
+            value={dateFinish}
+            min={dateStart}
+            onChange={(e) => selectDate(e, "setDateFinish")}
+          />
         </div>
         <div className="extra__form__rate">
           <p>Тариф</p>
@@ -118,7 +144,7 @@ function Extra({
             <>
               {listRate.map((item, id) => {
                 return (
-                  <div className="wrap">
+                  <div className="wrap" key={`${id}_${item}`}>
                     <input
                       type="radio"
                       id={`t${id}`}
@@ -195,6 +221,7 @@ const mapStateToProps = (state) => {
     dateFinish: state.ext.dateFinish,
     rate: state.ext.rate,
     additional: state.ext.additional,
+    dateCount: state.ext.dateCount,
     car: state.mod.selectCar,
   };
 };
@@ -204,6 +231,7 @@ const mapDispatchToProps = {
   setDateFinishText,
   setRateText,
   setAdditionalText,
+  setDateCountText,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Extra);

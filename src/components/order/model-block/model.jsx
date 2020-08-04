@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setCarText } from "../../../store/model/action";
 
 function Model(props) {
+  const models = ["Все модели", "Эконом", "Премиум"];
   const [modelCar, setModelCar] = useState("Все модели");
   const [carName, setCarName] = useState("");
   const filterCars = props.cars.filter((item) =>
@@ -21,37 +22,23 @@ function Model(props) {
         disabled: props.id !== 1,
       })}>
       <div className="form__model">
-        <input
-          type="radio"
-          id="r1"
-          name="model"
-          defaultChecked
-          onClick={() => setModelCar("Все модели")}
-        />
-        <label htmlFor="r1">
-          <span />
-          Все модели
-        </label>
-        <input
-          type="radio"
-          id="r2"
-          name="model"
-          onClick={() => setModelCar("Эконом")}
-        />
-        <label htmlFor="r2">
-          <span />
-          Эконом
-        </label>
-        <input
-          type="radio"
-          id="r3"
-          name="model"
-          onClick={() => setModelCar("Премиум")}
-        />
-        <label htmlFor="r3">
-          <span />
-          Премиум
-        </label>
+        {models.map((item, id) => {
+          return (
+            <>
+              <input
+                type="radio"
+                id={`r${id}`}
+                name="model"
+                defaultChecked={id === 0 ? true : false}
+                onClick={() => setModelCar(item)}
+              />
+              <label htmlFor={`r${id}`}>
+                <span />
+                {item}
+              </label>
+            </>
+          );
+        })}
       </div>
       {props.cars && (
         <div className="form__selectCar">
@@ -61,7 +48,8 @@ function Model(props) {
                 className={classnames("form__selectCar__item", {
                   active: carName == item.name,
                 })}
-                onClick={() => selectCar(item.name)}>
+                onClick={() => selectCar(item.name)}
+                key={`${id}_${item}`}>
                 <p className="title">{item.name}</p>
                 <p className="cost">
                   {item.priceMin}-{item.priceMax}P
