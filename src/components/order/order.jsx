@@ -7,11 +7,8 @@ import ExtraBlock from "./extra-block/extra";
 import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
 import { Link } from "react-router-dom";
-// import { createStore } from "redux";
 import { Provider } from "react-redux";
-// import rootReducer from "../../store/reducers";
 import { store } from "../../store/configureStore";
-// const store = createStore(rootReducer);
 const URL = "http://api-factory.simbirsoft1.com/api/db/";
 // const PROXY = "https://cors-anywhere.herokuapp.com/";
 
@@ -40,11 +37,11 @@ class Order extends React.Component {
       return;
     }
     this.getData("city").then((json) => {
-      let data = [];
-      json.data.forEach((elem) => data.push(elem.name));
-      data.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
+      json.data.sort((a, b) =>
+        a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+      );
       this.setState({
-        city: data,
+        city: json.data,
       });
     });
 
@@ -81,17 +78,15 @@ class Order extends React.Component {
     switch (textButton) {
       case "Выбрать модель":
         this.getData("car").then((json) => {
-          const cars = json.data.filter((item) => item.name);
           this.setState({
-            cars,
+            cars: json.data,
           });
         });
         break;
       case "Дополнительно":
         this.getData("rate").then((json) => {
-          const rate = json.data.filter((item) => item);
           this.setState({
-            rate,
+            rate: json.data,
           });
         });
         break;
@@ -182,11 +177,14 @@ class Order extends React.Component {
               />
               <ExtraBlock
                 id={id}
-                listCars={this.state.cars}
                 listRate={this.state.rate}
                 changeProps={this.changeProps}
               />
-              <TotalBlock id={id} paramOrder={this.props.paramOrder} />
+              <TotalBlock
+                id={id}
+                paramOrder={this.props.paramOrder}
+                cars={this.state.cars}
+              />
               <CostBlock
                 id={id}
                 nextWrapper={this.nextWrapper}
@@ -201,3 +199,23 @@ class Order extends React.Component {
   }
 }
 export default Order;
+
+// let user = {"orderStatusId": {},
+//   "cityId": {id: "5e26a128099b810b946c5d87"},
+//   "pointId": {id: "5e26a148099b810b946c5d88"},
+//   "carId": {id: "5e25ca0d099b810b946c5d65"},
+//   "color": "Голубой",
+//   "dateFrom": 0,
+//   "dateTo": 0,
+//   "rateId": {id: "5e26a0d2099b810b946c5d85"},
+//   "price": 5000,
+//   "isFullTank": true,
+//   "isNeedChildChair": false,
+//   "isRightWheel": true};
+// fetch("http://api-factory.simbirsoft1.com/api/db/order", {
+//       method: "POST",
+//       headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+// "Content-Type": "application/json" },
+// body: JSON.stringify(user),
+//     }).then((res) => res.json()).
+// then(json=>console.log(json));

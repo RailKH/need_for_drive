@@ -1,6 +1,7 @@
 export const EXT_CHANGE_COLOR_TEXT = "EXT_CHANGE_COLOR_TEXT";
 export const EXT_CHANGE_DATESTART_TEXT = "EXT_CHANGE_DATESTART_TEXT";
 export const EXT_CHANGE_DATEFINISH_TEXT = "EXT_CHANGE_DATEFINISH_TEXT";
+export const EXT_CHANGE_DATECOUNT_TEXT = "EXT_CHANGE_DATECOUNT_TEXT";
 export const EXT_CHANGE_RATE_TEXT = "EXT_CHANGE_RATE_TEXT";
 export const EXT_CHANGE_ADDITIONAL_TEXT = "EXT_CHANGE_ADDITIONAL_TEXT";
 
@@ -15,6 +16,10 @@ export const setDateStartText = (dateStart) => ({
 export const setDateFinishText = (dateFinish) => ({
   type: EXT_CHANGE_DATEFINISH_TEXT,
   payload: dateFinish,
+});
+export const setDateCountText = (dateCount) => ({
+  type: EXT_CHANGE_DATECOUNT_TEXT,
+  payload: dateCount,
 });
 export const setRateText = (rate) => ({
   type: EXT_CHANGE_RATE_TEXT,

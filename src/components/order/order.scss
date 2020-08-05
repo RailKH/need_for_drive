@@ -341,6 +341,11 @@ $cursor: url(../../assets/icons/Pointer.svg), pointer;
           font-weight: bold;
         }
       }
+      .total__img {
+        img {
+          width: 256px;
+        }
+      }
     }
     &__cost {
       border-left: 1px solid $light-gray;

@@ -3,6 +3,7 @@ import classnames from "classnames";
 
 import { connect } from "react-redux";
 import { setCityText, setCityPointText } from "../../../store/location/action";
+// import { setCityId, setPointId } from "../../../store/files_to_send/action";
 const wordLength = 2;
 
 function Location(props) {
@@ -10,56 +11,72 @@ function Location(props) {
   const [filterCityPoint, setfilterCityPoint] = useState([]);
 
   function inputChange(event, item) {
-    props[item](event.target.value);
+    item === "setCityText"
+      ? props[item]({ name: event.target.value })
+      : props[item]({ address: event.target.value });
+
+    // props[item]({ name: event.target.value });
 
     if (event.target.value === "") {
       item === "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
+      props.changeProps(false, "paramLocation");
     }
     if (event.target.value.length >= wordLength) {
       if (item === "setCityText") {
-        setfilterCity(props.listCity);
+        let filterCity = props.listCity.filter((item) => {
+          const fixItem = item.name.toLowerCase();
+          return fixItem.startsWith(event.target.value.toLowerCase());
+        });
+
+        setfilterCity(filterCity);
       } else {
         setfilterCityPoint([]);
         let filterCityPoint = props.listPoint.filter((item) => {
           const fixItem = item.cityId.name.toLowerCase();
-          return fixItem.startsWith(props.city.toLowerCase());
+          return fixItem.startsWith(props.city.name.toLowerCase());
         });
         setfilterCityPoint(filterCityPoint);
-        props.changeProps(true, "paramLocation");
       }
     }
   }
 
-  function selectCity(value, item) {
-    item === "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
-    props[item](value);
+  function selectCity(item, value) {
+    props[value](item);
+    if (value === "setCityText") {
+      setfilterCity([]);
+    } else {
+      setfilterCityPoint([]);
+      props.changeProps(true, "paramLocation");
+    }
+    // value === "setCityText"
+    //   ? setfilterCity([])
+    //   : {setfilterCityPoint([]); props.changeProps(true, "paramLocation")};
   }
   function clearInput(item) {
     if (item === "city") {
-      props.setCityText("");
+      props.setCityText({ name: "" });
       setfilterCity([]);
     } else {
-      props.setCityPointText("");
+      props.setCityPointText({ address: "" });
       setfilterCityPoint([]);
     }
-
     props.changeProps(false, "paramLocation");
   }
 
   const list_City = filterCity.map((item, id) => {
     return (
       <li
-        onClick={(e) => selectCity(e.target.textContent, "setCityText")}
+        onClick={() => selectCity(item, "setCityText")}
         key={id}
         className="dropdown">
-        {item}
+        {item.name}
       </li>
     );
   });
   const list_CityPoint = filterCityPoint.map((item, id) => {
     return (
       <li
-        onClick={(e) => selectCity(e.target.textContent, "setCityPointText")}
+        onClick={(e) => selectCity(item, "setCityPointText")}
         key={id}
         className="dropdown">
         {item.address}
@@ -79,11 +96,11 @@ function Location(props) {
             <input
               id="city"
               type="text"
-              value={props.city}
+              value={props.city.name}
               placeholder="Начните вводить город..."
               onChange={(e) => inputChange(e, "setCityText")}
             />
-            {props.city && (
+            {props.city.name && (
               <span onClick={() => clearInput("city")} className="close">
                 &times;
               </span>
@@ -97,11 +114,11 @@ function Location(props) {
             <input
               id="delivery_point"
               type="text"
-              value={props.cityPoint}
+              value={props.cityPoint.address}
               placeholder="Начните вводить пункт..."
               onChange={(e) => inputChange(e, "setCityPointText")}
             />
-            {props.cityPoint && (
+            {props.cityPoint.address && (
               <span onClick={() => clearInput("cityPoint")} className="close">
                 &times;
               </span>
@@ -130,6 +147,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setCityText,
   setCityPointText,
+  // setCityId,
+  // setPointId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Location);

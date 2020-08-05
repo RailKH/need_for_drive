@@ -12,8 +12,8 @@ export default function Menu(props) {
     <section className={classnames("menu", { disabled: !props.burger })}>
       <div className="menu__content">
         <ul>
-          {listMenu.map((item) => (
-            <li>{item}</li>
+          {listMenu.map((item, id) => (
+            <li key={`${id}_${item}`}>{item}</li>
           ))}
         </ul>
         <div className="menu__content__icons">

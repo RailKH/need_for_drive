@@ -1,7 +1,7 @@
 import { LOC_CHANGE_CITY_TEXT, LOC_CHANGE_CITYPOINT_TEXT } from "./action";
 const defaultState = {
-  valueCity: "",
-  valueOfPoint: "",
+  valueCity: { name: "" },
+  valueOfPoint: { address: "" },
 };
 
 export const locReducer = (state = defaultState, action) => {
@@ -9,12 +9,12 @@ export const locReducer = (state = defaultState, action) => {
     case LOC_CHANGE_CITY_TEXT:
       return {
         ...state,
-        valueCity: action.payload,
+        valueCity: Object.assign({}, action.payload),
       };
     case LOC_CHANGE_CITYPOINT_TEXT:
       return {
         ...state,
-        valueOfPoint: action.payload,
+        valueOfPoint: Object.assign({}, action.payload),
       };
   }
   return state;
