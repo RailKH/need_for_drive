@@ -77,12 +77,14 @@ function Cost(props) {
         )}
 
         {additional.map((item, id) => {
-          return (
-            <div key={`${item}${id}`}>
-              <span className="oil__prop feature-left">{item}</span>
-              <span className="oil__value feature-right">Да</span>
-            </div>
-          );
+          if (item.checked === true) {
+            return (
+              <div key={item.props}>
+                <span className="oil__prop feature-left">{item.name}</span>
+                <span className="oil__value feature-right">Да</span>
+              </div>
+            );
+          }
         })}
       </div>
       <p className="cost">

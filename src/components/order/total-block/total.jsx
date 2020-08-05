@@ -1,20 +1,8 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
-import { useEffect } from "react";
 
 function Total(props) {
-  // const [selectCar, setSelectCar] = useState("");
-  // function test() {
-  //   props.additional.forEach((item) => item == "Полный бак");
-  // }
-  // let selectCar = {};
-  // useEffect(() => {
-  //   props.cars.forEach(
-  //     (item) => item.id === props.carId && setSelectCar(item)
-  //     // Object.assign(selectCar, item)
-  //   );
-  // });
   return (
     <>
       {props.car.name && (
@@ -30,16 +18,18 @@ function Total(props) {
             )}
             <div className="total__form__name">{props.car.name}</div>
             <div className="total__form__number">
-              {props.car.number.toUpperCase() || "K 761 HA 73"}
+              {props.car.number
+                ? props.car.number.toUpperCase()
+                : "K 761 HA 73"}
             </div>
             <div className="total__form__tank">
-              <span>Топливо</span>
-
-              {` ${props.car.tank}%`}
+              <span>Топливо </span>
+              {(props.additional[0].checked && `100`) || props.car.tank || `40`}
+              %
             </div>
             <div className="total__form__date">
               <span>Доступна с </span>
-              {props.dateStart}
+              {new Date(props.dateStart).toLocaleString().slice(0, -3)}
             </div>
           </div>
           <div className="total__img">
@@ -56,7 +46,6 @@ function Total(props) {
 const mapStateToProps = (state) => {
   return {
     car: state.mod.selectCar,
-    // carId: state.send.carId,
     dateStart: state.ext.dateStart,
     additional: state.ext.additional,
   };

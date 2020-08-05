@@ -18,8 +18,8 @@ class Order extends React.Component {
     this.state = {
       id: 0,
       paramLocation: false,
-      paramModel: true,
-      paramExtra: true,
+      paramModel: false,
+      paramExtra: false,
       city: [],
       point: [],
       cars: [],
@@ -37,14 +37,10 @@ class Order extends React.Component {
       return;
     }
     this.getData("city").then((json) => {
-      // let data = [];
-      // json.data.forEach((elem) => data.push(elem.name));
-      // data.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
       json.data.sort((a, b) =>
         a.name > b.name ? 1 : a.name < b.name ? -1 : 0
       );
       this.setState({
-        // city: data,
         city: json.data,
       });
     });
@@ -82,7 +78,6 @@ class Order extends React.Component {
     switch (textButton) {
       case "Выбрать модель":
         this.getData("car").then((json) => {
-          // const cars = json.data.filter((item) => item.name);
           this.setState({
             cars: json.data,
           });
@@ -90,7 +85,6 @@ class Order extends React.Component {
         break;
       case "Дополнительно":
         this.getData("rate").then((json) => {
-          // const rate = json.data.filter((item) => item);
           this.setState({
             rate: json.data,
           });

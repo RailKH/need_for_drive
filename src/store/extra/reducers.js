@@ -6,14 +6,28 @@ import {
   EXT_CHANGE_RATE_TEXT,
   EXT_CHANGE_ADDITIONAL_TEXT,
 } from "./action";
-
+const listAdditional = [
+  { name: "Полный бак", price: "500р", checked: false, props: "isFullTank" },
+  {
+    name: "Детское кресло",
+    price: "200р",
+    checked: false,
+    props: "isNeedChildChair",
+  },
+  {
+    name: "Правый руль",
+    price: "1600р",
+    checked: false,
+    props: "isRightWheel",
+  },
+];
 const defaultState = {
   color: "",
   dateStart: "",
   dateFinish: "",
   dateCount: "",
   rate: {},
-  additional: [],
+  additional: [].concat(listAdditional),
 };
 
 export const extReducer = (state = defaultState, action) => {
@@ -47,6 +61,7 @@ export const extReducer = (state = defaultState, action) => {
       return {
         ...state,
         additional: [].concat(action.payload),
+        // additional: Object.assign({}, action.payload),
       };
   }
   return state;

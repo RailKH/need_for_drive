@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { setCarText } from "../../../store/model/action";
-// import { setCarId } from "../../../store/files_to_send/action";
 
 function Model(props) {
   const models = ["Все модели", "Эконом", "Премиум"];
@@ -74,7 +73,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
   setCarText,
-  // setCarId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Model);

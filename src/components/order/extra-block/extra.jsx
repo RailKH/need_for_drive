@@ -10,7 +10,6 @@ import {
   setAdditionalText,
 } from "../../../store/extra/action";
 
-let checkboxData = [];
 function Extra({
   id,
   listRate,
@@ -18,6 +17,7 @@ function Extra({
   car,
   color,
   rate,
+  additional,
   dateCount,
   setAdditionalText,
   setDateCountText,
@@ -25,42 +25,6 @@ function Extra({
   setRateText,
   setDateStartText,
 }) {
-  const [additional, setAdditional] = useState({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-  });
-  const listAdditional = [
-    { name: "Полный бак", price: "500р", checked: false, props: "isFullTank" },
-    {
-      name: "Детское кресло",
-      price: "200р",
-      checked: false,
-      props: "isNeedChildChair",
-    },
-    {
-      name: "Правый руль",
-      price: "1600р",
-      checked: false,
-      props: "isRightWheel",
-    },
-  ];
-  // const [additional, setAdditional] = useState([
-  //   { name: "Полный бак", price: "500р", checked: false, props: "isFullTank" },
-  //   {
-  //     name: "Детское кресло",
-  //     price: "200р",
-  //     checked: false,
-  //     props: "isNeedChildChair",
-  //   },
-  //   {
-  //     name: "Правый руль",
-  //     price: "1600р",
-  //     checked: false,
-  //     props: "isRightWheel",
-  //   },
-  // ]);
-
   let colorsCar = car.colors && ["любой", ...car.colors];
 
   const [dateStart, setDateStart] = useState("");
@@ -74,25 +38,15 @@ function Extra({
     setColorText(color[0].toUpperCase() + color.slice(1));
   }
 
-  function selectAdditional(item, name) {
-    let value = !additional[item];
-
-    setAdditional((prevState) => {
-      // return additional.map((item, index) => {
-      //   if (id === index) {
-      //     return { checked: true };
-      //   }
-      // });
-      return { ...prevState, [item]: value };
-    });
-
-    if (value) {
-      checkboxData.push(name);
-    } else {
-      let deletItem = checkboxData.indexOf(name);
-      checkboxData.splice(deletItem, 1);
-    }
-    setAdditionalText(checkboxData);
+  function selectAdditional(index) {
+    setAdditionalText(
+      additional.map((item, id) => {
+        if (id === index) {
+          return { ...item, checked: !item.checked };
+        }
+        return item;
+      })
+    );
   }
   function selectDate(e, item) {
     if (item === "setDateStart") {
@@ -119,6 +73,7 @@ function Extra({
       }
     }
   }
+
   return (
     <div
       className={classnames("order__content__extra", {
@@ -187,72 +142,24 @@ function Extra({
         </div>
         <div className="extra__form__additional">
           <p>Доп услуги</p>
-          {listAdditional.map((item, id) => {
+          {additional.map((item, id) => {
             return (
-              <div className="additional__checkbox">
+              <div
+                className="additional__checkbox"
+                onClick={() => selectAdditional(id)}>
                 <input
                   type="checkbox"
                   className="additional__checkbox__custom"
-                  id={`${id}_${item.name}`}
-                  name={`${item.name}${id}`}
-                  // value="tank"
-                  checked={additional[`checkbox${++id}`]}
-                  onChange={() =>
-                    selectAdditional(`checkbox${++id}`, `${item.name}`)
-                  }
+                  name={item.props}
+                  checked={item.checked}
                 />
-                <label htmlFor={`${item.name}${id}`}>
+                <label htmlFor={item.props}>
                   <span />
-                  {`${item.name}, ${item.price}p`}
+                  {`${item.name}, ${item.price}`}
                 </label>
               </div>
             );
           })}
-          {/* <div className="additional__checkbox">
-            <input
-              type="checkbox"
-              className="additional__checkbox__custom"
-              id="tank"
-              name="tank"
-              value="tank"
-              checked={additional.checkbox1}
-              onChange={() => selectAdditional("checkbox1", "Полный бак")}
-            />
-            <label htmlFor="tank">
-              <span />
-              Полный бак, 500р
-            </label>
-          </div>
-          <div className="additional__checkbox">
-            <input
-              type="checkbox"
-              className="additional__checkbox__custom"
-              id="chair"
-              name="chair"
-              value="chair"
-              checked={additional.checkbox2}
-              onChange={() => selectAdditional("checkbox2", "Детское кресло")}
-            />
-            <label htmlFor="chair">
-              <span />
-              Детское кресло, 200р
-            </label>
-          </div>
-          <div className="additional__checkbox">
-            <input
-              type="checkbox"
-              className="additional__checkbox__custom"
-              id="wheel"
-              name="wheel"
-              value="wheel"
-              checked={additional.checkbox3}
-              onChange={() => selectAdditional("checkbox3", "Правый руль")}
-            />
-            <label htmlFor="wheel">
-              <span />
-              Правый руль, 1600р
-            </label>
-          </div> */}
         </div>
       </div>
     </div>
