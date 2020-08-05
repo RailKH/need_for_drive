@@ -12,7 +12,7 @@ const defaultState = {
   dateStart: "",
   dateFinish: "",
   dateCount: "",
-  rate: "",
+  rate: {},
   additional: [],
 };
 
@@ -41,7 +41,7 @@ export const extReducer = (state = defaultState, action) => {
     case EXT_CHANGE_RATE_TEXT:
       return {
         ...state,
-        rate: action.payload,
+        rate: Object.assign({}, action.payload),
       };
     case EXT_CHANGE_ADDITIONAL_TEXT:
       return {

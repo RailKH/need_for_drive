@@ -37,20 +37,20 @@ function Cost(props) {
     <div className="order__content__cost">
       <p className="title">Ваш заказ:</p>
       <div className="param">
-        {props.city && (
+        {props.city.name && (
           <div className="delivery_point">
             <span className="delivery_point__prop feature-left">
               Пункт выдачи
             </span>
             <span className="delivery_point__value feature-right">
-              {`${props.city} ${props.cityPoint}`}
+              {`${props.city.name} ${props.cityPoint.address}`}
             </span>
           </div>
         )}
-        {props.car && (
+        {props.car.name && (
           <div className="model">
             <span className="model__prop feature-left">Модель</span>
-            <span className="model__value feature-right">{props.car}</span>
+            <span className="model__value feature-right">{props.car.name}</span>
           </div>
         )}
         {props.color && (
@@ -67,10 +67,12 @@ function Cost(props) {
             <span className="duration__value feature-right">{dateCount}</span>
           </div>
         )}
-        {props.rate && (
+        {props.rate.rateTypeId && (
           <div className="rate">
             <span className="rate__prop feature-left">Тариф</span>
-            <span className="rate__value feature-right">{props.rate}</span>
+            <span className="rate__value feature-right">
+              {props.rate.rateTypeId.name}
+            </span>
           </div>
         )}
 
@@ -106,6 +108,8 @@ const mapStateToProps = (state) => {
     rate: state.ext.rate,
     additional: state.ext.additional,
     dateCount: state.ext.dateCount,
+    // cityId: state.send.cityId,
+    // pointId: state.send.pointId,
   };
 };
 export default connect(mapStateToProps)(Cost);

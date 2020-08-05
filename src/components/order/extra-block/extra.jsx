@@ -13,40 +13,76 @@ import {
 let checkboxData = [];
 function Extra({
   id,
-  listCars,
   listRate,
   changeProps,
-
+  car,
+  color,
+  rate,
+  dateCount,
   setAdditionalText,
   setDateCountText,
   setColorText,
   setRateText,
   setDateStartText,
-
-  car,
-  color,
-  rate,
-  dateCount,
-  props,
 }) {
   const [additional, setAdditional] = useState({
     checkbox1: false,
     checkbox2: false,
     checkbox3: false,
   });
+  const listAdditional = [
+    { name: "Полный бак", price: "500р", checked: false, props: "isFullTank" },
+    {
+      name: "Детское кресло",
+      price: "200р",
+      checked: false,
+      props: "isNeedChildChair",
+    },
+    {
+      name: "Правый руль",
+      price: "1600р",
+      checked: false,
+      props: "isRightWheel",
+    },
+  ];
+  // const [additional, setAdditional] = useState([
+  //   { name: "Полный бак", price: "500р", checked: false, props: "isFullTank" },
+  //   {
+  //     name: "Детское кресло",
+  //     price: "200р",
+  //     checked: false,
+  //     props: "isNeedChildChair",
+  //   },
+  //   {
+  //     name: "Правый руль",
+  //     price: "1600р",
+  //     checked: false,
+  //     props: "isRightWheel",
+  //   },
+  // ]);
+
+  let colorsCar = car.colors && ["любой", ...car.colors];
+
   const [dateStart, setDateStart] = useState("");
   const [dateFinish, setDateFinish] = useState("");
+
   useEffect(() => {
     color && rate && dateCount && changeProps(true, "paramExtra");
   });
-  let colorsCar = listCars.find((item) => item.name === car);
+
   function selectColor(color) {
     setColorText(color[0].toUpperCase() + color.slice(1));
   }
 
   function selectAdditional(item, name) {
     let value = !additional[item];
+
     setAdditional((prevState) => {
+      // return additional.map((item, index) => {
+      //   if (id === index) {
+      //     return { checked: true };
+      //   }
+      // });
       return { ...prevState, [item]: value };
     });
 
@@ -91,24 +127,13 @@ function Extra({
       <div className="extra__form">
         <div className="extra__form__color">
           <p>Цвет</p>
-          <div>
-            <input
-              type="radio"
-              id="m0"
-              name="color"
-              onClick={() => selectColor("Любой")}
-            />
-            <label htmlFor="m0">
-              <span />
-              Любой
-            </label>
-          </div>
+
           {colorsCar &&
-            colorsCar.colors.map((item, id) => (
-              <div key={`${++id}_${item}`}>
+            colorsCar.map((item, id) => (
+              <div key={`${id}_${item}`}>
                 <input
                   type="radio"
-                  id={`m${++id}`}
+                  id={`m${id}`}
                   name="color"
                   onClick={() => selectColor(item)}
                 />
@@ -140,30 +165,50 @@ function Extra({
         </div>
         <div className="extra__form__rate">
           <p>Тариф</p>
-          {listRate && (
-            <>
-              {listRate.map((item, id) => {
-                return (
-                  <div className="wrap" key={`${id}_${item}`}>
+          {listRate &&
+            listRate.map((item, id) => {
+              return (
+                <>
+                  <div className="wrap" key={item.id}>
                     <input
                       type="radio"
                       id={`t${id}`}
                       name="rate"
-                      onClick={() => setRateText(item.rateTypeId.name)}
+                      onClick={() => setRateText(item)}
                     />
                     <label htmlFor={`t${id}`}>
                       <span />
                       {`${item.rateTypeId.name}, ${item.price}₽/${item.rateTypeId.unit}`}
                     </label>
                   </div>
-                );
-              })}
-            </>
-          )}
+                </>
+              );
+            })}
         </div>
         <div className="extra__form__additional">
           <p>Доп услуги</p>
-          <div className="additional__checkbox">
+          {listAdditional.map((item, id) => {
+            return (
+              <div className="additional__checkbox">
+                <input
+                  type="checkbox"
+                  className="additional__checkbox__custom"
+                  id={`${id}_${item.name}`}
+                  name={`${item.name}${id}`}
+                  // value="tank"
+                  checked={additional[`checkbox${++id}`]}
+                  onChange={() =>
+                    selectAdditional(`checkbox${++id}`, `${item.name}`)
+                  }
+                />
+                <label htmlFor={`${item.name}${id}`}>
+                  <span />
+                  {`${item.name}, ${item.price}p`}
+                </label>
+              </div>
+            );
+          })}
+          {/* <div className="additional__checkbox">
             <input
               type="checkbox"
               className="additional__checkbox__custom"
@@ -207,7 +252,7 @@ function Extra({
               <span />
               Правый руль, 1600р
             </label>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

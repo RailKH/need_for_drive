@@ -1,6 +1,6 @@
 import { MOD_CHANGE_CAR_TEXT } from "./action";
 const defaultState = {
-  selectCar: "",
+  selectCar: { name: "" },
 };
 
 export const modReducer = (state = defaultState, action) => {
@@ -8,7 +8,7 @@ export const modReducer = (state = defaultState, action) => {
     case MOD_CHANGE_CAR_TEXT:
       return {
         ...state,
-        selectCar: action.payload,
+        selectCar: Object.assign({}, action.payload),
       };
   }
   return state;

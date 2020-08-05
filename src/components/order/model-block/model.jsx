@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { setCarText } from "../../../store/model/action";
+// import { setCarId } from "../../../store/files_to_send/action";
 
 function Model(props) {
   const models = ["Все модели", "Эконом", "Премиум"];
@@ -10,9 +11,9 @@ function Model(props) {
   const filterCars = props.cars.filter((item) =>
     modelCar === "Все модели" ? true : item.categoryId.name === modelCar
   );
-  function selectCar(name) {
-    setCarName(name);
-    props.setCarText(name);
+  function selectCar(item) {
+    setCarName(item.name);
+    props.setCarText(item);
     props.changeProps(true, "paramModel");
   }
 
@@ -48,7 +49,7 @@ function Model(props) {
                 className={classnames("form__selectCar__item", {
                   active: carName == item.name,
                 })}
-                onClick={() => selectCar(item.name)}
+                onClick={() => selectCar(item)}
                 key={`${id}_${item}`}>
                 <p className="title">{item.name}</p>
                 <p className="cost">
@@ -73,6 +74,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
   setCarText,
+  // setCarId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Model);
