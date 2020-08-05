@@ -57,6 +57,7 @@ function Extra({
       setDateCountText(diffDates(e.target.value));
     }
   }
+
   function diffDates(date_finish) {
     if (dateStart) {
       let diffDate = Math.floor(
