@@ -125,7 +125,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => this.nextWrapper(0)}
                     className={classnames("link__content__text", {
-                      active: id === "0",
+                      active: id === 0,
                       ready: paramLocation,
                     })}>
                     Местоположение
@@ -134,7 +134,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => paramLocation && this.nextWrapper(1)}
                     className={classnames("link__content__text", {
-                      active: id === "1",
+                      active: id === 1,
                       ready: paramModel,
                     })}>
                     Модель
@@ -143,7 +143,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => paramModel && this.nextWrapper(2)}
                     className={classnames("link__content__text", {
-                      active: id === "2",
+                      active: id === 2,
                       ready: paramExtra,
                     })}>
                     Дополнительно
@@ -152,7 +152,7 @@ class Order extends React.Component {
                   <div
                     onClick={(e) => paramExtra && this.nextWrapper(3)}
                     className={classnames("link__content__text", {
-                      active: id === "3",
+                      active: id === 3,
                       ready: paramExtra,
                     })}>
                     Итого
