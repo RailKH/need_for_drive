@@ -3,7 +3,6 @@
   "name": "need-for-drive",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://cors-anywhere.herokuapp.com",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -28,6 +27,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  "proxy": "https://cors-anywhere.herokuapp.com/",
+
   "eslintConfig": {
     "extends": "react-app"
   },
