@@ -9,8 +9,8 @@ import CostBlock from "./cost-block/cost";
 import { Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../../store/configureStore";
-const URL = "/http://api-factory.simbirsoft1.com/api/db/";
-// const PROXY = "https://cors-anywhere.herokuapp.com";
+const URL = "http://api-factory.simbirsoft1.com/api/db/";
+const PROXY = "https://cors-anywhere.herokuapp.com/";
 
 class Order extends React.Component {
   constructor() {
@@ -54,7 +54,7 @@ class Order extends React.Component {
   }
 
   getData = async (item) => {
-    let data = await fetch(`${URL}${item}`, {
+    let data = await fetch(`${PROXY}${URL}${item}`, {
       method: "GET",
       headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
     }).then((res) => res.json());
