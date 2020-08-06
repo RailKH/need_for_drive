@@ -9,8 +9,8 @@ import CostBlock from "./cost-block/cost";
 import { Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../../store/configureStore";
-const URL = "http://api-factory.simbirsoft1.com/api/db/";
-// const PROXY = "https://cors-anywhere.herokuapp.com/";
+const URL = "/http://api-factory.simbirsoft1.com/api/db/";
+// const PROXY = "https://cors-anywhere.herokuapp.com";
 
 class Order extends React.Component {
   constructor() {
