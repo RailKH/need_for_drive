@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import {
@@ -24,15 +24,21 @@ function Extra({
   setColorText,
   setRateText,
   setDateStartText,
+  setDateFinishText,
+  dateStart,
+  dateFinish,
 }) {
   let colorsCar = car.colors && ["любой", ...car.colors];
 
-  const [dateStart, setDateStart] = useState("");
-  const [dateFinish, setDateFinish] = useState("");
+  // const [dateStart, setDateStart] = useState("");
+  // const [dateFinish, setDateFinish] = useState("");
 
   useEffect(() => {
     color && rate && dateCount && changeProps(true, "paramExtra");
   });
+  useEffect(() => {
+    dateStart && dateFinish && setDateCountText(diffDates());
+  }, [dateStart, dateFinish]);
 
   function selectColor(color) {
     setColorText(color[0].toUpperCase() + color.slice(1));
@@ -48,20 +54,11 @@ function Extra({
       })
     );
   }
-  function selectDate(e, item) {
-    if (item === "setDateStart") {
-      setDateStart(e.target.value);
-      setDateStartText(e.target.value);
-    } else {
-      setDateFinish(e.target.value);
-      setDateCountText(diffDates(e.target.value));
-    }
-  }
 
-  function diffDates(date_finish) {
+  function diffDates() {
     if (dateStart) {
       let diffDate = Math.floor(
-        new Date(new Date(date_finish) - new Date(dateStart)) / (1000 * 60 * 60)
+        new Date(new Date(dateFinish) - new Date(dateStart)) / (1000 * 60 * 60)
       );
       if (diffDate % 24 == 0) {
         return `${diffDate / 24}д`;
@@ -107,7 +104,7 @@ function Extra({
             <input
               type="datetime-local"
               value={dateStart}
-              onChange={(e) => selectDate(e, "setDateStart")}
+              onChange={(e) => setDateStartText(e.target.value)}
             />
           </div>
           <label>По</label>
@@ -116,7 +113,7 @@ function Extra({
             type="datetime-local"
             value={dateFinish}
             min={dateStart}
-            onChange={(e) => selectDate(e, "setDateFinish")}
+            onChange={(e) => setDateFinishText(e.target.value)}
           />
         </div>
         <div className="extra__form__rate">
@@ -145,18 +142,17 @@ function Extra({
           <p>Доп услуги</p>
           {additional.map((item, id) => {
             return (
-              <div
-                className="additional__checkbox"
-                onClick={() => selectAdditional(id)}>
+              <div className="additional__checkbox">
                 <input
                   type="checkbox"
                   className="additional__checkbox__custom"
-                  name={item.props}
-                  checked={item.checked}
+                  id={item.props}
+                  defaultChecked={item.checked}
+                  onChange={() => selectAdditional(id)}
                 />
                 <label htmlFor={item.props}>
                   <span />
-                  {`${item.name}, ${item.price}`}
+                  {`${item.name}, ${item.price}p`}
                 </label>
               </div>
             );

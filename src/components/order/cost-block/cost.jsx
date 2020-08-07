@@ -10,6 +10,37 @@ function Cost(props) {
   let paramButton;
   let value = id;
 
+  function calcPrice() {
+    let price = "...";
+    props.car.name && (price = props.car.priceMin);
+    if (dateCount && props.rate.price) {
+      if (props.rate.rateTypeId.name == "Поминутно") {
+        let time = Math.floor(
+          new Date(new Date(props.dateFinish) - new Date(props.dateStart)) /
+            (1000 * 60)
+        );
+        price += props.rate.price * time;
+      } else {
+        let time = Math.floor(
+          new Date(new Date(props.dateFinish) - new Date(props.dateStart)) /
+            (1000 * 60 * 60)
+        );
+
+        if (time < 24) {
+          price += props.rate.price;
+        } else {
+          price += props.rate.price * Math.ceil(time / 24);
+        }
+      }
+    }
+    props.additional.forEach((item) => {
+      if (item.checked === true) {
+        price += item.price;
+      }
+    });
+
+    return price;
+  }
   {
     switch (id) {
       case 0:
@@ -88,7 +119,8 @@ function Cost(props) {
         })}
       </div>
       <p className="cost">
-        <span>Цена:</span> от 8 000 до 12 000 ₽
+        <span>Цена: </span>
+        {calcPrice()} ₽
       </p>
       <button
         className={classnames("button", {
@@ -110,8 +142,8 @@ const mapStateToProps = (state) => {
     rate: state.ext.rate,
     additional: state.ext.additional,
     dateCount: state.ext.dateCount,
-    // cityId: state.send.cityId,
-    // pointId: state.send.pointId,
+    dateStart: state.ext.dateStart,
+    dateFinish: state.ext.dateFinish,
   };
 };
 export default connect(mapStateToProps)(Cost);

@@ -7,16 +7,16 @@ import {
   EXT_CHANGE_ADDITIONAL_TEXT,
 } from "./action";
 const listAdditional = [
-  { name: "Полный бак", price: "500р", checked: false, props: "isFullTank" },
+  { name: "Полный бак", price: 500, checked: false, props: "isFullTank" },
   {
     name: "Детское кресло",
-    price: "200р",
+    price: 200,
     checked: false,
     props: "isNeedChildChair",
   },
   {
     name: "Правый руль",
-    price: "1600р",
+    price: 1600,
     checked: false,
     props: "isRightWheel",
   },
@@ -61,7 +61,6 @@ export const extReducer = (state = defaultState, action) => {
       return {
         ...state,
         additional: [].concat(action.payload),
-        // additional: Object.assign({}, action.payload),
       };
   }
   return state;
