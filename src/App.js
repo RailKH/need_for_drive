@@ -16,7 +16,8 @@ import car_3 from "./assets/img/cars/image_3.png";
 
 import "./assets/styles/main.scss";
 import Verification from "./components/verification";
-
+import { Provider } from "react-redux";
+import { store } from "./store/configureStore";
 const cars = [car_1, car_2, car_3];
 
 class App extends React.Component {
@@ -41,6 +42,13 @@ class App extends React.Component {
       paramOrder: !state.paramOrder,
       verification: !state.verification,
     }));
+    if (!this.state.paramOrder) {
+      console.log("getORDER");
+    } else {
+      this.setState((state) => ({
+        status: "",
+      }));
+    }
   }
 
   openMenu() {
@@ -51,42 +59,44 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <div className="main">
-          <Navigation openMenu={this.openMenu} burger={this.state.burger} />
-          <Menu burger={this.state.burger} />
-          <Switch>
-            <Route
-              exact
-              path="/need_for_drive"
-              render={(props) => (
-                <FirstPage burger={this.state.burger} {...props} />
-              )}
-            />
-            <Route
-              exact
-              path="/order"
-              render={(props) => (
-                <Order
-                  cars={cars}
-                  changeVerification={this.changeVerification}
-                  burger={this.state.burger}
-                  paramOrder={this.state.paramOrder}
-                  changeOrder={this.changeOrder}
-                  {...props}
-                />
-              )}
-            />
-            <Redirect from="/" to="/need_for_drive" />
-          </Switch>
-          {this.state.verification && (
-            <Verification
-              changeVerification={this.changeVerification}
-              changeOrder={this.changeOrder}
-            />
-          )}
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="main">
+            <Navigation openMenu={this.openMenu} burger={this.state.burger} />
+            <Menu burger={this.state.burger} />
+            <Switch>
+              <Route
+                exact
+                path="/need_for_drive"
+                render={(props) => (
+                  <FirstPage burger={this.state.burger} {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/order"
+                render={(props) => (
+                  <Order
+                    cars={cars}
+                    changeVerification={this.changeVerification}
+                    burger={this.state.burger}
+                    paramOrder={this.state.paramOrder}
+                    changeOrder={this.changeOrder}
+                    {...props}
+                  />
+                )}
+              />
+              <Redirect from="/" to="/need_for_drive" />
+            </Switch>
+            {this.state.verification && (
+              <Verification
+                changeVerification={this.changeVerification}
+                changeOrder={this.changeOrder}
+              />
+            )}
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }

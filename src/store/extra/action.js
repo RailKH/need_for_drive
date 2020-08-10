@@ -4,6 +4,7 @@ export const EXT_CHANGE_DATEFINISH_TEXT = "EXT_CHANGE_DATEFINISH_TEXT";
 export const EXT_CHANGE_DATECOUNT_TEXT = "EXT_CHANGE_DATECOUNT_TEXT";
 export const EXT_CHANGE_RATE_TEXT = "EXT_CHANGE_RATE_TEXT";
 export const EXT_CHANGE_ADDITIONAL_TEXT = "EXT_CHANGE_ADDITIONAL_TEXT";
+export const EXT_CHANGE_STATUSID_TEXT = "EXT_CHANGE_STATUSID_TEXT";
 
 export const setColorText = (color) => ({
   type: EXT_CHANGE_COLOR_TEXT,
@@ -28,4 +29,8 @@ export const setRateText = (rate) => ({
 export const setAdditionalText = (additional) => ({
   type: EXT_CHANGE_ADDITIONAL_TEXT,
   payload: additional,
+});
+export const setStatusIdText = (orderStatusId) => ({
+  type: EXT_CHANGE_STATUSID_TEXT,
+  payload: orderStatusId,
 });

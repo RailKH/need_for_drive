@@ -24,7 +24,7 @@ function Model(props) {
       <div className="form__model">
         {models.map((item, id) => {
           return (
-            <>
+            <span key={`${id}_${item.name}`}>
               <input
                 type="radio"
                 id={`r${id}`}
@@ -36,7 +36,7 @@ function Model(props) {
                 <span />
                 {item}
               </label>
-            </>
+            </span>
           );
         })}
       </div>
@@ -49,7 +49,7 @@ function Model(props) {
                   active: carName == item.name,
                 })}
                 onClick={() => selectCar(item)}
-                key={`${id}_${item}`}>
+                key={`${id}_${item.name}`}>
                 <p className="title">{item.name}</p>
                 <p className="cost">
                   {item.priceMin}-{item.priceMax}P

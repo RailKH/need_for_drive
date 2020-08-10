@@ -142,7 +142,7 @@ function Extra({
           <p>Доп услуги</p>
           {additional.map((item, id) => {
             return (
-              <div className="additional__checkbox">
+              <div className="additional__checkbox" key={`${id}_${item.props}`}>
                 <input
                   type="checkbox"
                   className="additional__checkbox__custom"
