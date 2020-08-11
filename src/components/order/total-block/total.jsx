@@ -50,6 +50,7 @@ const mapStateToProps = (state) => {
     car: state.mod.selectCar,
     dateStart: state.ext.dateStart,
     additional: state.ext.additional,
+    paramOrder: state.ext.paramOrder,
   };
 };
 export default connect(mapStateToProps)(Total);

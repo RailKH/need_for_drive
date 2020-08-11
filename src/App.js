@@ -9,7 +9,6 @@ import Navigation from "./components/navigation/navigation";
 import Menu from "./components/menu/menu";
 import Order from "./components/order/order";
 import FirstPage from "./components/first-page/first-page";
-import Loader from "./components/loader";
 
 import car_1 from "./assets/img/cars/image_1.png";
 import car_2 from "./assets/img/cars/image_2.png";
@@ -18,6 +17,7 @@ import car_3 from "./assets/img/cars/image_3.png";
 import "./assets/styles/main.scss";
 import Verification from "./components/verification";
 import { connect } from "react-redux";
+import { setStatusIdText, setParamOrderText } from "./store/extra/action";
 
 const cars = [car_1, car_2, car_3];
 const URL = "http://api-factory.simbirsoft1.com/api/db/";
@@ -29,8 +29,7 @@ class App extends React.Component {
     this.state = {
       burger: false,
       verification: false,
-      paramOrder: false,
-      statusId: "",
+      // paramOrder: false,
       loader: false,
     };
     this.changeVerification = this.changeVerification.bind(this);
@@ -56,53 +55,59 @@ class App extends React.Component {
     return data;
   };
   changeOrder() {
+    console.log(this.props.paramOrder);
+    setParamOrderText(!this.props.paramOrder);
     this.setState((state) => ({
-      paramOrder: !state.paramOrder,
+      // paramOrder: !state.paramOrder,
       verification: !state.verification,
     }));
-    if (!this.state.paramOrder) {
-      let order = {
-        orderStatusId: {},
-        cityId: { id: this.props.city.id },
-        pointId: { id: this.props.cityPoint.id },
-        carId: { id: this.props.car.id },
-        color: "Голубой",
-        dateFrom: this.props.dateStart,
-        dateTo: this.props.dateFinish,
-        rateId: { id: this.props.rate.id },
-        price: 5000,
-        isFullTank: true,
-        isNeedChildChair: false,
-        isRightWheel: true,
-      };
-      this.setState((state) => ({
-        loader: true,
-      }));
+
+    if (!this.props.paramOrder) {
       // let order = {
       //   orderStatusId: {},
-      //   cityId: { id: "5e26a128099b810b946c5d87" },
-      //   pointId: { id: "5e26a148099b810b946c5d88" },
-      //   carId: { id: "5e25ca0d099b810b946c5d65" },
+      //   cityId: { id: this.props.city.id },
+      //   pointId: { id: this.props.cityPoint.id },
+      //   carId: { id: this.props.car.id },
       //   color: "Голубой",
-      //   dateFrom: 5,
-      //   dateTo: 7,
-      //   rateId: { id: "5e26a0d2099b810b946c5d85" },
+      //   dateFrom: this.props.dateStart,
+      //   dateTo: this.props.dateFinish,
+      //   rateId: { id: this.props.rate.id },
       //   price: 5000,
       //   isFullTank: true,
       //   isNeedChildChair: false,
       //   isRightWheel: true,
       // };
+      this.setState((state) => ({
+        loader: true,
+      }));
+      let order = {
+        orderStatusId: {},
+        cityId: { id: "5e26a128099b810b946c5d87" },
+        pointId: { id: "5e26a148099b810b946c5d88" },
+        carId: { id: "5e25ca0d099b810b946c5d65" },
+        color: "Голубой",
+        dateFrom: 5,
+        dateTo: 7,
+        rateId: { id: "5e26a0d2099b810b946c5d85" },
+        price: 5000,
+        isFullTank: true,
+        isNeedChildChair: false,
+        isRightWheel: true,
+      };
 
       this.postData("order", order).then((json) => {
+        this.props.setStatusIdText(json.data.id);
         this.setState((state) => ({
-          statusId: json.data.id,
+          // statusId: json.data.id,
           loader: false,
         }));
+        localStorage.setItem("statusId", json.data.id);
       });
     } else {
-      this.setState((state) => ({
-        statusId: "",
-      }));
+      console.log("clear");
+      this.props.setParamOrderText(false);
+      this.props.setStatusIdText("");
+      localStorage.removeItem("statusId");
     }
   }
 
@@ -127,16 +132,15 @@ class App extends React.Component {
               )}
             />
             <Route
-              exact
+              // exact
               path="/order"
               render={(props) => (
                 <Order
                   cars={cars}
                   changeVerification={this.changeVerification}
                   burger={this.state.burger}
-                  paramOrder={this.state.paramOrder}
+                  // paramOrder={this.props.paramOrder}
                   changeOrder={this.changeOrder}
-                  statusId={this.state.statusId}
                   loader={this.state.loader}
                   {...props}
                 />
@@ -164,9 +168,15 @@ const mapStateToProps = (state) => {
     color: state.ext.color,
     rate: state.ext.rate,
     additional: state.ext.additional,
+    orderStatusId: state.ext.orderStatusId,
+    paramOrder: state.ext.paramOrder,
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
   };
 };
+const mapDispatchToProps = {
+  setStatusIdText,
+  setParamOrderText,
+};
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

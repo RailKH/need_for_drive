@@ -147,6 +147,7 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     orderStatusId: state.ext.orderStatusId,
+    paramOrder: state.ext.paramOrder,
   };
 };
 const mapDispatchToProps = {

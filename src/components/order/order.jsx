@@ -6,6 +6,9 @@ import ModelBlock from "./model-block/model";
 import ExtraBlock from "./extra-block/extra";
 import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
+import { setCityText, setCityPointText } from "../../store/location/action";
+import { setCarText } from "../../store/model/action";
+import { setStatusIdText, setParamOrderText } from "../../store/extra/action";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -18,20 +21,18 @@ class Order extends React.Component {
     super();
     this.state = {
       id: 0,
-      paramLocation: true,
-      paramModel: true,
-      paramExtra: true,
+      paramLocation: false,
+      paramModel: false,
+      paramExtra: false,
       city: [],
       point: [],
       cars: [],
       rate: [],
-      // orderStatusId: "",
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
     this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
-    // this.setStatusId = this.setStatusId.bind(this);
   }
   componentDidMount() {
     if (this.props.paramOrder) {
@@ -40,21 +41,40 @@ class Order extends React.Component {
       });
       return;
     }
-    this.getData("city").then((json) => {
-      json.data.sort((a, b) =>
-        a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-      );
-      this.setState({
-        city: json.data,
-      });
-    });
 
-    this.getData("point").then((json) => {
-      const cityPoint = json.data.filter((item) => item.name);
-      this.setState({
-        point: cityPoint,
+    let statusId = localStorage.getItem("statusId");
+    if (statusId) {
+      console.log("start");
+      this.getData(`order/${statusId}`).then((json) => {
+        console.log(json.data);
+        this.props.setParamOrderText(true);
+        this.props.setStatusIdText(statusId);
+        this.props.setCityText(json.data.cityId);
+        this.props.setCityPointText(json.data.pointId);
+        this.props.setCarText(json.data.carId);
+        // this.props.setCarText(json.data.color);
+        // this.props.setCarText(json.data.rateId);
+        this.setState({
+          id: 3,
+        });
       });
-    });
+    } else {
+      this.getData("city").then((json) => {
+        json.data.sort((a, b) =>
+          a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+        );
+        this.setState({
+          city: json.data,
+        });
+      });
+
+      this.getData("point").then((json) => {
+        const cityPoint = json.data.filter((item) => item.name);
+        this.setState({
+          point: cityPoint,
+        });
+      });
+    }
   }
 
   getData = async (item) => {
@@ -133,10 +153,9 @@ class Order extends React.Component {
         </div>
         <div className="link">
           <div className="link__content">
-            {this.props.statusId ? (
+            {this.props.orderStatusId ? (
               <div className="link__content__title">
-                {/* Заказ номер RU58491823 */}
-                {this.props.statusId}
+                {this.props.orderStatusId}
               </div>
             ) : (
               <>
@@ -201,7 +220,7 @@ class Order extends React.Component {
 
             <TotalBlock
               id={id}
-              paramOrder={this.props.paramOrder}
+              // paramOrder={this.props.paramOrder}
               cars={this.state.cars}
               loader={this.props.loader}
             />
@@ -209,9 +228,8 @@ class Order extends React.Component {
               id={id}
               nextWrapper={this.nextWrapper}
               state={this.state}
-              paramOrder={this.props.paramOrder}
+              // paramOrder={this.props.paramOrder}
               postData={this.postData}
-              setStatusId={this.setStatusId}
             />
           </div>
         </section>
@@ -231,11 +249,17 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     orderStatusId: state.ext.orderStatusId,
+    paramOrder: state.ext.paramOrder,
   };
 };
-
-export default connect(mapStateToProps)(Order);
-// export default Order;
+const mapDispatchToProps = {
+  setCityText,
+  setCityPointText,
+  setCarText,
+  setStatusIdText,
+  setParamOrderText,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Order);
 
 // let user = {"orderStatusId": {},
 //   "cityId": {id: "5e26a128099b810b946c5d87"},

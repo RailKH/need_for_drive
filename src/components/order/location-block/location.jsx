@@ -3,7 +3,6 @@ import classnames from "classnames";
 
 import { connect } from "react-redux";
 import { setCityText, setCityPointText } from "../../../store/location/action";
-// import { setCityId, setPointId } from "../../../store/files_to_send/action";
 const wordLength = 2;
 
 function Location(props) {
@@ -42,6 +41,9 @@ function Location(props) {
 
   function selectCity(item, value) {
     props[value](item);
+    console.log(props);
+    console.log(item);
+
     if (value === "setCityText") {
       setfilterCity([]);
     } else {
