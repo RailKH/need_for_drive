@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/need_for_drive/static/css/main.634aec21.chunk.css",
-    "main.js": "/need_for_drive/static/js/main.8d7c3183.chunk.js",
-    "main.js.map": "/need_for_drive/static/js/main.8d7c3183.chunk.js.map",
+    "main.css": "/need_for_drive/static/css/main.9cf3e6d5.chunk.css",
+    "main.js": "/need_for_drive/static/js/main.2d53b225.chunk.js",
+    "main.js.map": "/need_for_drive/static/js/main.2d53b225.chunk.js.map",
     "runtime-main.js": "/need_for_drive/static/js/runtime-main.c644a858.js",
     "runtime-main.js.map": "/need_for_drive/static/js/runtime-main.c644a858.js.map",
     "static/css/2.d8100e34.chunk.css": "/need_for_drive/static/css/2.d8100e34.chunk.css",
-    "static/js/2.43441ec5.chunk.js": "/need_for_drive/static/js/2.43441ec5.chunk.js",
-    "static/js/2.43441ec5.chunk.js.map": "/need_for_drive/static/js/2.43441ec5.chunk.js.map",
+    "static/js/2.4d8d75e5.chunk.js": "/need_for_drive/static/js/2.4d8d75e5.chunk.js",
+    "static/js/2.4d8d75e5.chunk.js.map": "/need_for_drive/static/js/2.4d8d75e5.chunk.js.map",
     "index.html": "/need_for_drive/index.html",
-    "precache-manifest.6c2992608d6eb84a0318a81d6b4ba59d.js": "/need_for_drive/precache-manifest.6c2992608d6eb84a0318a81d6b4ba59d.js",
+    "precache-manifest.4ce0d642f52a0b71d3995c71e9cbd668.js": "/need_for_drive/precache-manifest.4ce0d642f52a0b71d3995c71e9cbd668.js",
     "service-worker.js": "/need_for_drive/service-worker.js",
     "static/css/2.d8100e34.chunk.css.map": "/need_for_drive/static/css/2.d8100e34.chunk.css.map",
-    "static/css/main.634aec21.chunk.css.map": "/need_for_drive/static/css/main.634aec21.chunk.css.map",
-    "static/js/2.43441ec5.chunk.js.LICENSE.txt": "/need_for_drive/static/js/2.43441ec5.chunk.js.LICENSE.txt",
+    "static/css/main.9cf3e6d5.chunk.css.map": "/need_for_drive/static/css/main.9cf3e6d5.chunk.css.map",
+    "static/js/2.4d8d75e5.chunk.js.LICENSE.txt": "/need_for_drive/static/js/2.4d8d75e5.chunk.js.LICENSE.txt",
     "static/media/Facebook_white.17b7a8e4.svg": "/need_for_drive/static/media/Facebook_white.17b7a8e4.svg",
     "static/media/content.scss": "/need_for_drive/static/media/Group.111ef1ff.svg",
     "static/media/Instagram_white.3fe654c7.svg": "/need_for_drive/static/media/Instagram_white.3fe654c7.svg",
@@ -31,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.c644a858.js",
     "static/css/2.d8100e34.chunk.css",
-    "static/js/2.43441ec5.chunk.js",
-    "static/css/main.634aec21.chunk.css",
-    "static/js/main.8d7c3183.chunk.js"
+    "static/js/2.4d8d75e5.chunk.js",
+    "static/css/main.9cf3e6d5.chunk.css",
+    "static/js/main.2d53b225.chunk.js"
   ]
 }
