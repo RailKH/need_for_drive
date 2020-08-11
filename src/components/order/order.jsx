@@ -134,10 +134,7 @@ class Order extends React.Component {
         <div className="link">
           <div className="link__content">
             {this.props.statusId ? (
-              <div className="link__content__title">
-                {/* Заказ номер RU58491823 */}
-                {this.props.statusId}
-              </div>
+              <div className="link__content__title">{this.props.statusId}</div>
             ) : (
               <>
                 <div
@@ -235,30 +232,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Order);
-// export default Order;
-
-// let user = {"orderStatusId": {},
-//   "cityId": {id: "5e26a128099b810b946c5d87"},
-//   "pointId": {id: "5e26a148099b810b946c5d88"},
-//   "carId": {id: "5e25ca0d099b810b946c5d65"},
-//   "color": "Голубой",
-//   "dateFrom": 5,
-//   "dateTo": 7,
-//   "rateId": {id: "5e26a0d2099b810b946c5d85"},
-//   "price": 5000,
-//   "isFullTank": true,
-//   "isNeedChildChair": false,
-//   "isRightWheel": true};
-
-// fetch(
-//     `http://api-factory.simbirsoft1.com/api/db/order`,
-//     {
-//       method: "POST",
-//       headers: {
-//         "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(user),
-//     }
-//   ).then((res) => res.json()).
-// then(json=>console.log(json));
