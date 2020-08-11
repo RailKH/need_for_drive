@@ -6,6 +6,7 @@ import ModelBlock from "./model-block/model";
 import ExtraBlock from "./extra-block/extra";
 import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
+
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -17,20 +18,20 @@ class Order extends React.Component {
     super();
     this.state = {
       id: 0,
-      paramLocation: false,
-      paramModel: false,
-      paramExtra: false,
+      paramLocation: true,
+      paramModel: true,
+      paramExtra: true,
       city: [],
       point: [],
       cars: [],
       rate: [],
-      orderStatusId: "",
+      // orderStatusId: "",
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
     this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
-    this.setStatusId = this.setStatusId.bind(this);
+    // this.setStatusId = this.setStatusId.bind(this);
   }
   componentDidMount() {
     if (this.props.paramOrder) {
@@ -83,11 +84,7 @@ class Order extends React.Component {
       [item]: value,
     });
   }
-  setStatusId(data) {
-    this.setState({
-      orderStatusId: data,
-    });
-  }
+
   nextWrapper(item, textButton) {
     if (item === 4) {
       item = 3;
@@ -105,33 +102,9 @@ class Order extends React.Component {
         });
         break;
       case "Дополнительно":
-        console.log("sssssss");
         this.getData("rate").then((json) => {
           this.setState({
             rate: json.data,
-          });
-        });
-        break;
-      case "Отменить":
-        let order = {
-          orderStatusId: {},
-          cityId: { id: this.props.city.id },
-          pointId: { id: this.props.cityPoint.id },
-          carId: { id: this.props.car.id },
-          color: this.props.color,
-          dateFrom: this.props.dateStart,
-          dateTo: this.props.dateFinish,
-          rateId: { id: this.props.rate.id },
-          // price: calcPrice(),
-          price: 5000,
-          isFullTank: true,
-          isNeedChildChair: false,
-          isRightWheel: true,
-        };
-
-        this.postData("order", order).then((json) => {
-          this.setState({
-            orderStatusId: json.data.id,
           });
         });
         break;
@@ -145,6 +118,7 @@ class Order extends React.Component {
   render() {
     const [car_1, car_2, car_3] = this.props.cars;
     const { id, paramLocation, paramExtra, paramModel } = this.state;
+
     return (
       <section className={classnames("order", { disabled: this.props.burger })}>
         <div className="order__header">
@@ -159,10 +133,10 @@ class Order extends React.Component {
         </div>
         <div className="link">
           <div className="link__content">
-            {this.state.orderStatusId ? (
+            {this.props.statusId ? (
               <div className="link__content__title">
                 {/* Заказ номер RU58491823 */}
-                {this.state.orderStatusId}
+                {this.props.statusId}
               </div>
             ) : (
               <>
@@ -224,10 +198,12 @@ class Order extends React.Component {
               listRate={this.state.rate}
               changeProps={this.changeProps}
             />
+
             <TotalBlock
               id={id}
               paramOrder={this.props.paramOrder}
               cars={this.state.cars}
+              loader={this.props.loader}
             />
             <CostBlock
               id={id}

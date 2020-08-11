@@ -62,24 +62,6 @@ function Cost(props) {
         break;
     }
     if (props.paramOrder) {
-      // let order = {
-      //   orderStatusId: {},
-      //   cityId: { id: props.city.id },
-      //   pointId: { id: props.cityPoint.id },
-      //   carId: { id: props.car.id },
-      //   color: "Голубой",
-      //   dateFrom: props.dateStart,
-      //   dateTo: props.dateFinish,
-      //   rateId: { id: props.rate.id },
-      //   price: calcPrice(),
-      //   isFullTank: true,
-      //   isNeedChildChair: false,
-      //   isRightWheel: true,
-      // };
-      // props.postData("order", order).then((json) => {
-      //   setStatusIdText(json.data.id);
-      //   setStatusId(json.data.id);
-      // });
       textButton = "Отменить";
     }
   }
