@@ -5,6 +5,7 @@ import {
   EXT_CHANGE_DATECOUNT_TEXT,
   EXT_CHANGE_RATE_TEXT,
   EXT_CHANGE_ADDITIONAL_TEXT,
+  EXT_CHANGE_STATUSID_TEXT,
 } from "./action";
 const listAdditional = [
   { name: "Полный бак", price: 500, checked: false, props: "isFullTank" },
@@ -28,6 +29,7 @@ const defaultState = {
   dateCount: "",
   rate: {},
   additional: [].concat(listAdditional),
+  orderStatusId: "",
 };
 
 export const extReducer = (state = defaultState, action) => {
@@ -61,6 +63,11 @@ export const extReducer = (state = defaultState, action) => {
       return {
         ...state,
         additional: [].concat(action.payload),
+      };
+    case EXT_CHANGE_STATUSID_TEXT:
+      return {
+        ...state,
+        orderStatusId: action.payload,
       };
   }
   return state;

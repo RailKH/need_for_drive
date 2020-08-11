@@ -143,6 +143,7 @@ $cursor: url(../../assets/icons/Pointer.svg), pointer;
     flex: 1;
     overflow: hidden;
     overflow-y: scroll;
+    position: relative;
     .wrapper {
       box-sizing: content-box;
       height: 100%;

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import classnames from "classnames";
 
 import { connect } from "react-redux";
+import { setStatusIdText } from "../../../store/extra/action";
 
 function Cost(props) {
-  const { additional, dateCount } = props;
+  const { additional, dateCount, setStatusId } = props;
   const { id, paramLocation, paramExtra, paramModel } = props.state;
   let textButton = "";
   let paramButton;
@@ -14,7 +15,7 @@ function Cost(props) {
     let price = "...";
     props.car.name && (price = props.car.priceMin);
     if (dateCount && props.rate.price) {
-      if (props.rate.rateTypeId.name == "Поминутно") {
+      if (props.rate.rateTypeId.name === "Поминутно") {
         let time = Math.floor(
           new Date(new Date(props.dateFinish) - new Date(props.dateStart)) /
             (1000 * 60)
@@ -133,6 +134,7 @@ function Cost(props) {
     </div>
   );
 }
+
 const mapStateToProps = (state) => {
   return {
     city: state.loc.valueCity,
@@ -144,6 +146,22 @@ const mapStateToProps = (state) => {
     dateCount: state.ext.dateCount,
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
+    orderStatusId: state.ext.orderStatusId,
   };
 };
-export default connect(mapStateToProps)(Cost);
+const mapDispatchToProps = {
+  setStatusIdText,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Cost);
+
+// "cityId": {id: "5e26a128099b810b946c5d87"},
+//   "pointId": {id: "5e26a148099b810b946c5d88"},
+//   "carId": {id: "5e25ca0d099b810b946c5d65"},
+//   "color": "Голубой",
+//   "dateFrom": 5,
+//   "dateTo": 7,
+//   "rateId": {id: "5e26a0d2099b810b946c5d85"},
+//   "price": 5000,
+//   "isFullTank": true,
+//   "isNeedChildChair": false,
+//   "isRightWheel": true};

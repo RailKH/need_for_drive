@@ -1,10 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
+import Loader from "../../loader";
 
 function Total(props) {
   return (
     <>
+      {props.loader && <Loader />}
       {props.car.name && (
         <div
           className={classnames("order__content__total", {
