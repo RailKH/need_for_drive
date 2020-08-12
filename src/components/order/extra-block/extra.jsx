@@ -7,9 +7,28 @@ import {
   setDateFinishText,
   setDateCountText,
   setRateText,
-  setAdditionalText,
+  // setAdditionalText,
+  setTankText,
+  setChairText,
+  setWheelText,
 } from "../../../store/extra/action";
+const listAdditional = [
+  { name: "Полный бак", price: 500, set: "tank", fun: "setTankText" },
+  {
+    name: "Детское кресло",
+    price: 200,
 
+    set: "chair",
+    fun: "setChairText",
+  },
+  {
+    name: "Правый руль",
+    price: 1600,
+
+    set: "wheel",
+    fun: "setWheelText",
+  },
+];
 function Extra({
   id,
   listRate,
@@ -17,16 +36,19 @@ function Extra({
   car,
   color,
   rate,
-  additional,
   dateCount,
-  setAdditionalText,
   setDateCountText,
   setColorText,
   setRateText,
   setDateStartText,
   setDateFinishText,
+  setTankText,
+  setChairText,
+  setWheelText,
   dateStart,
   dateFinish,
+  tank,
+  chair,
 }) {
   let colorsCar = car.colors && ["любой", ...car.colors];
 
@@ -41,15 +63,11 @@ function Extra({
     setColorText(color[0].toUpperCase() + color.slice(1));
   }
 
-  function selectAdditional(index) {
-    setAdditionalText(
-      additional.map((item, id) => {
-        if (id === index) {
-          return { ...item, checked: !item.checked };
-        }
-        return item;
-      })
-    );
+  function selectAdditional(fun, value) {
+    console.log(fun, value);
+    console.log(tank);
+    console.log(chair);
+    // [value]();
   }
 
   function diffDates() {
@@ -157,17 +175,17 @@ function Extra({
         </div>
         <div className="extra__form__additional">
           <p>Доп услуги</p>
-          {additional.map((item, id) => {
+          {listAdditional.map((item, id) => {
             return (
-              <div className="additional__checkbox" key={`${id}_${item.props}`}>
+              <div className="additional__checkbox" key={`${id}_${item.set}`}>
                 <input
                   type="checkbox"
                   className="additional__checkbox__custom"
-                  id={item.props}
-                  defaultChecked={item.checked}
-                  onChange={() => selectAdditional(id)}
+                  id={item.set}
+                  defaultChecked={[item.set]}
+                  onChange={() => selectAdditional(item.fun, [item.set])}
                 />
-                <label htmlFor={item.props}>
+                <label htmlFor={item.set}>
                   <span />
                   {`${item.name}, ${item.price}p`}
                 </label>
@@ -186,8 +204,11 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     rate: state.ext.rate,
-    additional: state.ext.additional,
+    // additional: state.ext.additional,
     dateCount: state.ext.dateCount,
+    tank: state.ext.tank,
+    chair: state.ext.chair,
+    wheel: state.ext.wheel,
     car: state.mod.selectCar,
   };
 };
@@ -196,8 +217,11 @@ const mapDispatchToProps = {
   setDateStartText,
   setDateFinishText,
   setRateText,
-  setAdditionalText,
+  // setAdditionalText,
   setDateCountText,
+  setTankText,
+  setChairText,
+  setWheelText,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Extra);

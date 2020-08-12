@@ -38,11 +38,11 @@ function Cost(props) {
         }
       }
     }
-    props.additional.forEach((item) => {
-      if (item.checked === true) {
-        price += item.price;
-      }
-    });
+    // props.additional.forEach((item) => {
+    //   if (item.checked === true) {
+    //     price += item.price;
+    //   }
+    // });
     props.setPriceText(price);
 
     // return price;
@@ -113,7 +113,7 @@ function Cost(props) {
           </div>
         )}
 
-        {additional.map((item, id) => {
+        {/* {additional.map((item, id) => {
           if (item.checked === true) {
             return (
               <div key={item.props}>
@@ -122,7 +122,7 @@ function Cost(props) {
               </div>
             );
           }
-        })}
+        })} */}
       </div>
 
       <p className="cost">

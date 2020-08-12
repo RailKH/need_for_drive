@@ -16,7 +16,7 @@ import {
   setDateFinishText,
   setDateCountText,
   setRateText,
-  setAdditionalText,
+  // setAdditionalText,
   setPriceText,
 } from "../../store/extra/action";
 
@@ -34,6 +34,7 @@ const defaultList = {
   price: "",
   dateStart: "",
 };
+
 class Order extends React.Component {
   constructor(props) {
     super();
@@ -180,7 +181,6 @@ class Order extends React.Component {
   }
 
   render() {
-    const [car_1, car_2, car_3] = this.props.cars;
     const { id, paramLocation, paramExtra, paramModel } = this.state;
 
     return (
@@ -305,7 +305,7 @@ const mapDispatchToProps = {
   setDateFinishText,
   setDateCountText,
   setRateText,
-  setAdditionalText,
+  // setAdditionalText,
   setPriceText,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
