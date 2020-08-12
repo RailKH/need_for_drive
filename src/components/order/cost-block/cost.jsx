@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import classnames from "classnames";
 
 import { connect } from "react-redux";
-import { setStatusIdText } from "../../../store/extra/action";
+import { setStatusIdText, setPriceText } from "../../../store/extra/action";
 
 function Cost(props) {
   const { additional, dateCount, setStatusId } = props;
@@ -10,6 +10,10 @@ function Cost(props) {
   let textButton = "";
   let paramButton;
   let value = id;
+
+  useEffect(() => {
+    !props.paramOrder && calcPrice();
+  });
 
   function calcPrice() {
     let price = "...";
@@ -39,8 +43,9 @@ function Cost(props) {
         price += item.price;
       }
     });
+    props.setPriceText(price);
 
-    return price;
+    // return price;
   }
   {
     switch (id) {
@@ -119,10 +124,12 @@ function Cost(props) {
           }
         })}
       </div>
+
       <p className="cost">
         <span>Цена: </span>
-        {calcPrice()} ₽
+        {props.price} ₽
       </p>
+
       <button
         className={classnames("button", {
           disabled: !paramButton,
@@ -147,9 +154,12 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     orderStatusId: state.ext.orderStatusId,
+    paramOrder: state.ext.paramOrder,
+    price: state.ext.price,
   };
 };
 const mapDispatchToProps = {
   setStatusIdText,
+  setPriceText,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Cost);

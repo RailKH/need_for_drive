@@ -6,32 +6,52 @@ import ModelBlock from "./model-block/model";
 import ExtraBlock from "./extra-block/extra";
 import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
+import { setCityText, setCityPointText } from "../../store/location/action";
+import { setCarText } from "../../store/model/action";
+import {
+  setStatusIdText,
+  setParamOrderText,
+  setColorText,
+  setDateStartText,
+  setDateFinishText,
+  setDateCountText,
+  setRateText,
+  setAdditionalText,
+  setPriceText,
+} from "../../store/extra/action";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const URL = "http://api-factory.simbirsoft1.com/api/db/";
 const PROXY = "https://cors-anywhere.herokuapp.com/";
-
+const defaultList = {
+  cityId: { name: "" },
+  pointId: { address: "" },
+  carId: {},
+  color: "",
+  rateId: {},
+  price: "",
+  dateStart: "",
+};
 class Order extends React.Component {
   constructor(props) {
     super();
     this.state = {
       id: 0,
-      paramLocation: true,
-      paramModel: true,
-      paramExtra: true,
+      paramLocation: false,
+      paramModel: false,
+      paramExtra: false,
       city: [],
       point: [],
       cars: [],
       rate: [],
-      // orderStatusId: "",
     };
     this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
     this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
-    // this.setStatusId = this.setStatusId.bind(this);
+    this.setDefValue = this.setDefValue.bind(this);
   }
   componentDidMount() {
     if (this.props.paramOrder) {
@@ -39,6 +59,22 @@ class Order extends React.Component {
         id: 3,
       });
       return;
+    }
+
+    let statusId = localStorage.getItem("statusId");
+    if (statusId) {
+      this.getData(`order/${statusId}`).then((json) => {
+        console.log(json.data);
+        this.props.setParamOrderText(true);
+        this.props.setStatusIdText(statusId);
+        this.setDefValue(json);
+
+        this.setState({
+          id: 3,
+
+          paramExtra: true,
+        });
+      });
     }
     this.getData("city").then((json) => {
       json.data.sort((a, b) =>
@@ -56,7 +92,27 @@ class Order extends React.Component {
       });
     });
   }
-
+  setDefValue(json) {
+    let value = json ? json.data : defaultList;
+    // if (json) {
+    this.props.setCityText(value.cityId);
+    this.props.setCityPointText(value.pointId);
+    this.props.setCarText(value.carId);
+    this.props.setColorText(value.color);
+    this.props.setRateText(value.rateId);
+    this.props.setPriceText(value.price);
+    this.props.setDateStartText(value.dateFrom);
+    this.props.setDateFinishText(value.dateTo);
+    // } else {
+    //   this.props.setCityText(defaultList.cityId);
+    //   this.props.setCityPointText(defaultList.pointId);
+    //   this.props.setCarText(defaultList.carId);
+    //   this.props.setColorText(defaultList.color);
+    //   this.props.setRateText(defaultList.rateId);
+    //   this.props.setPriceText(defaultList.price);
+    //   this.props.setDateStartText(defaultList.dateStart);
+    // }
+  }
   getData = async (item) => {
     let data = await fetch(`${PROXY}${URL}${item}`, {
       method: "GET",
@@ -86,10 +142,18 @@ class Order extends React.Component {
   }
 
   nextWrapper(item, textButton) {
+    console.log(this.state);
     if (item === 4) {
       item = 3;
       if (this.props.paramOrder) {
         this.props.changeOrder();
+        this.setState({
+          paramExtra: false,
+          paramModel: false,
+          paramLocation: false,
+          id: 0,
+        });
+        this.setDefValue();
       }
       this.props.changeVerification("verification");
     }
@@ -133,8 +197,10 @@ class Order extends React.Component {
         </div>
         <div className="link">
           <div className="link__content">
-            {this.props.statusId ? (
-              <div className="link__content__title">{this.props.statusId}</div>
+            {this.props.orderStatusId ? (
+              <div className="link__content__title">
+                {this.props.orderStatusId}
+              </div>
             ) : (
               <>
                 <div
@@ -198,7 +264,6 @@ class Order extends React.Component {
 
             <TotalBlock
               id={id}
-              paramOrder={this.props.paramOrder}
               cars={this.state.cars}
               loader={this.props.loader}
             />
@@ -206,9 +271,7 @@ class Order extends React.Component {
               id={id}
               nextWrapper={this.nextWrapper}
               state={this.state}
-              paramOrder={this.props.paramOrder}
               postData={this.postData}
-              setStatusId={this.setStatusId}
             />
           </div>
         </section>
@@ -228,7 +291,23 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     orderStatusId: state.ext.orderStatusId,
+    paramOrder: state.ext.paramOrder,
   };
 };
 
-export default connect(mapStateToProps)(Order);
+const mapDispatchToProps = {
+  setCityText,
+  setCityPointText,
+  setCarText,
+  setStatusIdText,
+  setParamOrderText,
+  setColorText,
+  setDateStartText,
+  setDateFinishText,
+  setDateCountText,
+  setRateText,
+  setAdditionalText,
+  setPriceText,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Order);
+
