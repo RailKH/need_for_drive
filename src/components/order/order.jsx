@@ -294,6 +294,7 @@ const mapStateToProps = (state) => {
     paramOrder: state.ext.paramOrder,
   };
 };
+
 const mapDispatchToProps = {
   setCityText,
   setCityPointText,
@@ -309,3 +310,4 @@ const mapDispatchToProps = {
   setPriceText,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
+
