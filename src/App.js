@@ -80,20 +80,6 @@ class App extends React.Component {
       this.setState((state) => ({
         loader: true,
       }));
-      // let order = {
-      //   orderStatusId: {},
-      //   cityId: { id: "5e26a128099b810b946c5d87" },
-      //   pointId: { id: "5e26a148099b810b946c5d88" },
-      //   carId: { id: "5e25ca0d099b810b946c5d65" },
-      //   color: "Голубой",
-      //   dateFrom: 5,
-      //   dateTo: 7,
-      //   rateId: { id: "5e26a0d2099b810b946c5d85" },
-      //   price: 5000,
-      //   isFullTank: true,
-      //   isNeedChildChair: false,
-      //   isRightWheel: true,
-      // };
 
       this.postData("order", order).then((json) => {
         this.props.setStatusIdText(json.data.id);
