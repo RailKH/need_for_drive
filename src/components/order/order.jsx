@@ -71,7 +71,6 @@ class Order extends React.Component {
 
         this.setState({
           id: 3,
-
           paramExtra: true,
         });
       });
@@ -94,7 +93,6 @@ class Order extends React.Component {
   }
   setDefValue(json) {
     let value = json ? json.data : defaultList;
-    // if (json) {
     this.props.setCityText(value.cityId);
     this.props.setCityPointText(value.pointId);
     this.props.setCarText(value.carId);
@@ -103,15 +101,6 @@ class Order extends React.Component {
     this.props.setPriceText(value.price);
     this.props.setDateStartText(value.dateFrom);
     this.props.setDateFinishText(value.dateTo);
-    // } else {
-    //   this.props.setCityText(defaultList.cityId);
-    //   this.props.setCityPointText(defaultList.pointId);
-    //   this.props.setCarText(defaultList.carId);
-    //   this.props.setColorText(defaultList.color);
-    //   this.props.setRateText(defaultList.rateId);
-    //   this.props.setPriceText(defaultList.price);
-    //   this.props.setDateStartText(defaultList.dateStart);
-    // }
   }
   getData = async (item) => {
     let data = await fetch(`${PROXY}${URL}${item}`, {
@@ -310,4 +299,3 @@ const mapDispatchToProps = {
   setPriceText,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
-
