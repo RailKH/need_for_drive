@@ -66,8 +66,6 @@ function Extra({
   function selectAdditional(fun, value) {
     console.log(fun, value);
     console.log(tank);
-    console.log(chair);
-    // [value]();
   }
 
   function diffDates() {
