@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/need_for_drive/static/css/main.9cf3e6d5.chunk.css",
-    "main.js": "/need_for_drive/static/js/main.876d20a7.chunk.js",
-    "main.js.map": "/need_for_drive/static/js/main.876d20a7.chunk.js.map",
+    "main.js": "/need_for_drive/static/js/main.35f3d835.chunk.js",
+    "main.js.map": "/need_for_drive/static/js/main.35f3d835.chunk.js.map",
     "runtime-main.js": "/need_for_drive/static/js/runtime-main.c644a858.js",
     "runtime-main.js.map": "/need_for_drive/static/js/runtime-main.c644a858.js.map",
     "static/css/2.d8100e34.chunk.css": "/need_for_drive/static/css/2.d8100e34.chunk.css",
-    "static/js/2.e1e0dff4.chunk.js": "/need_for_drive/static/js/2.e1e0dff4.chunk.js",
-    "static/js/2.e1e0dff4.chunk.js.map": "/need_for_drive/static/js/2.e1e0dff4.chunk.js.map",
+    "static/js/2.254b7f7b.chunk.js": "/need_for_drive/static/js/2.254b7f7b.chunk.js",
+    "static/js/2.254b7f7b.chunk.js.map": "/need_for_drive/static/js/2.254b7f7b.chunk.js.map",
     "index.html": "/need_for_drive/index.html",
-    "precache-manifest.9d2a3931515f08224e7b421f80bb71df.js": "/need_for_drive/precache-manifest.9d2a3931515f08224e7b421f80bb71df.js",
+    "precache-manifest.939ceb8fcac1b0c54c983496cda45c61.js": "/need_for_drive/precache-manifest.939ceb8fcac1b0c54c983496cda45c61.js",
     "service-worker.js": "/need_for_drive/service-worker.js",
     "static/css/2.d8100e34.chunk.css.map": "/need_for_drive/static/css/2.d8100e34.chunk.css.map",
     "static/css/main.9cf3e6d5.chunk.css.map": "/need_for_drive/static/css/main.9cf3e6d5.chunk.css.map",
-    "static/js/2.e1e0dff4.chunk.js.LICENSE.txt": "/need_for_drive/static/js/2.e1e0dff4.chunk.js.LICENSE.txt",
+    "static/js/2.254b7f7b.chunk.js.LICENSE.txt": "/need_for_drive/static/js/2.254b7f7b.chunk.js.LICENSE.txt",
     "static/media/Facebook_white.17b7a8e4.svg": "/need_for_drive/static/media/Facebook_white.17b7a8e4.svg",
     "static/media/content.scss": "/need_for_drive/static/media/Group.111ef1ff.svg",
     "static/media/Instagram_white.3fe654c7.svg": "/need_for_drive/static/media/Instagram_white.3fe654c7.svg",
@@ -31,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.c644a858.js",
     "static/css/2.d8100e34.chunk.css",
-    "static/js/2.e1e0dff4.chunk.js",
+    "static/js/2.254b7f7b.chunk.js",
     "static/css/main.9cf3e6d5.chunk.css",
-    "static/js/main.876d20a7.chunk.js"
+    "static/js/main.35f3d835.chunk.js"
   ]
 }
