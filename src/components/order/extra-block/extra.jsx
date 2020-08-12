@@ -30,9 +30,6 @@ function Extra({
 }) {
   let colorsCar = car.colors && ["любой", ...car.colors];
 
-  // const [dateStart, setDateStart] = useState("");
-  // const [dateFinish, setDateFinish] = useState("");
-
   useEffect(() => {
     color && rate && dateCount && changeProps(true, "paramExtra");
   });
@@ -71,7 +68,23 @@ function Extra({
       }
     }
   }
+  function getFormate(value) {
+    const date = new Date(value);
+    const trueMonth = date.getMonth() + 1;
+    const month = `${trueMonth}`.length === 1 ? `0${trueMonth}` : trueMonth;
+    const day =
+      `${date.getDate()}`.length === 1 ? `0${date.getDate()}` : date.getDate();
+    const hour =
+      `${date.getHours()}`.length === 1
+        ? `0${date.getHours()}`
+        : date.getHours();
+    const minute =
+      `${date.getMinutes()}`.length === 1
+        ? `0${date.getMinutes()}`
+        : date.getMinutes();
 
+    return `${date.getFullYear()}-${month}-${day}T${hour}:${minute}`;
+  }
   return (
     <div
       className={classnames("order__content__extra", {
@@ -103,17 +116,21 @@ function Extra({
             <label>С</label>
             <input
               type="datetime-local"
-              value={dateStart}
-              onChange={(e) => setDateStartText(e.target.value)}
+              value={getFormate(dateStart)}
+              onChange={(e) => {
+                setDateStartText(new Date(e.target.value).getTime());
+              }}
             />
           </div>
           <label>По</label>
           <input
             type="text"
             type="datetime-local"
-            value={dateFinish}
-            min={dateStart}
-            onChange={(e) => setDateFinishText(e.target.value)}
+            value={getFormate(dateFinish)}
+            min={getFormate(dateStart)}
+            onChange={(e) =>
+              setDateFinishText(new Date(e.target.value).getTime())
+            }
           />
         </div>
         <div className="extra__form__rate">

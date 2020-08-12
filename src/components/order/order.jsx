@@ -8,14 +8,32 @@ import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
 import { setCityText, setCityPointText } from "../../store/location/action";
 import { setCarText } from "../../store/model/action";
-import { setStatusIdText, setParamOrderText } from "../../store/extra/action";
+import {
+  setStatusIdText,
+  setParamOrderText,
+  setColorText,
+  setDateStartText,
+  setDateFinishText,
+  setDateCountText,
+  setRateText,
+  setAdditionalText,
+  setPriceText,
+} from "../../store/extra/action";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const URL = "http://api-factory.simbirsoft1.com/api/db/";
 const PROXY = "https://cors-anywhere.herokuapp.com/";
-
+const defaultList = {
+  cityId: { name: "" },
+  pointId: { address: "" },
+  carId: {},
+  color: "",
+  rateId: {},
+  price: "",
+  dateStart: "",
+};
 class Order extends React.Component {
   constructor(props) {
     super();
@@ -33,6 +51,7 @@ class Order extends React.Component {
     this.changeProps = this.changeProps.bind(this);
     this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
+    this.setDefValue = this.setDefValue.bind(this);
   }
   componentDidMount() {
     if (this.props.paramOrder) {
@@ -44,39 +63,56 @@ class Order extends React.Component {
 
     let statusId = localStorage.getItem("statusId");
     if (statusId) {
-      console.log("start");
       this.getData(`order/${statusId}`).then((json) => {
         console.log(json.data);
         this.props.setParamOrderText(true);
         this.props.setStatusIdText(statusId);
-        this.props.setCityText(json.data.cityId);
-        this.props.setCityPointText(json.data.pointId);
-        this.props.setCarText(json.data.carId);
-        // this.props.setCarText(json.data.color);
-        // this.props.setCarText(json.data.rateId);
+        this.setDefValue(json);
+
         this.setState({
           id: 3,
-        });
-      });
-    } else {
-      this.getData("city").then((json) => {
-        json.data.sort((a, b) =>
-          a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-        );
-        this.setState({
-          city: json.data,
-        });
-      });
 
-      this.getData("point").then((json) => {
-        const cityPoint = json.data.filter((item) => item.name);
-        this.setState({
-          point: cityPoint,
+          paramExtra: true,
         });
       });
     }
-  }
+    this.getData("city").then((json) => {
+      json.data.sort((a, b) =>
+        a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+      );
+      this.setState({
+        city: json.data,
+      });
+    });
 
+    this.getData("point").then((json) => {
+      const cityPoint = json.data.filter((item) => item.name);
+      this.setState({
+        point: cityPoint,
+      });
+    });
+  }
+  setDefValue(json) {
+    let value = json ? json.data : defaultList;
+    // if (json) {
+    this.props.setCityText(value.cityId);
+    this.props.setCityPointText(value.pointId);
+    this.props.setCarText(value.carId);
+    this.props.setColorText(value.color);
+    this.props.setRateText(value.rateId);
+    this.props.setPriceText(value.price);
+    this.props.setDateStartText(value.dateFrom);
+    this.props.setDateFinishText(value.dateTo);
+    // } else {
+    //   this.props.setCityText(defaultList.cityId);
+    //   this.props.setCityPointText(defaultList.pointId);
+    //   this.props.setCarText(defaultList.carId);
+    //   this.props.setColorText(defaultList.color);
+    //   this.props.setRateText(defaultList.rateId);
+    //   this.props.setPriceText(defaultList.price);
+    //   this.props.setDateStartText(defaultList.dateStart);
+    // }
+  }
   getData = async (item) => {
     let data = await fetch(`${PROXY}${URL}${item}`, {
       method: "GET",
@@ -106,10 +142,18 @@ class Order extends React.Component {
   }
 
   nextWrapper(item, textButton) {
+    console.log(this.state);
     if (item === 4) {
       item = 3;
       if (this.props.paramOrder) {
         this.props.changeOrder();
+        this.setState({
+          paramExtra: false,
+          paramModel: false,
+          paramLocation: false,
+          id: 0,
+        });
+        this.setDefValue();
       }
       this.props.changeVerification("verification");
     }
@@ -220,7 +264,6 @@ class Order extends React.Component {
 
             <TotalBlock
               id={id}
-              // paramOrder={this.props.paramOrder}
               cars={this.state.cars}
               loader={this.props.loader}
             />
@@ -228,7 +271,6 @@ class Order extends React.Component {
               id={id}
               nextWrapper={this.nextWrapper}
               state={this.state}
-              // paramOrder={this.props.paramOrder}
               postData={this.postData}
             />
           </div>
@@ -258,31 +300,12 @@ const mapDispatchToProps = {
   setCarText,
   setStatusIdText,
   setParamOrderText,
+  setColorText,
+  setDateStartText,
+  setDateFinishText,
+  setDateCountText,
+  setRateText,
+  setAdditionalText,
+  setPriceText,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
-
-// let user = {"orderStatusId": {},
-//   "cityId": {id: "5e26a128099b810b946c5d87"},
-//   "pointId": {id: "5e26a148099b810b946c5d88"},
-//   "carId": {id: "5e25ca0d099b810b946c5d65"},
-//   "color": "Голубой",
-//   "dateFrom": 5,
-//   "dateTo": 7,
-//   "rateId": {id: "5e26a0d2099b810b946c5d85"},
-//   "price": 5000,
-//   "isFullTank": true,
-//   "isNeedChildChair": false,
-//   "isRightWheel": true};
-
-// fetch(
-//     `http://api-factory.simbirsoft1.com/api/db/order`,
-//     {
-//       method: "POST",
-//       headers: {
-//         "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(user),
-//     }
-//   ).then((res) => res.json()).
-// then(json=>console.log(json));

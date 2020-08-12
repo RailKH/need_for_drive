@@ -56,44 +56,44 @@ class App extends React.Component {
   };
   changeOrder() {
     console.log(this.props.paramOrder);
-    setParamOrderText(!this.props.paramOrder);
+    this.props.setParamOrderText(!this.props.paramOrder);
     this.setState((state) => ({
       // paramOrder: !state.paramOrder,
       verification: !state.verification,
     }));
 
     if (!this.props.paramOrder) {
+      let order = {
+        orderStatusId: {},
+        cityId: { id: this.props.city.id },
+        pointId: { id: this.props.cityPoint.id },
+        carId: { id: this.props.car.id },
+        color: this.props.color,
+        dateFrom: this.props.dateStart,
+        dateTo: this.props.dateFinish,
+        rateId: { id: this.props.rate.id },
+        price: this.props.price,
+        isFullTank: true,
+        isNeedChildChair: false,
+        isRightWheel: true,
+      };
+      this.setState((state) => ({
+        loader: true,
+      }));
       // let order = {
       //   orderStatusId: {},
-      //   cityId: { id: this.props.city.id },
-      //   pointId: { id: this.props.cityPoint.id },
-      //   carId: { id: this.props.car.id },
+      //   cityId: { id: "5e26a128099b810b946c5d87" },
+      //   pointId: { id: "5e26a148099b810b946c5d88" },
+      //   carId: { id: "5e25ca0d099b810b946c5d65" },
       //   color: "Голубой",
-      //   dateFrom: this.props.dateStart,
-      //   dateTo: this.props.dateFinish,
-      //   rateId: { id: this.props.rate.id },
+      //   dateFrom: 5,
+      //   dateTo: 7,
+      //   rateId: { id: "5e26a0d2099b810b946c5d85" },
       //   price: 5000,
       //   isFullTank: true,
       //   isNeedChildChair: false,
       //   isRightWheel: true,
       // };
-      this.setState((state) => ({
-        loader: true,
-      }));
-      let order = {
-        orderStatusId: {},
-        cityId: { id: "5e26a128099b810b946c5d87" },
-        pointId: { id: "5e26a148099b810b946c5d88" },
-        carId: { id: "5e25ca0d099b810b946c5d65" },
-        color: "Голубой",
-        dateFrom: 5,
-        dateTo: 7,
-        rateId: { id: "5e26a0d2099b810b946c5d85" },
-        price: 5000,
-        isFullTank: true,
-        isNeedChildChair: false,
-        isRightWheel: true,
-      };
 
       this.postData("order", order).then((json) => {
         this.props.setStatusIdText(json.data.id);
@@ -172,6 +172,7 @@ const mapStateToProps = (state) => {
     paramOrder: state.ext.paramOrder,
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
+    price: state.ext.price,
   };
 };
 const mapDispatchToProps = {

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import classnames from "classnames";
 
 import { connect } from "react-redux";
-import { setStatusIdText } from "../../../store/extra/action";
+import { setStatusIdText, setPriceText } from "../../../store/extra/action";
 
 function Cost(props) {
   const { additional, dateCount, setStatusId } = props;
@@ -10,6 +10,10 @@ function Cost(props) {
   let textButton = "";
   let paramButton;
   let value = id;
+
+  useEffect(() => {
+    !props.paramOrder && calcPrice();
+  });
 
   function calcPrice() {
     let price = "...";
@@ -39,8 +43,9 @@ function Cost(props) {
         price += item.price;
       }
     });
+    props.setPriceText(price);
 
-    return price;
+    // return price;
   }
   {
     switch (id) {
@@ -119,10 +124,12 @@ function Cost(props) {
           }
         })}
       </div>
+
       <p className="cost">
         <span>Цена: </span>
-        {calcPrice()} ₽
+        {props.price} ₽
       </p>
+
       <button
         className={classnames("button", {
           disabled: !paramButton,
@@ -148,21 +155,11 @@ const mapStateToProps = (state) => {
     dateFinish: state.ext.dateFinish,
     orderStatusId: state.ext.orderStatusId,
     paramOrder: state.ext.paramOrder,
+    price: state.ext.price,
   };
 };
 const mapDispatchToProps = {
   setStatusIdText,
+  setPriceText,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Cost);
-
-// "cityId": {id: "5e26a128099b810b946c5d87"},
-//   "pointId": {id: "5e26a148099b810b946c5d88"},
-//   "carId": {id: "5e25ca0d099b810b946c5d65"},
-//   "color": "Голубой",
-//   "dateFrom": 5,
-//   "dateTo": 7,
-//   "rateId": {id: "5e26a0d2099b810b946c5d85"},
-//   "price": 5000,
-//   "isFullTank": true,
-//   "isNeedChildChair": false,
-//   "isRightWheel": true};

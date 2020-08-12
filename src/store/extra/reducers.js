@@ -7,6 +7,7 @@ import {
   EXT_CHANGE_ADDITIONAL_TEXT,
   EXT_CHANGE_STATUSID_TEXT,
   EXT_CHANGE_PARAMORDER_TEXT,
+  EXT_CHANGE_PRICE_TEXT,
 } from "./action";
 const listAdditional = [
   { name: "Полный бак", price: 500, checked: false, props: "isFullTank" },
@@ -32,6 +33,7 @@ const defaultState = {
   additional: [].concat(listAdditional),
   orderStatusId: "",
   paramOrder: false,
+  price: "",
 };
 
 export const extReducer = (state = defaultState, action) => {
@@ -75,6 +77,11 @@ export const extReducer = (state = defaultState, action) => {
       return {
         ...state,
         paramOrder: action.payload,
+      };
+    case EXT_CHANGE_PRICE_TEXT:
+      return {
+        ...state,
+        price: action.payload,
       };
   }
   return state;

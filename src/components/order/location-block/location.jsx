@@ -14,8 +14,6 @@ function Location(props) {
       ? props[item]({ name: event.target.value })
       : props[item]({ address: event.target.value });
 
-    // props[item]({ name: event.target.value });
-
     if (event.target.value === "") {
       item === "setCityText" ? setfilterCity([]) : setfilterCityPoint([]);
       props.changeProps(false, "paramLocation");
@@ -41,9 +39,6 @@ function Location(props) {
 
   function selectCity(item, value) {
     props[value](item);
-    console.log(props);
-    console.log(item);
-
     if (value === "setCityText") {
       setfilterCity([]);
     } else {
