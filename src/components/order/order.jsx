@@ -55,10 +55,10 @@ class Order extends React.Component {
       cars: [],
       rate: [],
     };
-    this.nextWrapper = this.nextWrapper.bind(this);
     this.changeProps = this.changeProps.bind(this);
     this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
+    this.nextWrapper = this.nextWrapper.bind(this);
     this.setDefValue = this.setDefValue.bind(this);
   }
   componentDidMount() {
