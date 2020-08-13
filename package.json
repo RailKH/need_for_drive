@@ -28,7 +28,6 @@
     "deploy": "gh-pages -d build"
   },
   "proxy": "https://cors-anywhere.herokuapp.com/",
-
   "eslintConfig": {
     "extends": "react-app"
   },

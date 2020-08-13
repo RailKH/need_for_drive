@@ -46,7 +46,7 @@ function Model(props) {
             return (
               <div
                 className={classnames("form__selectCar__item", {
-                  active: carName == item.name,
+                  active: carName === item.name,
                 })}
                 onClick={() => selectCar(item)}
                 key={`${id}_${item.name}`}>
@@ -56,6 +56,7 @@ function Model(props) {
                 </p>
                 <img
                   src={`http://api-factory.simbirsoft1.com${item.thumbnail.path}`}
+                  alt={item.name}
                 />
               </div>
             );

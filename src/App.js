@@ -29,7 +29,6 @@ class App extends React.Component {
     this.state = {
       burger: false,
       verification: false,
-      // paramOrder: false,
       loader: false,
     };
     this.changeVerification = this.changeVerification.bind(this);
@@ -55,10 +54,8 @@ class App extends React.Component {
     return data;
   };
   changeOrder() {
-    console.log(this.props.paramOrder);
     this.props.setParamOrderText(!this.props.paramOrder);
     this.setState((state) => ({
-      // paramOrder: !state.paramOrder,
       verification: !state.verification,
     }));
 
@@ -73,9 +70,9 @@ class App extends React.Component {
         dateTo: this.props.dateFinish,
         rateId: { id: this.props.rate.id },
         price: this.props.price,
-        isFullTank: true,
-        isNeedChildChair: false,
-        isRightWheel: true,
+        isFullTank: this.props.tank,
+        isNeedChildChair: this.props.chair,
+        isRightWheel: this.props.wheel,
       };
       this.setState((state) => ({
         loader: true,
@@ -84,13 +81,11 @@ class App extends React.Component {
       this.postData("order", order).then((json) => {
         this.props.setStatusIdText(json.data.id);
         this.setState((state) => ({
-          // statusId: json.data.id,
           loader: false,
         }));
         localStorage.setItem("statusId", json.data.id);
       });
     } else {
-      console.log("clear");
       this.props.setParamOrderText(false);
       this.props.setStatusIdText("");
       localStorage.removeItem("statusId");
@@ -118,14 +113,12 @@ class App extends React.Component {
               )}
             />
             <Route
-              // exact
               path="/order"
               render={(props) => (
                 <Order
                   cars={cars}
                   changeVerification={this.changeVerification}
                   burger={this.state.burger}
-                  // paramOrder={this.props.paramOrder}
                   changeOrder={this.changeOrder}
                   loader={this.state.loader}
                   {...props}
@@ -159,6 +152,9 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     price: state.ext.price,
+    tank: state.ext.tank,
+    wheel: state.ext.wheel,
+    chair: state.ext.chair,
   };
 };
 const mapDispatchToProps = {

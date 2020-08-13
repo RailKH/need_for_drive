@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import { setStatusIdText, setPriceText } from "../../../store/extra/action";
 
 function Cost(props) {
-  const { additional, dateCount, setStatusId } = props;
+  const { dateCount } = props;
   const { id, paramLocation, paramExtra, paramModel } = props.state;
+  const additional = [props.tank, props.chair, props.wheel];
   let textButton = "";
   let paramButton;
   let value = id;
@@ -38,14 +39,12 @@ function Cost(props) {
         }
       }
     }
-    props.additional.forEach((item) => {
-      if (item.checked === true) {
+    props.listAdditional.forEach((item, id) => {
+      if (additional[id] === true) {
         price += item.price;
       }
     });
     props.setPriceText(price);
-
-    // return price;
   }
   {
     switch (id) {
@@ -96,7 +95,7 @@ function Cost(props) {
             <span className="color__value feature-right">{props.color}</span>
           </div>
         )}
-        {dateCount && (
+        {dateCount && props.dateStart && (
           <div className="duration">
             <span className="duration__prop feature-left">
               Длительность аренды
@@ -113,10 +112,10 @@ function Cost(props) {
           </div>
         )}
 
-        {additional.map((item, id) => {
-          if (item.checked === true) {
+        {props.listAdditional.map((item, id) => {
+          if (additional[id] === true) {
             return (
-              <div key={item.props}>
+              <div key={`${id}_${item.set}`}>
                 <span className="oil__prop feature-left">{item.name}</span>
                 <span className="oil__value feature-right">Да</span>
               </div>
@@ -149,13 +148,15 @@ const mapStateToProps = (state) => {
     car: state.mod.selectCar,
     color: state.ext.color,
     rate: state.ext.rate,
-    additional: state.ext.additional,
     dateCount: state.ext.dateCount,
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     orderStatusId: state.ext.orderStatusId,
     paramOrder: state.ext.paramOrder,
     price: state.ext.price,
+    tank: state.ext.tank,
+    chair: state.ext.chair,
+    wheel: state.ext.wheel,
   };
 };
 const mapDispatchToProps = {

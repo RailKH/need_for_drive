@@ -26,8 +26,7 @@ function Total(props) {
             </div>
             <div className="total__form__tank">
               <span>Топливо </span>
-              {(props.additional[0].checked && `100`) || props.car.tank || `40`}
-              %
+              {(props.tank && `100`) || props.car.tank || `40`}%
             </div>
             <div className="total__form__date">
               <span>Доступна с </span>
@@ -37,6 +36,7 @@ function Total(props) {
           <div className="total__img">
             <img
               src={`http://api-factory.simbirsoft1.com${props.car.thumbnail.path}`}
+              alt="orderCar"
             />
           </div>
         </div>
@@ -51,6 +51,7 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     additional: state.ext.additional,
     paramOrder: state.ext.paramOrder,
+    tank: state.ext.tank,
   };
 };
 export default connect(mapStateToProps)(Total);

@@ -141,8 +141,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setCityText,
   setCityPointText,
-  // setCityId,
-  // setPointId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Location);

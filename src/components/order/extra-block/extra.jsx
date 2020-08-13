@@ -7,57 +7,39 @@ import {
   setDateFinishText,
   setDateCountText,
   setRateText,
-  setAdditionalText,
+  setTankText,
+  setChairText,
+  setWheelText,
 } from "../../../store/extra/action";
 
-function Extra({
-  id,
-  listRate,
-  changeProps,
-  car,
-  color,
-  rate,
-  additional,
-  dateCount,
-  setAdditionalText,
-  setDateCountText,
-  setColorText,
-  setRateText,
-  setDateStartText,
-  setDateFinishText,
-  dateStart,
-  dateFinish,
-}) {
-  let colorsCar = car.colors && ["любой", ...car.colors];
+function Extra(props) {
+  let colorsCar = props.car.colors && ["любой", ...props.car.colors];
 
   useEffect(() => {
-    color && rate && dateCount && changeProps(true, "paramExtra");
+    props.color &&
+      props.rate &&
+      props.dateCount &&
+      props.changeProps(true, "paramExtra");
   });
   useEffect(() => {
-    dateStart && dateFinish && setDateCountText(diffDates());
-  }, [dateStart, dateFinish]);
+    props.dateStart && props.dateFinish && props.setDateCountText(diffDates());
+  }, [props.dateStart, props.dateFinish]);
 
   function selectColor(color) {
-    setColorText(color[0].toUpperCase() + color.slice(1));
+    props.setColorText(color[0].toUpperCase() + color.slice(1));
   }
 
-  function selectAdditional(index) {
-    setAdditionalText(
-      additional.map((item, id) => {
-        if (id === index) {
-          return { ...item, checked: !item.checked };
-        }
-        return item;
-      })
-    );
+  function selectAdditional(fun, value) {
+    props[fun](!props[value]);
   }
 
   function diffDates() {
-    if (dateStart) {
+    if (props.dateStart) {
       let diffDate = Math.floor(
-        new Date(new Date(dateFinish) - new Date(dateStart)) / (1000 * 60 * 60)
+        new Date(new Date(props.dateFinish) - new Date(props.dateStart)) /
+          (1000 * 60 * 60)
       );
-      if (diffDate % 24 == 0) {
+      if (diffDate % 24 === 0) {
         return `${diffDate / 24}д`;
       } else {
         let dif = diffDate % 24;
@@ -69,26 +51,31 @@ function Extra({
     }
   }
   function getFormate(value) {
-    const date = new Date(value);
-    const trueMonth = date.getMonth() + 1;
-    const month = `${trueMonth}`.length === 1 ? `0${trueMonth}` : trueMonth;
-    const day =
-      `${date.getDate()}`.length === 1 ? `0${date.getDate()}` : date.getDate();
-    const hour =
-      `${date.getHours()}`.length === 1
-        ? `0${date.getHours()}`
-        : date.getHours();
-    const minute =
-      `${date.getMinutes()}`.length === 1
-        ? `0${date.getMinutes()}`
-        : date.getMinutes();
+    if (value) {
+      const date = new Date(value);
+      const trueMonth = date.getMonth() + 1;
+      const month = `${trueMonth}`.length === 1 ? `0${trueMonth}` : trueMonth;
+      const day =
+        `${date.getDate()}`.length === 1
+          ? `0${date.getDate()}`
+          : date.getDate();
+      const hour =
+        `${date.getHours()}`.length === 1
+          ? `0${date.getHours()}`
+          : date.getHours();
+      const minute =
+        `${date.getMinutes()}`.length === 1
+          ? `0${date.getMinutes()}`
+          : date.getMinutes();
 
-    return `${date.getFullYear()}-${month}-${day}T${hour}:${minute}`;
+      return `${date.getFullYear()}-${month}-${day}T${hour}:${minute}`;
+    }
+    return "";
   }
   return (
     <div
       className={classnames("order__content__extra", {
-        disabled: id !== 2,
+        disabled: props.id !== 2,
       })}>
       <div className="extra__form">
         <div className="extra__form__color">
@@ -116,9 +103,9 @@ function Extra({
             <label>С</label>
             <input
               type="datetime-local"
-              value={getFormate(dateStart)}
+              value={getFormate(props.dateStart)}
               onChange={(e) => {
-                setDateStartText(new Date(e.target.value).getTime());
+                props.setDateStartText(new Date(e.target.value).getTime());
               }}
             />
           </div>
@@ -126,25 +113,25 @@ function Extra({
           <input
             type="text"
             type="datetime-local"
-            value={getFormate(dateFinish)}
-            min={getFormate(dateStart)}
+            value={getFormate(props.dateFinish)}
+            min={getFormate(props.dateStart)}
             onChange={(e) =>
-              setDateFinishText(new Date(e.target.value).getTime())
+              props.setDateFinishText(new Date(e.target.value).getTime())
             }
           />
         </div>
         <div className="extra__form__rate">
           <p>Тариф</p>
-          {listRate &&
-            listRate.map((item, id) => {
+          {props.listRate &&
+            props.listRate.map((item, id) => {
               return (
                 <>
-                  <div className="wrap" key={item.id}>
+                  <div className="wrap" key={`radio_${item.id}`}>
                     <input
                       type="radio"
                       id={`t${id}`}
                       name="rate"
-                      onClick={() => setRateText(item)}
+                      onClick={() => props.setRateText(item)}
                     />
                     <label htmlFor={`t${id}`}>
                       <span />
@@ -157,17 +144,17 @@ function Extra({
         </div>
         <div className="extra__form__additional">
           <p>Доп услуги</p>
-          {additional.map((item, id) => {
+          {props.listAdditional.map((item, id) => {
             return (
-              <div className="additional__checkbox" key={`${id}_${item.props}`}>
+              <div className="additional__checkbox" key={`${id}_${item.set}`}>
                 <input
                   type="checkbox"
                   className="additional__checkbox__custom"
-                  id={item.props}
-                  defaultChecked={item.checked}
-                  onChange={() => selectAdditional(id)}
+                  id={item.set}
+                  defaultChecked={props[item.set]}
+                  onChange={() => selectAdditional(item.fun, item.set)}
                 />
-                <label htmlFor={item.props}>
+                <label htmlFor={item.set}>
                   <span />
                   {`${item.name}, ${item.price}p`}
                 </label>
@@ -186,8 +173,10 @@ const mapStateToProps = (state) => {
     dateStart: state.ext.dateStart,
     dateFinish: state.ext.dateFinish,
     rate: state.ext.rate,
-    additional: state.ext.additional,
     dateCount: state.ext.dateCount,
+    tank: state.ext.tank,
+    chair: state.ext.chair,
+    wheel: state.ext.wheel,
     car: state.mod.selectCar,
   };
 };
@@ -196,8 +185,10 @@ const mapDispatchToProps = {
   setDateStartText,
   setDateFinishText,
   setRateText,
-  setAdditionalText,
   setDateCountText,
+  setTankText,
+  setChairText,
+  setWheelText,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Extra);

@@ -16,8 +16,10 @@ import {
   setDateFinishText,
   setDateCountText,
   setRateText,
-  setAdditionalText,
   setPriceText,
+  setTankText,
+  setChairText,
+  setWheelText,
 } from "../../store/extra/action";
 
 import { Link } from "react-router-dom";
@@ -33,7 +35,25 @@ const defaultList = {
   rateId: {},
   price: "",
   dateStart: "",
+  dateCount: "",
 };
+const listAdditional = [
+  { name: "Полный бак", price: 500, set: "tank", fun: "setTankText" },
+  {
+    name: "Детское кресло",
+    price: 200,
+
+    set: "chair",
+    fun: "setChairText",
+  },
+  {
+    name: "Правый руль",
+    price: 1600,
+
+    set: "wheel",
+    fun: "setWheelText",
+  },
+];
 class Order extends React.Component {
   constructor(props) {
     super();
@@ -64,7 +84,6 @@ class Order extends React.Component {
     let statusId = localStorage.getItem("statusId");
     if (statusId) {
       this.getData(`order/${statusId}`).then((json) => {
-        console.log(json.data);
         this.props.setParamOrderText(true);
         this.props.setStatusIdText(statusId);
         this.setDefValue(json);
@@ -101,6 +120,9 @@ class Order extends React.Component {
     this.props.setPriceText(value.price);
     this.props.setDateStartText(value.dateFrom);
     this.props.setDateFinishText(value.dateTo);
+    this.props.setTankText(value.isFullTank);
+    this.props.setChairText(value.isNeedChildChair);
+    this.props.setWheelText(value.isRightWheel);
   }
   getData = async (item) => {
     let data = await fetch(`${PROXY}${URL}${item}`, {
@@ -131,7 +153,6 @@ class Order extends React.Component {
   }
 
   nextWrapper(item, textButton) {
-    console.log(this.state);
     if (item === 4) {
       item = 3;
       if (this.props.paramOrder) {
@@ -169,7 +190,6 @@ class Order extends React.Component {
   }
 
   render() {
-    const [car_1, car_2, car_3] = this.props.cars;
     const { id, paramLocation, paramExtra, paramModel } = this.state;
 
     return (
@@ -249,6 +269,7 @@ class Order extends React.Component {
               id={id}
               listRate={this.state.rate}
               changeProps={this.changeProps}
+              listAdditional={listAdditional}
             />
 
             <TotalBlock
@@ -261,6 +282,7 @@ class Order extends React.Component {
               nextWrapper={this.nextWrapper}
               state={this.state}
               postData={this.postData}
+              listAdditional={listAdditional}
             />
           </div>
         </section>
@@ -295,7 +317,9 @@ const mapDispatchToProps = {
   setDateFinishText,
   setDateCountText,
   setRateText,
-  setAdditionalText,
   setPriceText,
+  setTankText,
+  setChairText,
+  setWheelText,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Order);
