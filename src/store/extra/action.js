@@ -3,7 +3,6 @@ export const EXT_CHANGE_DATESTART_TEXT = "EXT_CHANGE_DATESTART_TEXT";
 export const EXT_CHANGE_DATEFINISH_TEXT = "EXT_CHANGE_DATEFINISH_TEXT";
 export const EXT_CHANGE_DATECOUNT_TEXT = "EXT_CHANGE_DATECOUNT_TEXT";
 export const EXT_CHANGE_RATE_TEXT = "EXT_CHANGE_RATE_TEXT";
-// export const EXT_CHANGE_ADDITIONAL_TEXT = "EXT_CHANGE_ADDITIONAL_TEXT";
 export const EXT_CHANGE_STATUSID_TEXT = "EXT_CHANGE_STATUSID_TEXT";
 export const EXT_CHANGE_PARAMORDER_TEXT = "EXT_CHANGE_PARAMORDER_TEXT";
 export const EXT_CHANGE_PRICE_TEXT = "EXT_CHANGE_PRICE_TEXT";
@@ -31,10 +30,6 @@ export const setRateText = (rate) => ({
   type: EXT_CHANGE_RATE_TEXT,
   payload: rate,
 });
-// export const setAdditionalText = (additional) => ({
-//   type: EXT_CHANGE_ADDITIONAL_TEXT,
-//   payload: additional,
-// });
 export const setStatusIdText = (orderStatusId) => ({
   type: EXT_CHANGE_STATUSID_TEXT,
   payload: orderStatusId,

@@ -36,6 +36,7 @@ function Total(props) {
           <div className="total__img">
             <img
               src={`http://api-factory.simbirsoft1.com${props.car.thumbnail.path}`}
+              alt="orderCar"
             />
           </div>
         </div>

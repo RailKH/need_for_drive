@@ -45,9 +45,6 @@ function Location(props) {
       setfilterCityPoint([]);
       props.changeProps(true, "paramLocation");
     }
-    // value === "setCityText"
-    //   ? setfilterCity([])
-    //   : {setfilterCityPoint([]); props.changeProps(true, "paramLocation")};
   }
   function clearInput(item) {
     if (item === "city") {
@@ -144,8 +141,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setCityText,
   setCityPointText,
-  // setCityId,
-  // setPointId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Location);
