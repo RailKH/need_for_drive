@@ -39,20 +39,8 @@ const defaultList = {
 };
 const listAdditional = [
   { name: "Полный бак", price: 500, set: "tank", fun: "setTankText" },
-  {
-    name: "Детское кресло",
-    price: 200,
-
-    set: "chair",
-    fun: "setChairText",
-  },
-  {
-    name: "Правый руль",
-    price: 1600,
-
-    set: "wheel",
-    fun: "setWheelText",
-  },
+  { name: "Детское кресло", price: 200, set: "chair", fun: "setChairText" },
+  { name: "Правый руль", price: 1600, set: "wheel", fun: "setWheelText" },
 ];
 class Order extends React.Component {
   constructor(props) {
@@ -87,10 +75,8 @@ class Order extends React.Component {
         this.props.setParamOrderText(true);
         this.props.setStatusIdText(statusId);
         this.setDefValue(json);
-
         this.setState({
           id: 3,
-
           paramExtra: true,
         });
       });
