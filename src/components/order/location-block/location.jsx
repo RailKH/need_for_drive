@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-
+import { YMaps, Map, Placemark, ZoomControl } from "react-yandex-maps";
 import { connect } from "react-redux";
+import CityMap from "./map";
 import { setCityText, setCityPointText } from "../../../store/location/action";
 const wordLength = 2;
+const apiYandex = "5b5054c2-d046-4cf8-8cac-90a914e3631a";
 
 function Location(props) {
   const [filterCity, setfilterCity] = useState([]);
   const [filterCityPoint, setfilterCityPoint] = useState([]);
+  const [cityCoord, setCityCoord] = useState("");
+  const [pointCoord, setPointCoord] = useState([]);
 
   function inputChange(event, item) {
     item === "setCityText"
@@ -36,11 +40,38 @@ function Location(props) {
       }
     }
   }
+  const getCoord = async (value) => {
+    let data = await fetch(
+      `https://geocode-maps.yandex.ru/1.x?apikey=${apiYandex}&format=json&results=1&sco=longlat&geocode=Россия+${value}`
+    ).then((res) => res.json());
 
+    return data;
+  };
   function selectCity(item, value) {
     props[value](item);
     if (value === "setCityText") {
       setfilterCity([]);
+
+      getCoord(item.name).then((json) => {
+        let coord = json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+          .split(" ")
+          .reverse()
+          .map((item) => +item);
+        setCityCoord(coord);
+      });
+      props.listPoint
+        .filter((elem) => {
+          return item.name === elem.cityId.name;
+        })
+        .map((elem, ind) => {
+          getCoord(`${item.name}${elem.address}`).then((json) => {
+            let coord = json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+              .split(" ")
+              .reverse()
+              .map((item) => +item);
+            setPointCoord((prev) => [...prev, { coord: coord, point: elem }]);
+          });
+        });
     } else {
       setfilterCityPoint([]);
       props.changeProps(true, "paramLocation");
@@ -50,6 +81,7 @@ function Location(props) {
     if (item === "city") {
       props.setCityText({ name: "" });
       setfilterCity([]);
+      setPointCoord([]);
     } else {
       props.setCityPointText({ address: "" });
       setfilterCityPoint([]);
@@ -122,10 +154,12 @@ function Location(props) {
         </div>
         <div className="map">
           <p>Выбрать на карте:</p>
-
-          <div className="map__area">
-            <div id="map"></div>
-          </div>
+          <CityMap
+            coord={cityCoord}
+            city={props.city.name}
+            pointCoord={pointCoord}
+            selectCity={selectCity}
+          />
         </div>
       </div>
     </div>
