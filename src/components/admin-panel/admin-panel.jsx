@@ -9,7 +9,7 @@ class AdminPanel extends React.Component {
 
   render() {
     return (
-      <div className="main">
+      <div className="admin_page">
         <Login />
       </div>
     );

@@ -14,7 +14,7 @@ export default function Login() {
         </div>
         <div className="box-footer">
           <button className="box-footer_button">Запросить доступ</button>
-          <button className="box-footer_button">Войти</button>
+          <button className="box-footer_button active">Войти</button>
         </div>
       </div>
     </div>
