@@ -1,0 +1,86 @@
+@import "./variables.scss";
+@import "./fonts.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.main {
+  background: #f5f6f8;
+  width: 100%;
+  height: 100vh;
+  font-family: "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: #3d5170;
+}
+
+.login_box {
+  width: 375px;
+  margin: 0 auto;
+  &_title {
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    &::before {
+      content: url(../icons/Logo_Icon.svg);
+      position: relative;
+      left: -12px;
+    }
+  }
+  .login_box_wrap {
+    background: #fff;
+    box-shadow: 0px 1px 0px rgba(90, 97, 105, 0.11),
+      0px 2px 4px rgba(90, 97, 105, 0.12), 0px 5px 5px rgba(90, 97, 105, 0.06),
+      0px 3.5px 35px rgba(90, 97, 105, 0.1);
+    border-radius: 9px;
+    padding: 18px;
+    .box-title {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 17.5px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: -0.4375px;
+      padding: 2px 0 35px 0;
+    }
+    .box-registration {
+      font-size: 10.5px;
+      line-height: 12px;
+      letter-spacing: -0.18421px;
+      color: #495057;
+      input {
+        width: 100%;
+        padding: 8px 11px;
+        border: 0.5px solid #becad6;
+        border-radius: 3px;
+        font-size: 11px;
+        line-height: 13px;
+        letter-spacing: -0.192982px;
+        color: #3d5170;
+        margin: 8px 0 15px 0;
+        outline: none;
+      }
+      input:focus {
+        border-color: $green;
+      }
+    }
+  }
+  .box-footer {
+    &_button {
+      border: none;
+      background: #fff;
+      font-size: 10.5px;
+      line-height: 12px;
+      letter-spacing: -0.18421px;
+      color: #007bff;
+    }
+  }
+}
