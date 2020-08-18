@@ -27,7 +27,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "https://cors-anywhere.herokuapp.com/",
+  "proxy": "https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db",
   "eslintConfig": {
     "extends": "react-app"
   },
