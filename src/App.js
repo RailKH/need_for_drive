@@ -21,8 +21,8 @@ import { connect } from "react-redux";
 import { setStatusIdText, setParamOrderText } from "./store/extra/action";
 
 const cars = [car_1, car_2, car_3];
-// const URL = "http://api-factory.simbirsoft1.com/api/db/";
-// const PROXY = "https://cors-anywhere.herokuapp.com/";
+const URL = "http://api-factory.simbirsoft1.com/api/db/";
+const PROXY = "https://cors-anywhere.herokuapp.com/";
 
 class App extends React.Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class App extends React.Component {
     }));
   }
   postData = async (item, order) => {
-    let data = await fetch(`/${item}`, {
+    let data = await fetch(`${PROXY}${URL}`, {
       method: "POST",
       headers: {
         "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",

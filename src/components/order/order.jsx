@@ -25,8 +25,8 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-// const URL = "http://api-factory.simbirsoft1.com/api/db/";
-// const PROXY = "https://cors-anywhere.herokuapp.com/";
+const URL = "http://api-factory.simbirsoft1.com/api/db/";
+const PROXY = "https://cors-anywhere.herokuapp.com/";
 const defaultList = {
   cityId: { name: "" },
   pointId: { address: "" },
@@ -112,7 +112,7 @@ class Order extends React.Component {
     this.props.setWheelText(value.isRightWheel);
   }
   getData = async (item) => {
-    let data = await fetch(`/${item}`, {
+    let data = await fetch(`${PROXY}${URL}`, {
       method: "GET",
       headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
     }).then((res) => res.json());
@@ -121,7 +121,7 @@ class Order extends React.Component {
   };
 
   postData = async (item, order) => {
-    let data = await fetch(`/${item}`, {
+    let data = await fetch(`${PROXY}${URL}`, {
       method: "POST",
       headers: {
         "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
