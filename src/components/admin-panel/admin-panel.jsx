@@ -1,5 +1,6 @@
 import React from "react";
 import Login from "../login/login";
+import MenuBlock from "../admin-menu/admin-menu";
 import "../../assets/styles/admin-panel.scss";
 
 class AdminPanel extends React.Component {
@@ -10,7 +11,8 @@ class AdminPanel extends React.Component {
   render() {
     return (
       <div className="admin_page">
-        <Login />
+        {/* <Login /> */}
+        <MenuBlock />
       </div>
     );
   }

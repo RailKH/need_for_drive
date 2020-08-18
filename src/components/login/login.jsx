@@ -3,7 +3,7 @@ import React from "react";
 export default function Login() {
   return (
     <div className="login_box">
-      <div className="login_box_title">Need for drive</div>
+      <div className="login_box_title admin_logo">Need for drive</div>
       <div className="login_box_wrap">
         <div className="box-title">Вход</div>
         <div className="box-registration">
