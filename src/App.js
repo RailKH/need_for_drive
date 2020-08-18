@@ -43,7 +43,7 @@ class App extends React.Component {
     }));
   }
   postData = async (item, order) => {
-    let data = await fetch(`${PROXY}${URL}`, {
+    let data = await fetch(`${PROXY}${URL}${item}`, {
       method: "POST",
       headers: {
         "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
