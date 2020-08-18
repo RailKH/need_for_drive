@@ -3,7 +3,6 @@
   "name": "need-for-drive",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://api-factory.simbirsoft1.com/api/db",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -28,6 +27,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  "proxy": "https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db",
   "eslintConfig": {
     "extends": "react-app"
   },
