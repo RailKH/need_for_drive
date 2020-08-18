@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import { YMaps, Map, Placemark, ZoomControl } from "react-yandex-maps";
 import { connect } from "react-redux";
 import CityMap from "./map";
 import { setCityText, setCityPointText } from "../../../store/location/action";
