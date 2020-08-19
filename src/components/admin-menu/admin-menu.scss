@@ -31,13 +31,14 @@
       color: #007bff;
       background: #fbfbfb;
       box-shadow: inset 0px -1px 0px #e1e5eb, inset 4px 0px 0px #007bff;
-    }
-    &.admin_cart {
-      &::before {
-        content: url(../../assets/icons/admin-menu/pen.svg);
-        position: relative;
-        left: -15px;
+      cursor: url(../../assets/icons/Pointer.svg), pointer;
+      & .icon {
+        fill: #007bffed;
       }
+    }
+    .block-logo {
+      position: relative;
+      left: -15px;
     }
   }
 }

@@ -12,7 +12,9 @@ class AdminPanel extends React.Component {
     return (
       <div className="admin_page">
         {/* <Login /> */}
-        <MenuBlock />
+        <div className="admin_page_content">
+          <MenuBlock />
+        </div>
       </div>
     );
   }
