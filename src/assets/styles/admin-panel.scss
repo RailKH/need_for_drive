@@ -18,7 +18,7 @@
   align-items: center;
   margin-bottom: 16px;
   &::before {
-    content: url(../icons/Logo_Icon.svg);
+    content: url(../icons/admin-menu/Logo_Icon.svg);
     position: relative;
     left: -12px;
   }
@@ -94,18 +94,6 @@
         cursor: $cursor;
         color: #000;
       }
-    }
-  }
-}
-
-.menu-block {
-  width: 285px;
-  height: 100%;
-  .menu-block_logo {
-    font-size: 16px;
-    line-height: 18px;
-    &::before {
-      content: url(../icons/admin-logo.svg);
     }
   }
 }
