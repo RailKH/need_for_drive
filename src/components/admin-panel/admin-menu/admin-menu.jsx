@@ -1,10 +1,10 @@
 import React from "react";
-import "../admin-menu/admin-menu.scss";
-import { ReactComponent as Icon1 } from "../../assets/icons/admin-menu/pen.svg";
-import { ReactComponent as Icon2 } from "../../assets/icons/admin-menu/form1.svg";
-import { ReactComponent as Icon3 } from "../../assets/icons/admin-menu/order.svg";
-import { ReactComponent as Icon4 } from "../../assets/icons/admin-menu/form2.svg";
-import { ReactComponent as Icon5 } from "../../assets/icons/admin-menu/form3.svg";
+import "./admin-menu.scss";
+import { ReactComponent as Icon1 } from "../../../assets/icons/admin-menu/pen.svg";
+import { ReactComponent as Icon2 } from "../../../assets/icons/admin-menu/form1.svg";
+import { ReactComponent as Icon3 } from "../../../assets/icons/admin-menu/order.svg";
+import { ReactComponent as Icon4 } from "../../../assets/icons/admin-menu/form2.svg";
+import { ReactComponent as Icon5 } from "../../../assets/icons/admin-menu/form3.svg";
 
 export default function MenuBlock() {
   return (

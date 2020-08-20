@@ -10,6 +10,15 @@
   font-weight: normal;
   color: #3d5170;
 }
+.admin_page_content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 285px 1fr;
+  &_edit {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .admin_logo {
   font-size: 24px;
   line-height: 28px;
