@@ -1,5 +1,6 @@
 import React from "react";
 import "./admin-header.scss";
+import userAvatar from "../../../assets/icons/admin-menu/user-avatar.jpg";
 
 export default function AdminHeader() {
   return (
@@ -10,7 +11,11 @@ export default function AdminHeader() {
       <div className="admin-header_notification">
         <span className="notification-count">2</span>
       </div>
-      <div className="admin-header_user-block"></div>
+      <div className="admin-header_user-block">
+        <img src={userAvatar} alt="user" />
+        <span className="user-name">Admin</span>
+        <span className="user-dropdown" />
+      </div>
     </div>
   );
 }
