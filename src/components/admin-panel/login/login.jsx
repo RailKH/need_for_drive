@@ -13,8 +13,8 @@ export default function Login() {
           <input type="text" />
         </div>
         <div className="box-footer">
-          <button className="box-footer_button">Запросить доступ</button>
-          <button className="box-footer_button active">Войти</button>
+          <button className="admin_button">Запросить доступ</button>
+          <button className="admin_button active">Войти</button>
         </div>
       </div>
     </div>
