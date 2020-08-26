@@ -14,13 +14,16 @@ import {
 
 function Extra(props) {
   let colorsCar = props.car.colors && ["любой", ...props.car.colors];
-
   useEffect(() => {
     props.color &&
       props.rate &&
       props.dateCount &&
       props.changeProps(true, "paramExtra");
   });
+  // useEffect(()=>{
+  //   console.log("sss");
+
+  // }.props.)
   useEffect(() => {
     props.dateStart && props.dateFinish && props.setDateCountText(diffDates());
   }, [props.dateStart, props.dateFinish]);
@@ -88,6 +91,7 @@ function Extra(props) {
                   type="radio"
                   id={`m${id}`}
                   name="color"
+                  defaultChecked={id === 0 ? true : false}
                   onClick={() => selectColor(item)}
                 />
                 <label htmlFor={`m${id}`}>

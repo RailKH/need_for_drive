@@ -11,7 +11,6 @@ class CityMap extends React.Component {
     if (this.props.coord) {
       this.map.setCenter(this.props.coord, 11);
     }
-    console.log(this.props.pointCoord);
     return (
       <div className="map__area">
         <YMaps>

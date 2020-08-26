@@ -1,3 +1,5 @@
+$cursor: url(../../../assets/icons/Pointer.svg), pointer;
+
 .admin-main {
   width: 100%;
   padding: 28px 31px;
@@ -31,6 +33,9 @@
           letter-spacing: -0.345714px;
           color: #868e96;
           outline: none;
+          &:hover {
+            cursor: $cursor;
+          }
         }
       }
       .description {
@@ -84,12 +89,50 @@
             border-radius: 4px;
             font-size: 11px;
             line-height: 13px;
-            padding: 5.5px 7.5px;
+            span {
+              display: inline-block;
+              padding: 5.5px 7.5px;
+              img {
+                margin-right: 5px;
+              }
+              &:hover {
+                background: #becad6;
+                cursor: $cursor;
+              }
+            }
+
+            span:nth-child(2) {
+              border-left: 0.5px solid #becad6;
+              border-right: 0.5px solid #becad6;
+            }
           }
         }
       }
       .page {
         height: 59px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &_content {
+          font-size: 15px;
+          line-height: 17px;
+          color: #007bff;
+          span {
+            margin-right: 3px;
+            margin-left: 2.5px;
+            &:hover {
+              cursor: $cursor;
+            }
+          }
+          .main-pages_second {
+            display: inline-block;
+            border-radius: 50%;
+            width: 18px;
+            text-align: center;
+            background: #007bff;
+            color: #fff;
+          }
+        }
       }
     }
   }

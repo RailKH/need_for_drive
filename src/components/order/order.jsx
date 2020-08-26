@@ -42,6 +42,7 @@ const listAdditional = [
   { name: "Детское кресло", price: 200, set: "chair", fun: "setChairText" },
   { name: "Правый руль", price: 1600, set: "wheel", fun: "setWheelText" },
 ];
+
 class Order extends React.Component {
   constructor(props) {
     super();
@@ -258,7 +259,6 @@ class Order extends React.Component {
               changeProps={this.changeProps}
               listAdditional={listAdditional}
             />
-
             <TotalBlock
               id={id}
               cars={this.state.cars}
