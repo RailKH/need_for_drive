@@ -12,6 +12,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
         <Route exact path="/need_for_drive" component={App} />
+        <Route exact path="/order" component={App} />
         <Route exact path="/admin" component={AdminPanel} />
       </Router>
     </Provider>

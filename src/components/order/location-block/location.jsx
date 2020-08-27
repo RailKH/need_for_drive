@@ -31,10 +31,16 @@ function Location(props) {
         setfilterCity(filterCity);
       } else {
         setfilterCityPoint([]);
-        let filterCityPoint = props.listPoint.filter((item) => {
-          const fixItem = item.cityId.name.toLowerCase();
-          return fixItem.startsWith(props.city.name.toLowerCase());
-        });
+        let filterCityPoint = props.listPoint
+          .filter((item) => {
+            const fixItem = item.cityId.name.toLowerCase();
+            return fixItem.startsWith(props.city.name.toLowerCase());
+          })
+          .filter((elem) => {
+            const fixElem = elem.address.toLowerCase();
+            return fixElem.includes(event.target.value.toLowerCase());
+          });
+        test(props.city.name, filterCityPoint);
         setfilterCityPoint(filterCityPoint);
       }
     }
@@ -46,6 +52,25 @@ function Location(props) {
 
     return data;
   };
+
+  function test(name, data) {
+    console.log(name, data);
+    data
+      .filter((elem) => {
+        return name === elem.cityId.name;
+      })
+      .map((elem, ind) => {
+        getCoord(`${name}${elem.address}`).then((json) => {
+          let coord = json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+            .split(" ")
+            .reverse()
+            .map((item) => +item);
+          setPointCoord((prev) => [...prev, { coord: coord, point: elem }]);
+          console.log(pointCoord);
+        });
+      });
+  }
+
   function selectCity(item, value) {
     props[value](item);
     if (value === "setCityText") {
@@ -58,19 +83,20 @@ function Location(props) {
           .map((item) => +item);
         setCityCoord(coord);
       });
-      props.listPoint
-        .filter((elem) => {
-          return item.name === elem.cityId.name;
-        })
-        .map((elem, ind) => {
-          getCoord(`${item.name}${elem.address}`).then((json) => {
-            let coord = json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
-              .split(" ")
-              .reverse()
-              .map((item) => +item);
-            setPointCoord((prev) => [...prev, { coord: coord, point: elem }]);
-          });
-        });
+      test(item.name, props.listPoint);
+      // props.listPoint
+      //   .filter((elem) => {
+      //     return item.name === elem.cityId.name;
+      //   })
+      //   .map((elem, ind) => {
+      //     getCoord(`${item.name}${elem.address}`).then((json) => {
+      //       let coord = json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+      //         .split(" ")
+      //         .reverse()
+      //         .map((item) => +item);
+      //       setPointCoord((prev) => [...prev, { coord: coord, point: elem }]);
+      //     });
+      //   });
     } else {
       setfilterCityPoint([]);
       props.changeProps(true, "paramLocation");

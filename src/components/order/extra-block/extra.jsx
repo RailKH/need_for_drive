@@ -13,20 +13,20 @@ import {
 } from "../../../store/extra/action";
 
 function Extra(props) {
-  let colorsCar = props.car.colors && ["любой", ...props.car.colors];
+  let colorsCar = [];
   useEffect(() => {
     props.color &&
       props.rate &&
       props.dateCount &&
       props.changeProps(true, "paramExtra");
   });
-  // useEffect(()=>{
-  //   console.log("sss");
 
-  // }.props.)
   useEffect(() => {
     props.dateStart && props.dateFinish && props.setDateCountText(diffDates());
   }, [props.dateStart, props.dateFinish]);
+  useEffect(() => {
+    colorsCar = ["любой", ...props.car.colors];
+  }, props.car);
 
   function selectColor(color) {
     props.setColorText(color[0].toUpperCase() + color.slice(1));
@@ -75,6 +75,9 @@ function Extra(props) {
     }
     return "";
   }
+  if (props.color) {
+    console.log(props.color[0].toLowerCase() + props.color.slice(1));
+  }
   return (
     <div
       className={classnames("order__content__extra", {
@@ -91,7 +94,10 @@ function Extra(props) {
                   type="radio"
                   id={`m${id}`}
                   name="color"
-                  defaultChecked={id === 0 ? true : false}
+                  defaultChecked={
+                    id === 0
+                    // props.color[0].toLowerCase() + props.color.slice(1)
+                  }
                   onClick={() => selectColor(item)}
                 />
                 <label htmlFor={`m${id}`}>
