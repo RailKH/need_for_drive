@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { setStatusIdText, setPriceText } from "../../../store/extra/action";
@@ -123,20 +124,26 @@ function Cost(props) {
           }
         })}
       </div>
-
       <p className="cost">
         <span>Цена: </span>
         {props.price} ₽
       </p>
-
-      <button
-        className={classnames("button", {
-          disabled: !paramButton,
-          false: props.paramOrder,
-        })}
-        onClick={(e) => paramButton && props.nextWrapper(++value, textButton)}>
-        {textButton}
-      </button>
+      {props.orderFalse ? (
+        <Link to="/">
+          <button className="button">Вернуться на главную</button>
+        </Link>
+      ) : (
+        <button
+          className={classnames("button", {
+            disabled: !paramButton,
+            false: props.paramOrder,
+          })}
+          onClick={(e) =>
+            paramButton && props.nextWrapper(++value, textButton)
+          }>
+          {textButton}
+        </button>
+      )}
     </div>
   );
 }

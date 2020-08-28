@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import { setCarText } from "../../../store/model/action";
+import { setColorText } from "../../../store/extra/action";
 
 function Model(props) {
   const models = ["Все модели", "Эконом", "Премиум"];
@@ -11,6 +12,7 @@ function Model(props) {
     modelCar === "Все модели" ? true : item.categoryId.name === modelCar
   );
   function selectCar(item) {
+    props.setColorText("Любой");
     setCarName(item.name);
     props.setCarText(item);
     props.changeProps(true, "paramModel");
@@ -73,6 +75,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = {
+  setColorText,
   setCarText,
 };
 

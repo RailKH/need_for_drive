@@ -42,6 +42,7 @@ const listAdditional = [
   { name: "Детское кресло", price: 200, set: "chair", fun: "setChairText" },
   { name: "Правый руль", price: 1600, set: "wheel", fun: "setWheelText" },
 ];
+
 class Order extends React.Component {
   constructor(props) {
     super();
@@ -50,6 +51,7 @@ class Order extends React.Component {
       paramLocation: false,
       paramModel: false,
       paramExtra: false,
+      orderFalse: false,
       city: [],
       point: [],
       cars: [],
@@ -62,12 +64,12 @@ class Order extends React.Component {
     this.setDefValue = this.setDefValue.bind(this);
   }
   componentDidMount() {
-    if (this.props.paramOrder) {
-      this.setState({
-        id: 3,
-      });
-      return;
-    }
+    this.setDefValue();
+    this.setState({
+      paramLocation: false,
+      paramModel: false,
+      paramExtra: false,
+    });
 
     let statusId = localStorage.getItem("statusId");
     if (statusId) {
@@ -95,6 +97,7 @@ class Order extends React.Component {
       this.setState({
         point: cityPoint,
       });
+      this.props.changeLoader(false);
     });
   }
   setDefValue(json) {
@@ -148,11 +151,11 @@ class Order extends React.Component {
           paramExtra: false,
           paramModel: false,
           paramLocation: false,
-          id: 0,
+          orderFalse: true,
         });
         this.setDefValue();
       }
-      this.props.changeVerification("verification");
+      !this.state.orderFalse && this.props.changeVerification("verification");
     }
     switch (textButton) {
       case "Выбрать модель":
@@ -195,7 +198,7 @@ class Order extends React.Component {
           <div className="link__content">
             {this.props.orderStatusId ? (
               <div className="link__content__title">
-                {this.props.orderStatusId}
+                Заказ номер {this.props.orderStatusId}
               </div>
             ) : (
               <>
@@ -246,6 +249,7 @@ class Order extends React.Component {
               changeProps={this.changeProps}
               listCity={this.state.city}
               listPoint={this.state.point}
+              loader={this.props.loader}
             />
             <ModelBlock
               id={id}
@@ -258,11 +262,11 @@ class Order extends React.Component {
               changeProps={this.changeProps}
               listAdditional={listAdditional}
             />
-
             <TotalBlock
               id={id}
               cars={this.state.cars}
               loader={this.props.loader}
+              orderFalse={this.state.orderFalse}
             />
             <CostBlock
               id={id}
@@ -270,6 +274,7 @@ class Order extends React.Component {
               state={this.state}
               postData={this.postData}
               listAdditional={listAdditional}
+              orderFalse={this.state.orderFalse}
             />
           </div>
         </section>

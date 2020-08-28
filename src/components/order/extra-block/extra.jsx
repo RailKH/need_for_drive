@@ -13,14 +13,13 @@ import {
 } from "../../../store/extra/action";
 
 function Extra(props) {
-  let colorsCar = props.car.colors && ["любой", ...props.car.colors];
-
   useEffect(() => {
     props.color &&
       props.rate &&
       props.dateCount &&
       props.changeProps(true, "paramExtra");
   });
+
   useEffect(() => {
     props.dateStart && props.dateFinish && props.setDateCountText(diffDates());
   }, [props.dateStart, props.dateFinish]);
@@ -80,14 +79,14 @@ function Extra(props) {
       <div className="extra__form">
         <div className="extra__form__color">
           <p>Цвет</p>
-
-          {colorsCar &&
-            colorsCar.map((item, id) => (
+          {props.car.name &&
+            ["любой", ...props.car.colors].map((item, id) => (
               <div key={`${id}_${item}`}>
                 <input
                   type="radio"
                   id={`m${id}`}
                   name="color"
+                  defaultChecked={id === 0}
                   onClick={() => selectColor(item)}
                 />
                 <label htmlFor={`m${id}`}>
@@ -125,8 +124,8 @@ function Extra(props) {
           {props.listRate &&
             props.listRate.map((item, id) => {
               return (
-                <>
-                  <div className="wrap" key={`radio_${item.id}`}>
+                <div key={`radio_${item.id}`}>
+                  <div className="wrap">
                     <input
                       type="radio"
                       id={`t${id}`}
@@ -138,7 +137,7 @@ function Extra(props) {
                       {`${item.rateTypeId.name}, ${item.price}₽/${item.rateTypeId.unit}`}
                     </label>
                   </div>
-                </>
+                </div>
               );
             })}
         </div>

@@ -1,0 +1,27 @@
+.admin-footer {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0px -0.5px 0px #d7dae3;
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  &_link {
+    padding: 26px 27px;
+    color: #007bff;
+    span + span {
+      padding-left: 16px;
+    }
+  }
+  &_copyright {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: right;
+    color: #818ea3;
+    display: flex;
+    align-items: center;
+    padding-right: 27.5px;
+  }
+}

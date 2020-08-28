@@ -36,6 +36,12 @@ class App extends React.Component {
     this.changeOrder = this.changeOrder.bind(this);
     this.openMenu = this.openMenu.bind(this);
     this.postData = this.postData.bind(this);
+    this.changeLoader = this.changeLoader.bind(this);
+  }
+  componentDidMount() {
+    this.setState((state) => ({
+      loader: true,
+    }));
   }
   changeVerification() {
     this.setState((state) => ({
@@ -54,6 +60,11 @@ class App extends React.Component {
 
     return data;
   };
+  changeLoader(data) {
+    this.setState((state) => ({
+      loader: data,
+    }));
+  }
   changeOrder() {
     this.props.setParamOrderText(!this.props.paramOrder);
     this.setState((state) => ({
@@ -114,6 +125,7 @@ class App extends React.Component {
               )}
             />
             <Route
+              exact
               path="/order"
               render={(props) => (
                 <Order
@@ -122,6 +134,7 @@ class App extends React.Component {
                   burger={this.state.burger}
                   changeOrder={this.changeOrder}
                   loader={this.state.loader}
+                  changeLoader={this.changeLoader}
                   {...props}
                 />
               )}
