@@ -113,7 +113,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path="/admin/" component={AdminPanel} />
+        <Route path="/need_for_drive/admin" component={AdminPanel} />
         <div className="main">
           <Navigation openMenu={this.openMenu} burger={this.state.burger} />
           <Menu burger={this.state.burger} />
@@ -126,7 +126,7 @@ class App extends React.Component {
               )}
             />
             <Route
-              path="/order/"
+              path="/order"
               render={(props) => (
                 <Order
                   cars={cars}
