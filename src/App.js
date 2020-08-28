@@ -113,21 +113,20 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path="/need_for_drive/admin" component={AdminPanel} />
+        <Route path="/admin/" component={AdminPanel} />
         <div className="main">
           <Navigation openMenu={this.openMenu} burger={this.state.burger} />
           <Menu burger={this.state.burger} />
           <Switch>
             <Route
               exact
-              path="/need_for_drive"
+              path="/"
               render={(props) => (
                 <FirstPage burger={this.state.burger} {...props} />
               )}
             />
             <Route
-              exact
-              path="/need_for_drive/order"
+              path="/order/"
               render={(props) => (
                 <Order
                   cars={cars}
