@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/need_for_drive/static/css/main.3b0fd549.chunk.css",
-    "main.js": "/need_for_drive/static/js/main.bb3cfc17.chunk.js",
-    "main.js.map": "/need_for_drive/static/js/main.bb3cfc17.chunk.js.map",
+    "main.js": "/need_for_drive/static/js/main.1f4a5579.chunk.js",
+    "main.js.map": "/need_for_drive/static/js/main.1f4a5579.chunk.js.map",
     "runtime-main.js": "/need_for_drive/static/js/runtime-main.c644a858.js",
     "runtime-main.js.map": "/need_for_drive/static/js/runtime-main.c644a858.js.map",
     "static/css/2.d8100e34.chunk.css": "/need_for_drive/static/css/2.d8100e34.chunk.css",
-    "static/js/2.f6f6bf23.chunk.js": "/need_for_drive/static/js/2.f6f6bf23.chunk.js",
-    "static/js/2.f6f6bf23.chunk.js.map": "/need_for_drive/static/js/2.f6f6bf23.chunk.js.map",
+    "static/js/2.92c020fd.chunk.js": "/need_for_drive/static/js/2.92c020fd.chunk.js",
+    "static/js/2.92c020fd.chunk.js.map": "/need_for_drive/static/js/2.92c020fd.chunk.js.map",
     "index.html": "/need_for_drive/index.html",
-    "precache-manifest.c691696f893c871824bffd808c3478c4.js": "/need_for_drive/precache-manifest.c691696f893c871824bffd808c3478c4.js",
+    "precache-manifest.8002f5e4534de325cbac0c54241f091b.js": "/need_for_drive/precache-manifest.8002f5e4534de325cbac0c54241f091b.js",
     "service-worker.js": "/need_for_drive/service-worker.js",
     "static/css/2.d8100e34.chunk.css.map": "/need_for_drive/static/css/2.d8100e34.chunk.css.map",
     "static/css/main.3b0fd549.chunk.css.map": "/need_for_drive/static/css/main.3b0fd549.chunk.css.map",
-    "static/js/2.f6f6bf23.chunk.js.LICENSE.txt": "/need_for_drive/static/js/2.f6f6bf23.chunk.js.LICENSE.txt",
+    "static/js/2.92c020fd.chunk.js.LICENSE.txt": "/need_for_drive/static/js/2.92c020fd.chunk.js.LICENSE.txt",
     "static/media/Facebook_white.17b7a8e4.svg": "/need_for_drive/static/media/Facebook_white.17b7a8e4.svg",
     "static/media/content.scss": "/need_for_drive/static/media/Group.111ef1ff.svg",
     "static/media/main.scss": "/need_for_drive/static/media/Roboto-Regular.11eabca2.ttf",
@@ -43,8 +43,8 @@
   "entrypoints": [
     "static/js/runtime-main.c644a858.js",
     "static/css/2.d8100e34.chunk.css",
-    "static/js/2.f6f6bf23.chunk.js",
+    "static/js/2.92c020fd.chunk.js",
     "static/css/main.3b0fd549.chunk.css",
-    "static/js/main.bb3cfc17.chunk.js"
+    "static/js/main.1f4a5579.chunk.js"
   ]
 }
