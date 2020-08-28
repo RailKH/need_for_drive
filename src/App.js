@@ -113,6 +113,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
+        <Route path="/admin" component={AdminPanel} />
         <div className="main">
           <Navigation openMenu={this.openMenu} burger={this.state.burger} />
           <Menu burger={this.state.burger} />
@@ -139,7 +140,6 @@ class App extends React.Component {
                 />
               )}
             />
-            <Redirect from="/" to="/need_for_drive" />
           </Switch>
           {this.state.verification && (
             <Verification
@@ -148,7 +148,6 @@ class App extends React.Component {
             />
           )}
         </div>
-        {/* <Route path="/admin" component={AdminPanel} /> */}
       </Router>
     );
   }

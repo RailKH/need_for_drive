@@ -11,11 +11,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Switch>
-          <Route path="/need_for_drive" component={App} />
-          {/* <Route exact path="/order" component={App} /> */}
-          <Route exact path="/admin" component={AdminPanel} />
-        </Switch>
+        <App />
+        {/* <Switch> */}
+        {/* <Route path="/need_for_drive" component={App} />
+          <Route exact path="/admin" component={AdminPanel} /> */}
+        {/* </Switch> */}
       </Router>
     </Provider>
   </React.StrictMode>,
