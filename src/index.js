@@ -5,15 +5,17 @@ import App from "./App";
 
 import { Provider } from "react-redux";
 import { store } from "./store/configureStore";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Route exact path="/need_for_drive" component={App} />
-        <Route exact path="/order" component={App} />
-        <Route exact path="/admin" component={AdminPanel} />
+        <Switch>
+          <Route path="/need_for_drive" component={App} />
+          {/* <Route exact path="/order" component={App} /> */}
+          <Route exact path="/admin" component={AdminPanel} />
+        </Switch>
       </Router>
     </Provider>
   </React.StrictMode>,

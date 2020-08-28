@@ -126,7 +126,7 @@ class App extends React.Component {
             />
             <Route
               exact
-              path="/order"
+              path="/need_for_drive/order"
               render={(props) => (
                 <Order
                   cars={cars}
@@ -139,7 +139,6 @@ class App extends React.Component {
                 />
               )}
             />
-
             <Redirect from="/" to="/need_for_drive" />
           </Switch>
           {this.state.verification && (
@@ -149,7 +148,7 @@ class App extends React.Component {
             />
           )}
         </div>
-        <Route path="/admin" component={AdminPanel} />
+        {/* <Route path="/admin" component={AdminPanel} /> */}
       </Router>
     );
   }
