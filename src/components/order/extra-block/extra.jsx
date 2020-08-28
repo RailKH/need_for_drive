@@ -124,8 +124,8 @@ function Extra(props) {
           {props.listRate &&
             props.listRate.map((item, id) => {
               return (
-                <>
-                  <div className="wrap" key={`radio_${item.id}`}>
+                <div key={`radio_${item.id}`}>
+                  <div className="wrap">
                     <input
                       type="radio"
                       id={`t${id}`}
@@ -137,7 +137,7 @@ function Extra(props) {
                       {`${item.rateTypeId.name}, ${item.price}₽/${item.rateTypeId.unit}`}
                     </label>
                   </div>
-                </>
+                </div>
               );
             })}
         </div>

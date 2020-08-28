@@ -42,7 +42,7 @@ function Location(props) {
             const fixElem = elem.address.toLowerCase();
             return fixElem.includes(event.target.value.toLowerCase());
           });
-        test(props.city.name, filterCityPoint);
+        getPointCoord(props.city.name, filterCityPoint);
         setfilterCityPoint(filterCityPoint);
       }
     }
@@ -53,7 +53,7 @@ function Location(props) {
     ).then((res) => res.json());
   };
 
-  function test(name, data) {
+  function getPointCoord(name, data) {
     setPointCoord([]);
     data
       .filter((elem) => {
@@ -82,20 +82,7 @@ function Location(props) {
           .map((item) => +item);
         setCityCoord(coord);
       });
-      test(item.name, props.listPoint);
-      // props.listPoint
-      //   .filter((elem) => {
-      //     return item.name === elem.cityId.name;
-      //   })
-      //   .map((elem, ind) => {
-      //     getCoord(`${item.name}${elem.address}`).then((json) => {
-      //       let coord = json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
-      //         .split(" ")
-      //         .reverse()
-      //         .map((item) => +item);
-      //       setPointCoord((prev) => [...prev, { coord: coord, point: elem }]);
-      //     });
-      //   });
+      getPointCoord(item.name, props.listPoint);
     } else {
       setfilterCityPoint([]);
       props.changeProps(true, "paramLocation");
@@ -109,9 +96,7 @@ function Location(props) {
     } else {
       props.setCityPointText({ address: "" });
       setfilterCityPoint([]);
-      // console.log(props.listPoint);
-      // console.log("city", props.city.name);
-      test(props.city.name, props.listPoint);
+      getPointCoord(props.city.name, props.listPoint);
     }
     props.changeProps(false, "paramLocation");
   }
