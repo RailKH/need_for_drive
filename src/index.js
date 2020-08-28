@@ -11,11 +11,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router basename={process.env.PUBLIC_URL}>
-        <App />
-        {/* <Switch> */}
-        {/* <Route path="/need_for_drive" component={App} />
-          <Route exact path="/admin" component={AdminPanel} /> */}
-        {/* </Switch> */}
+        {/* <App /> */}
+        <Switch>
+          <Route exact path="/admin" component={AdminPanel} />
+          <Route path="/" component={App} />
+        </Switch>
       </Router>
     </Provider>
   </React.StrictMode>,
