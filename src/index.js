@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router basename="/need_for_drive/">
+      <Router basename="/need_for_drive">
         <App />
         {/* <Switch> */}
         {/* <Route path="/need_for_drive" component={App} />

@@ -186,7 +186,7 @@ class Order extends React.Component {
       <section className={classnames("order", { disabled: this.props.burger })}>
         <div className="order__header">
           <header className="content__header">
-            <Link to="/need_for_drive">
+            <Link to="/">
               <span href="#" className="content__header__logo">
                 Need for drive
               </span>

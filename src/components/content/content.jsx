@@ -19,7 +19,7 @@ export default function Content(props) {
         <p className="content__desc__text">
           Поминутная аренда авто твоего города
         </p>
-        <Link to="/need_for_drive/order">
+        <Link to="/order">
           <button className="content__desc__button button">
             Забронировать
           </button>

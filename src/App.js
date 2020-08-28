@@ -112,42 +112,46 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <Route path="/need_for_drive/admin" component={AdminPanel} />
-        <div className="main">
-          <Navigation openMenu={this.openMenu} burger={this.state.burger} />
-          <Menu burger={this.state.burger} />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <FirstPage burger={this.state.burger} {...props} />
-              )}
-            />
-            <Route
-              path="/order"
-              render={(props) => (
-                <Order
-                  cars={cars}
-                  changeVerification={this.changeVerification}
-                  burger={this.state.burger}
-                  changeOrder={this.changeOrder}
-                  loader={this.state.loader}
-                  changeLoader={this.changeLoader}
-                  {...props}
-                />
-              )}
-            />
-          </Switch>
-          {this.state.verification && (
-            <Verification
-              changeVerification={this.changeVerification}
-              changeOrder={this.changeOrder}
-            />
-          )}
-        </div>
-      </Router>
+      <>
+        {/* <Router> */}
+        <Switch>
+          <Route exact path="/admin" component={AdminPanel} />
+          <div className="main">
+            <Navigation openMenu={this.openMenu} burger={this.state.burger} />
+            <Menu burger={this.state.burger} />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <FirstPage burger={this.state.burger} {...props} />
+                )}
+              />
+              <Route
+                path="/order"
+                render={(props) => (
+                  <Order
+                    cars={cars}
+                    changeVerification={this.changeVerification}
+                    burger={this.state.burger}
+                    changeOrder={this.changeOrder}
+                    loader={this.state.loader}
+                    changeLoader={this.changeLoader}
+                    {...props}
+                  />
+                )}
+              />
+            </Switch>
+            {this.state.verification && (
+              <Verification
+                changeVerification={this.changeVerification}
+                changeOrder={this.changeOrder}
+              />
+            )}
+          </div>
+          {/* </Router> */}
+        </Switch>
+      </>
     );
   }
 }
