@@ -90,6 +90,7 @@ class Order extends React.Component {
       this.setState({
         city: json.data,
       });
+      console.log("city");
     });
 
     this.getData("point").then((json) => {
@@ -97,6 +98,8 @@ class Order extends React.Component {
       this.setState({
         point: cityPoint,
       });
+      console.log("point");
+      this.props.changeLoader(false);
     });
   }
   setDefValue(json) {
@@ -248,6 +251,7 @@ class Order extends React.Component {
               changeProps={this.changeProps}
               listCity={this.state.city}
               listPoint={this.state.point}
+              loader={this.props.loader}
             />
             <ModelBlock
               id={id}

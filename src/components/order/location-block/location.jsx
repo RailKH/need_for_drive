@@ -3,6 +3,8 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 import CityMap from "./map";
 import { setCityText, setCityPointText } from "../../../store/location/action";
+import Loader from "../../loader";
+
 const wordLength = 2;
 const apiYandex = "5b5054c2-d046-4cf8-8cac-90a914e3631a";
 
@@ -46,15 +48,13 @@ function Location(props) {
     }
   }
   const getCoord = async (value) => {
-    let data = await fetch(
+    return await fetch(
       `https://geocode-maps.yandex.ru/1.x?apikey=${apiYandex}&format=json&results=1&sco=longlat&geocode=Россия+${value}`
     ).then((res) => res.json());
-
-    return data;
   };
 
   function test(name, data) {
-    console.log(name, data);
+    setPointCoord([]);
     data
       .filter((elem) => {
         return name === elem.cityId.name;
@@ -66,7 +66,6 @@ function Location(props) {
             .reverse()
             .map((item) => +item);
           setPointCoord((prev) => [...prev, { coord: coord, point: elem }]);
-          console.log(pointCoord);
         });
       });
   }
@@ -110,6 +109,9 @@ function Location(props) {
     } else {
       props.setCityPointText({ address: "" });
       setfilterCityPoint([]);
+      // console.log(props.listPoint);
+      // console.log("city", props.city.name);
+      test(props.city.name, props.listPoint);
     }
     props.changeProps(false, "paramLocation");
   }
@@ -136,58 +138,61 @@ function Location(props) {
   });
 
   return (
-    <div
-      className={classnames("order__content__location", {
-        disabled: props.id !== 0,
-      })}>
-      <div className="form">
-        <div className="form__input">
-          <label htmlFor="city">Город</label>
-          <div className="wrap__location">
-            <input
-              id="city"
-              type="text"
-              value={props.city.name}
-              placeholder="Начните вводить город..."
-              onChange={(e) => inputChange(e, "setCityText")}
-            />
-            {props.city.name && (
-              <span onClick={() => clearInput("city")} className="close">
-                &times;
-              </span>
-            )}
-            <ul className="dropdown-list">{list_City}</ul>
+    <>
+      {props.loader && <Loader />}
+      <div
+        className={classnames("order__content__location", {
+          disabled: props.id !== 0,
+        })}>
+        <div className="form">
+          <div className="form__input">
+            <label htmlFor="city">Город</label>
+            <div className="wrap__location">
+              <input
+                id="city"
+                type="text"
+                value={props.city.name}
+                placeholder="Начните вводить город..."
+                onChange={(e) => inputChange(e, "setCityText")}
+              />
+              {props.city.name && (
+                <span onClick={() => clearInput("city")} className="close">
+                  &times;
+                </span>
+              )}
+              <ul className="dropdown-list">{list_City}</ul>
+            </div>
           </div>
-        </div>
-        <div className="form__input">
-          <label htmlFor="delivery_point">Пункт выдачи</label>
-          <div className="wrap__location">
-            <input
-              id="delivery_point"
-              type="text"
-              value={props.cityPoint.address}
-              placeholder="Начните вводить пункт..."
-              onChange={(e) => inputChange(e, "setCityPointText")}
-            />
-            {props.cityPoint.address && (
-              <span onClick={() => clearInput("cityPoint")} className="close">
-                &times;
-              </span>
-            )}
-            <ul className="dropdown-list delivery">{list_CityPoint}</ul>
+          <div className="form__input">
+            <label htmlFor="delivery_point">Пункт выдачи</label>
+            <div className="wrap__location">
+              <input
+                id="delivery_point"
+                type="text"
+                value={props.cityPoint.address}
+                placeholder="Начните вводить пункт..."
+                onChange={(e) => inputChange(e, "setCityPointText")}
+              />
+              {props.cityPoint.address && (
+                <span onClick={() => clearInput("cityPoint")} className="close">
+                  &times;
+                </span>
+              )}
+              <ul className="dropdown-list delivery">{list_CityPoint}</ul>
+            </div>
           </div>
-        </div>
-        <div className="map">
-          <p>Выбрать на карте:</p>
-          <CityMap
-            coord={cityCoord}
-            city={props.city.name}
-            pointCoord={pointCoord}
-            selectCity={selectCity}
-          />
+          <div className="map">
+            <p>Выбрать на карте:</p>
+            <CityMap
+              coord={cityCoord}
+              city={props.city.name}
+              pointCoord={pointCoord}
+              selectCity={selectCity}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

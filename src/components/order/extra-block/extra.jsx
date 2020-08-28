@@ -13,7 +13,6 @@ import {
 } from "../../../store/extra/action";
 
 function Extra(props) {
-  let colorsCar = [];
   useEffect(() => {
     props.color &&
       props.rate &&
@@ -24,9 +23,6 @@ function Extra(props) {
   useEffect(() => {
     props.dateStart && props.dateFinish && props.setDateCountText(diffDates());
   }, [props.dateStart, props.dateFinish]);
-  useEffect(() => {
-    colorsCar = ["любой", ...props.car.colors];
-  }, props.car);
 
   function selectColor(color) {
     props.setColorText(color[0].toUpperCase() + color.slice(1));
@@ -75,9 +71,6 @@ function Extra(props) {
     }
     return "";
   }
-  if (props.color) {
-    console.log(props.color[0].toLowerCase() + props.color.slice(1));
-  }
   return (
     <div
       className={classnames("order__content__extra", {
@@ -86,18 +79,14 @@ function Extra(props) {
       <div className="extra__form">
         <div className="extra__form__color">
           <p>Цвет</p>
-
-          {colorsCar &&
-            colorsCar.map((item, id) => (
+          {props.car.name &&
+            ["любой", ...props.car.colors].map((item, id) => (
               <div key={`${id}_${item}`}>
                 <input
                   type="radio"
                   id={`m${id}`}
                   name="color"
-                  defaultChecked={
-                    id === 0
-                    // props.color[0].toLowerCase() + props.color.slice(1)
-                  }
+                  defaultChecked={id === 0}
                   onClick={() => selectColor(item)}
                 />
                 <label htmlFor={`m${id}`}>
