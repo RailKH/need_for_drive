@@ -93,54 +93,6 @@ export default function AdminMain() {
                 </span>
               </div>
             </div>
-            <div className="description_item">
-              <img src={car} alt="car" />
-              <div className="item_descr">
-                <div className="descr_title">
-                  <span>Elatra</span> в <span>Ульяновск</span>, Нариманова 42
-                </div>
-                <div className="descr_time">
-                  12.06.2019 12:00 — 13.06.2019 12:00
-                </div>
-                <div className="descr_color">
-                  Цвет: <span>Голубой</span>
-                </div>
-              </div>
-              <div>
-                {additional.map((item, ind) => {
-                  return (
-                    <div
-                      className="additional__checkbox"
-                      key={`${ind}_${item}`}>
-                      <input
-                        type="checkbox"
-                        className="additional__checkbox__custom"
-                        id={item}
-                      />
-                      <label htmlFor={item}>
-                        <span />
-                        {item}
-                      </label>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="price">4 300 ₽</div>
-              <div className="change-button">
-                <span>
-                  <img src={mark} />
-                  Готово
-                </span>
-                <span>
-                  <img src={cross} />
-                  Отмена
-                </span>
-                <span>
-                  <img src={ellipsis} />
-                  Изменить
-                </span>
-              </div>
-            </div>
           </div>
           <div className="page">
             <div className="page_content">

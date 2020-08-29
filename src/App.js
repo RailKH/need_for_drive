@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navigation from "./components/navigation/navigation";
 import Menu from "./components/menu/menu";
 import Order from "./components/order/order";
@@ -112,46 +107,40 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
-        {/* <Router> */}
-        {/* <Route exact path="/admin" component={AdminPanel} /> */}
-        <div className="main">
-          <Navigation openMenu={this.openMenu} burger={this.state.burger} />
-          <Menu burger={this.state.burger} />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <FirstPage burger={this.state.burger} {...props} />
-              )}
-            />
-            <Route
-              exact
-              path="/order"
-              render={(props) => (
-                <Order
-                  cars={cars}
-                  changeVerification={this.changeVerification}
-                  burger={this.state.burger}
-                  changeOrder={this.changeOrder}
-                  loader={this.state.loader}
-                  changeLoader={this.changeLoader}
-                  {...props}
-                />
-              )}
-            />
-          </Switch>
-          {this.state.verification && (
-            <Verification
-              changeVerification={this.changeVerification}
-              changeOrder={this.changeOrder}
-            />
-          )}
-        </div>
-        {/* </Router> */}
-        {/* </Switch> */}
-      </>
+      <div className="main">
+        <Navigation openMenu={this.openMenu} burger={this.state.burger} />
+        <Menu burger={this.state.burger} />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <FirstPage burger={this.state.burger} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/order"
+            render={(props) => (
+              <Order
+                cars={cars}
+                changeVerification={this.changeVerification}
+                burger={this.state.burger}
+                changeOrder={this.changeOrder}
+                loader={this.state.loader}
+                changeLoader={this.changeLoader}
+                {...props}
+              />
+            )}
+          />
+        </Switch>
+        {this.state.verification && (
+          <Verification
+            changeVerification={this.changeVerification}
+            changeOrder={this.changeOrder}
+          />
+        )}
+      </div>
     );
   }
 }

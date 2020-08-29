@@ -6,6 +6,7 @@ import AdminMain from "./admin-main/admin-main";
 import AdminFooter from "./admin-footer/admin-footer";
 import AdminError from "./admin-error/admin-error";
 import "../../assets/styles/admin-panel.scss";
+import { Route, Switch } from "react-router-dom";
 
 class AdminPanel extends React.Component {
   constructor(props) {
@@ -20,8 +21,12 @@ class AdminPanel extends React.Component {
           <MenuBlock />
           <div className="admin_page_content_edit">
             <AdminHeader />
-            {/* <AdminMain /> */}
-            <AdminError />
+            <Switch>
+              <Route path="/admin/admin-main" component={AdminMain} />
+              <Route path="/admin/admin-error" component={AdminError} />
+              {/* // <AdminMain />
+              // <AdminError /> */}
+            </Switch>
             <AdminFooter />
           </div>
         </div>

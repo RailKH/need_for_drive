@@ -11,7 +11,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router basename={process.env.PUBLIC_URL}>
-        {/* <App /> */}
         <Switch>
           <Route path="/admin" component={AdminPanel} />
           <Route path="/" component={App} />
