@@ -13,7 +13,7 @@ ReactDOM.render(
       <Router basename={process.env.PUBLIC_URL}>
         {/* <App /> */}
         <Switch>
-          <Route exact path="/admin" component={AdminPanel} />
+          <Route path="/admin" component={AdminPanel} />
           <Route path="/" component={App} />
         </Switch>
       </Router>

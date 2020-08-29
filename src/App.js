@@ -127,6 +127,7 @@ class App extends React.Component {
               )}
             />
             <Route
+              exact
               path="/order"
               render={(props) => (
                 <Order
