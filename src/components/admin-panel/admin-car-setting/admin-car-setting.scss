@@ -1,0 +1,86 @@
+.admin-car {
+  &_content {
+    &_desc {
+      margin-top: 28px;
+
+      .car-cart {
+        background: #fff;
+        width: 334.5px;
+        height: 506px;
+        box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
+        border-radius: 9px;
+        padding: 35px 0;
+        .car-cart_suptitle {
+          font-size: 13px;
+          line-height: 15px;
+          color: #868e96;
+        }
+        &_photo {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .title {
+            font-size: 24.5px;
+            line-height: 28px;
+            margin: 10px 0 5px 0;
+          }
+          .filupp {
+            border: 0.5px solid #becad6;
+            border-radius: 4px;
+            width: 232px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            input {
+              display: none;
+            }
+            span {
+              padding: 8px 13px;
+              font-size: 10px;
+            }
+            .filupp-file-button {
+              background: #e9ecef;
+              border-left: 0.5px solid #becad6;
+            }
+          }
+        }
+        &_load-bar {
+          margin: 22.5px 0;
+          padding: 15px 22.5px;
+          box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.12),
+            0px 1px 0px rgba(0, 0, 0, 0.12);
+          &_wrap {
+            display: flex;
+            justify-content: space-between;
+          }
+          &_wrap-loader {
+            margin-top: 10px;
+            width: 100%;
+            height: 5px;
+            box-shadow: inset 0px 0.5px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+          }
+          &_loader {
+            width: 74%;
+            height: 100%;
+            background: #007bff;
+            border-radius: 4px;
+          }
+          span {
+            font-size: 11px;
+            line-height: 13px;
+          }
+        }
+        &_desc {
+          padding: 0 22.5px;
+          .car-cart_text {
+            margin-top: 15px;
+            font-size: 13.5px;
+            line-height: 19px;
+            color: #5a6169;
+          }
+        }
+      }
+    }
+  }
+}
