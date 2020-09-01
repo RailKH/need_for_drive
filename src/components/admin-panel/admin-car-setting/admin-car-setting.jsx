@@ -42,8 +42,21 @@ export default function AdminCarSetting() {
             </div>
           </div>
           <div className="car-setting">
-            <div className="car-setting_title"></div>
-            <div className="car-setting_content"></div>
+            <div className="car-setting_title">Настройки автомобиля</div>
+            <div className="car-setting_content">
+              <div className="car-setting_content_item box-registration">
+                <p>Модель автомобиля</p>
+                <input type="text" value="Hyndai, i30 N" />
+              </div>
+              <div className="car-setting_content_item box-registration">
+                <p>Тип автомобиля</p>
+                <input type="text" value="Компакт-кар" />
+              </div>
+              <div className="car-setting_content_item box-registration">
+                <p>Доступные цвета</p>
+                <input type="text" value="Cиний" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
