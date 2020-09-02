@@ -2,15 +2,15 @@
   &_content {
     &_desc {
       margin-top: 28px;
-      display: flex;
+      display: grid;
+      grid-template-columns: 334.5px 1fr;
+      grid-gap: 28px;
       .car-cart {
         background: #fff;
         width: 334.5px;
-        height: 506px;
         box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
         border-radius: 9px;
         padding: 35px 0;
-        margin-right: 28px;
         .car-cart_suptitle {
           font-size: 13px;
           line-height: 15px;
@@ -88,7 +88,8 @@
         border-radius: 9px;
         width: 100%;
         padding: 20px 18px;
-
+        display: flex;
+        flex-direction: column;
         &_title {
           font-family: "Roboto";
           font-weight: 500;
@@ -103,6 +104,43 @@
             width: 45%;
             margin-right: 20px;
           }
+          &_item:last-child {
+            .wrapper {
+              width: 100%;
+              display: flex;
+              input {
+                width: calc(100% - 30px);
+              }
+              .plus-box {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #becad6;
+                border-radius: 4px;
+                font-size: 30px;
+                padding: 5px;
+                color: #becad6;
+                margin: 8px 0 15px 8px;
+              }
+            }
+          }
+          .additional__checkbox {
+            position: relative;
+            margin-bottom: 8px;
+            input[type="checkbox"]:checked + label span:after {
+              width: 3px;
+              height: 7px;
+              border-width: 0 1px 1px 0;
+              top: 0;
+            }
+          }
+        }
+      }
+      .car-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        button {
+          font-size: 11.5px;
         }
       }
     }

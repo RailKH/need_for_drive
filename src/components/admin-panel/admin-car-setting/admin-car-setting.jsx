@@ -1,6 +1,7 @@
 import React from "react";
 import "./admin-car-setting.scss";
 import car from "../../../assets/img/cars/image_2.png";
+const color = ["Красный", "Белый", "Черный"];
 
 export default function AdminCarSetting() {
   return (
@@ -54,8 +55,36 @@ export default function AdminCarSetting() {
               </div>
               <div className="car-setting_content_item box-registration">
                 <p>Доступные цвета</p>
-                <input type="text" value="Cиний" />
+                <div className="wrapper">
+                  <input type="text" value="Cиний" />
+                  <div className="plus-box">+</div>
+                </div>
+                {color.map((item, ind) => {
+                  return (
+                    <div
+                      className="additional__checkbox"
+                      key={`${ind}_${item}`}>
+                      <input
+                        type="checkbox"
+                        className="additional__checkbox__custom"
+                        id={item}
+                        defaultChecked
+                      />
+                      <label htmlFor={item}>
+                        <span />
+                        {item}
+                      </label>
+                    </div>
+                  );
+                })}
               </div>
+            </div>
+            <div className="car-footer">
+              <div className="car-footer_wrapper">
+                <button className="admin_button active">Сохранить</button>
+                <button className="admin_button active cancel">Отменить</button>
+              </div>
+              <button className="admin_button active delete">Удалить</button>
             </div>
           </div>
         </div>
