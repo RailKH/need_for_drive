@@ -6,6 +6,9 @@ const color = ["Красный", "Белый", "Черный"];
 export default function AdminCarSetting() {
   return (
     <div className="admin-car admin-main">
+      <div className="admin-car_block-notification">
+        Успех! Машина сохранена
+      </div>
       <div className="admin-car_content admin-main_content">
         <div className="admin-main_content_title">Карточка автомобиля</div>
         <div className="admin-car_content_desc">
