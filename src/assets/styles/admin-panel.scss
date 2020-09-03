@@ -28,6 +28,14 @@
         box-shadow: 0px 0px 5px rgba(90, 97, 105, 1);
       }
     }
+    &.cancel {
+      background-color: #e9ecef;
+      color: #3d5170;
+      margin-left: 12.5px;
+    }
+    &.delete {
+      background: #cb3656;
+    }
     &:hover {
       cursor: $cursor;
       color: #000;
@@ -69,6 +77,7 @@
       0px 3.5px 35px rgba(90, 97, 105, 0.1);
     border-radius: 9px;
     padding: 18px;
+    position: relative;
     .box-title {
       font-family: Helvetica;
       font-style: normal;
@@ -79,30 +88,73 @@
       letter-spacing: -0.4375px;
       padding: 2px 0 35px 0;
     }
-    .box-registration {
-      font-size: 10.5px;
-      line-height: 12px;
-      letter-spacing: -0.18421px;
-      color: #495057;
-      input {
-        width: 100%;
-        padding: 8px 11px;
-        border: 0.5px solid #becad6;
-        border-radius: 3px;
-        font-size: 11px;
-        line-height: 13px;
-        letter-spacing: -0.192982px;
-        color: #3d5170;
-        margin: 8px 0 15px 0;
-        outline: none;
+    .box-error {
+      position: absolute;
+      top: 55px;
+      color: red;
+    }
+    .lds-ring {
+      display: inline-block;
+      position: relative;
+      width: 20px;
+      height: 20px;
+    }
+    .lds-ring div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #fff transparent transparent transparent;
+    }
+    .lds-ring div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    .lds-ring div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+      0% {
+        transform: rotate(0deg);
       }
-      input:focus {
-        border-color: $green;
+      100% {
+        transform: rotate(360deg);
       }
     }
   }
   .box-footer {
     display: flex;
     justify-content: space-between;
+  }
+}
+.box-registration {
+  font-size: 10.5px;
+  line-height: 12px;
+  letter-spacing: -0.18421px;
+  color: #495057;
+  input {
+    width: 100%;
+    padding: 8px 11px;
+    border: 0.5px solid #becad6;
+    border-radius: 3px;
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: -0.192982px;
+    color: #3d5170;
+    margin: 8px 0 15px 0;
+    outline: none;
+  }
+  &.error input {
+    border: 0.5px solid #c4183c;
+    box-shadow: 0px 2.5px 5.5px rgba(196, 24, 60, 0.1);
+  }
+  input:focus {
+    border-color: $green;
   }
 }

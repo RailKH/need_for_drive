@@ -11,10 +11,12 @@ export default function MenuBlock() {
   return (
     <div className="menu-block">
       <div className="menu-block_logo admin_logo">Need for car</div>
-      <div className="menu-block_auto admin_cart">
-        <Pen className="block-logo" />
-        Карточка автомобиля
-      </div>
+      <Link to="/admin/admin-car-setting">
+        <div className="menu-block_auto admin_cart">
+          <Pen className="block-logo" />
+          Карточка автомобиля
+        </div>
+      </Link>
       <Link to="/admin/admin-error">
         <div className="menu-block_auto admin_list">
           <Form1 className="block-logo" />

@@ -1,0 +1,154 @@
+.admin-car {
+  position: relative;
+  &_block-notification {
+    position: absolute;
+    background: #0ec261;
+    width: 100%;
+  }
+  &_content {
+    &_desc {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 334.5px 1fr;
+      grid-gap: 28px;
+      .car-cart {
+        background: #fff;
+        width: 334.5px;
+        box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
+        border-radius: 9px;
+        padding: 35px 0;
+        .car-cart_suptitle {
+          font-size: 13px;
+          line-height: 15px;
+          color: #868e96;
+        }
+        &_photo {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .title {
+            font-size: 24.5px;
+            line-height: 28px;
+            margin: 10px 0 5px 0;
+          }
+          .filupp {
+            border: 0.5px solid #becad6;
+            border-radius: 4px;
+            width: 232px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            input {
+              display: none;
+            }
+            span {
+              padding: 8px 13px;
+              font-size: 10px;
+            }
+            .filupp-file-button {
+              background: #e9ecef;
+              border-left: 0.5px solid #becad6;
+            }
+          }
+        }
+        &_load-bar {
+          margin: 22.5px 0;
+          padding: 15px 22.5px;
+          box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.12),
+            0px 1px 0px rgba(0, 0, 0, 0.12);
+          &_wrap {
+            display: flex;
+            justify-content: space-between;
+          }
+          &_wrap-loader {
+            margin-top: 10px;
+            width: 100%;
+            height: 5px;
+            box-shadow: inset 0px 0.5px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+          }
+          &_loader {
+            width: 74%;
+            height: 100%;
+            background: #007bff;
+            border-radius: 4px;
+          }
+          span {
+            font-size: 11px;
+            line-height: 13px;
+          }
+        }
+        &_desc {
+          padding: 0 22.5px;
+          .car-cart_text {
+            margin-top: 15px;
+            font-size: 13.5px;
+            line-height: 19px;
+            color: #5a6169;
+          }
+        }
+      }
+      .car-setting {
+        background: #ffffff;
+        box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
+        border-radius: 9px;
+        width: 100%;
+        padding: 20px 18px;
+        display: flex;
+        flex-direction: column;
+        &_title {
+          font-family: "Roboto";
+          font-weight: 500;
+          font-size: 17.5px;
+          color: #3d5170;
+          margin-bottom: 38px;
+        }
+        &_content {
+          display: flex;
+          flex-wrap: wrap;
+          &_item {
+            width: 45%;
+            margin-right: 20px;
+          }
+          &_item:last-child {
+            .wrapper {
+              width: 100%;
+              display: flex;
+              input {
+                width: calc(100% - 30px);
+              }
+              .plus-box {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #becad6;
+                border-radius: 4px;
+                font-size: 30px;
+                padding: 5px;
+                color: #becad6;
+                margin: 8px 0 15px 8px;
+              }
+            }
+          }
+          .additional__checkbox {
+            position: relative;
+            margin-bottom: 8px;
+            input[type="checkbox"]:checked + label span:after {
+              width: 3px;
+              height: 7px;
+              border-width: 0 1px 1px 0;
+              top: 0;
+            }
+          }
+        }
+      }
+      .car-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        button {
+          font-size: 11.5px;
+        }
+      }
+    }
+  }
+}
