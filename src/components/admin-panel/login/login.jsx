@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classnames from "classnames";
 import { useState } from "react";
 const URL =
@@ -9,6 +9,17 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
+  let basicToken = "";
+
+  useEffect(() => {
+    setLoader(true);
+    checkAuth()
+      .then((res) => {
+        props.changeAutorisation();
+        props.setName(res);
+      })
+      .catch(() => setLoader(false));
+  }, []);
 
   function getToken() {
     let token = "";
@@ -18,10 +29,30 @@ export default function Login(props) {
       const position = Math.floor(Math.random() * WORDS.length - 1);
       token += WORDS[position];
     }
-    return btoa(`${token}:4cbcea96de`);
+    basicToken = btoa(`${token}:4cbcea96de`);
+    return basicToken;
   }
-
-  function auth() {
+  function getCookie(name) {
+    let matches = document.cookie.match(
+      new RegExp(
+        "(?:^|; )" +
+          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+          "=([^;]*)"
+      )
+    );
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+  function checkAuth() {
+    return fetch(`${URL}auth/check`, {
+      method: "GET",
+      headers: {
+        "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("access_token"),
+      },
+    }).then((response) => response.json());
+  }
+  function Auth() {
     return fetch(`${URL}auth/login`, {
       method: "POST",
       headers: {
@@ -36,10 +67,15 @@ export default function Login(props) {
     if (mail.length > 3 && password.length > 3) {
       setError(false);
       setLoader(true);
-      auth()
+      Auth()
         .then((res) => {
-          console.log(res);
-          props.changeAutorisation();
+          document.cookie = `basicToken=${basicToken}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
+          document.cookie = `access_token=${res.access_token}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
+          document.cookie = `refresh_token=${res.refresh_token}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
+          checkAuth().then((res) => {
+            props.changeAutorisation();
+            props.setName(res);
+          });
         })
         .catch(() => {
           setError(true);
@@ -48,10 +84,6 @@ export default function Login(props) {
     } else {
       setError(true);
     }
-
-    // if (mail === "test" && password === "test") {
-    //   props.changeAutorisation();
-    // }
   }
 
   return (

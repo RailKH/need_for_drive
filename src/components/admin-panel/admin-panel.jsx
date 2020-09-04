@@ -13,9 +13,16 @@ class AdminPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      autorisation: false,
+      autorisation: true,
+      adminName: "",
     };
     this.changeAutorisation = this.changeAutorisation.bind(this);
+    this.setName = this.setName.bind(this);
+  }
+  setName(res) {
+    this.setState({
+      adminName: res.role.name,
+    });
   }
   changeAutorisation() {
     this.setState((state) => ({
@@ -26,12 +33,18 @@ class AdminPanel extends React.Component {
     return (
       <div className="admin_page">
         {!this.state.autorisation ? (
-          <Login changeAutorisation={this.changeAutorisation} />
+          <Login
+            changeAutorisation={this.changeAutorisation}
+            setName={this.setName}
+          />
         ) : (
           <div className="admin_page_content">
             <MenuBlock />
             <div className="admin_page_content_edit">
-              <AdminHeader />
+              <AdminHeader
+                name={this.state.adminName}
+                changeAutorisation={this.changeAutorisation}
+              />
               <Switch>
                 <Route path="/admin/admin-main" component={AdminMain} />
                 <Route path="/admin/admin-error" component={AdminError} />

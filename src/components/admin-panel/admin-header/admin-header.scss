@@ -1,3 +1,5 @@
+$cursor: url(../../../assets/icons/Pointer.svg), pointer;
+
 .admin_page_content_edit {
   .admin-header {
     width: 100%;
@@ -45,21 +47,45 @@
       }
     }
     &_user-block {
+      position: relative;
       display: flex;
       align-items: center;
-      padding-left: 25.5px;
-      img {
-        border-radius: 50%;
+      &:hover {
+        cursor: $cursor;
       }
-      .user-name {
-        padding-left: 14px;
+      .user-dropdown-box {
+        position: absolute;
+        padding: 10px;
+        background: #fff;
+        width: 100%;
+        bottom: -36px;
+        border: 1px solid #cacedb;
+        display: none;
+        &:hover {
+          cursor: $cursor;
+          background: #cacedb;
+        }
       }
-      .user-dropdown {
-        border: 6px solid transparent;
-        border-top: 6px solid #abb6bf;
-        position: relative;
-        left: 40px;
-        top: 3px;
+      &_wrap {
+        display: flex;
+        align-items: center;
+        padding-left: 25.5px;
+        img {
+          border-radius: 50%;
+        }
+        .user-name {
+          padding-left: 14px;
+        }
+        .user-dropdown {
+          border: 6px solid transparent;
+          border-top: 6px solid #abb6bf;
+          position: relative;
+          left: 40px;
+          top: 3px;
+        }
+      }
+      &:hover .user-dropdown-box {
+        display: block;
       }
     }
   }

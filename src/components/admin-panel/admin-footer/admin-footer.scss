@@ -7,8 +7,10 @@
   margin-top: auto;
   &_link {
     padding: 26px 27px;
-    color: #007bff;
-    span + span {
+    a {
+      color: #007bff;
+    }
+    a + a {
       padding-left: 16px;
     }
   }
