@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import getData from "../../api/api.js";
 import "./order.scss";
 import LocationBlock from "./location-block/location";
 import ModelBlock from "./model-block/model";
@@ -58,7 +59,7 @@ class Order extends React.Component {
       rate: [],
     };
     this.changeProps = this.changeProps.bind(this);
-    this.getData = this.getData.bind(this);
+    // this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
     this.nextWrapper = this.nextWrapper.bind(this);
     this.setDefValue = this.setDefValue.bind(this);
@@ -73,7 +74,8 @@ class Order extends React.Component {
 
     let statusId = localStorage.getItem("statusId");
     if (statusId) {
-      this.getData(`order/${statusId}`).then((json) => {
+      getData(`order/${statusId}`).then((json) => {
+        // this.getData(`order/${statusId}`).then((json) => {
         this.props.setParamOrderText(true);
         this.props.setStatusIdText(statusId);
         this.setDefValue(json);
@@ -83,7 +85,7 @@ class Order extends React.Component {
         });
       });
     }
-    this.getData("city").then((json) => {
+    getData("city").then((json) => {
       json.data.sort((a, b) =>
         a.name > b.name ? 1 : a.name < b.name ? -1 : 0
       );
@@ -92,7 +94,8 @@ class Order extends React.Component {
       });
     });
 
-    this.getData("point").then((json) => {
+    getData("point").then((json) => {
+      // this.getData("point").then((json) => {
       const cityPoint = json.data.filter((item) => item.name);
       this.setState({
         point: cityPoint,
@@ -114,14 +117,14 @@ class Order extends React.Component {
     this.props.setChairText(value.isNeedChildChair);
     this.props.setWheelText(value.isRightWheel);
   }
-  getData = async (item) => {
-    let data = await fetch(`${PROXY}${URL}${item}`, {
-      method: "GET",
-      headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
-    }).then((res) => res.json());
+  // getData = async (item) => {
+  //   let data = await fetch(`${PROXY}${URL}${item}`, {
+  //     method: "GET",
+  //     headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
+  //   }).then((res) => res.json());
 
-    return data;
-  };
+  //   return data;
+  // };
 
   postData = async (item, order) => {
     let data = await fetch(`${PROXY}${URL}${item}`, {
@@ -159,14 +162,14 @@ class Order extends React.Component {
     }
     switch (textButton) {
       case "Выбрать модель":
-        this.getData("car").then((json) => {
+        getData("car").then((json) => {
           this.setState({
             cars: json.data,
           });
         });
         break;
       case "Дополнительно":
-        this.getData("rate").then((json) => {
+        getData("rate").then((json) => {
           this.setState({
             rate: json.data,
           });

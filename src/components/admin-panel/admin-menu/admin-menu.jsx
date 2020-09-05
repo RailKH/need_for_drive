@@ -29,10 +29,12 @@ export default function MenuBlock() {
           Заказы
         </div>
       </Link>
-      <div className="menu-block_auto admin_menu1">
-        <Form2 className="block-logo" />
-        Menu 4
-      </div>
+      <Link to="/admin/admin-point">
+        <div className="menu-block_auto admin_menu1">
+          <Form2 className="block-logo" />
+          Menu 4
+        </div>
+      </Link>
       <div className="menu-block_auto admin_menu2">
         <Form3 className="block-logo" />
         Menu 5
