@@ -111,14 +111,14 @@ export default function AdminPoint() {
   const [changeAddress, setchangeAddress] = useState("");
   const [changeId, setchangeId] = useState("");
 
-  // useEffect(() => {
-  //   api.getData("city").then((json) => {
-  //     listCity = json.data;
-  //   });
-  //   api.getData("point").then((json) => {
-  //     listPointCity = json.data;
-  //   });
-  // }, []);
+  useEffect(() => {
+    api.getData("city").then((json) => {
+      listCity = json.data;
+    });
+    api.getData("point").then((json) => {
+      listPointCity = json.data;
+    });
+  }, []);
 
   function inputChange(e) {
     setCity(e.target.value);
@@ -182,7 +182,7 @@ export default function AdminPoint() {
   }
   return (
     <div className="admin-main">
-      <Notification />
+      {/* <Notification /> */}
       <div className="admin-main_content">
         <div className="admin-main_content_title">
           Добавление и изменение пунктов выдачи
