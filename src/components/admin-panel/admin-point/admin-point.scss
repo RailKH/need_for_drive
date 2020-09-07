@@ -1,0 +1,39 @@
+.admin-car_content_desc .admin-point_select-city {
+  min-height: 250px;
+  &.box-registration {
+    padding: 20px 18px;
+    position: relative;
+  }
+  .dropdown-list {
+    border: 1px solid #eee;
+    top: 70px;
+    width: 90%;
+  }
+  .admin-point_add-point {
+    p {
+      margin-top: 35px;
+    }
+    input:first-of-type {
+      margin: 0;
+      margin-top: 8px;
+    }
+  }
+  input {
+    width: 100%;
+    padding: 8px 11px;
+    border: 0.5px solid #becad6;
+    border-radius: 3px;
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: -0.192982px;
+    color: #3d5170;
+    margin: 8px 0 15px 0;
+    outline: none;
+    &::placeholder {
+      font-size: 11px;
+      line-height: 15px;
+      letter-spacing: -0.0928572px;
+      color: #767f9d;
+    }
+  }
+}

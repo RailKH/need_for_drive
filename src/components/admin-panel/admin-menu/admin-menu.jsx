@@ -32,7 +32,7 @@ export default function MenuBlock() {
       <Link to="/admin/admin-point">
         <div className="menu-block_auto admin_menu1">
           <Form2 className="block-logo" />
-          Menu 4
+          Добавление пунктов выдачи
         </div>
       </Link>
       <div className="menu-block_auto admin_menu2">

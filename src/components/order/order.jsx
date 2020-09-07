@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import getData from "../../api/api.js";
+import api from "../../api/api.js";
 import "./order.scss";
 import LocationBlock from "./location-block/location";
 import ModelBlock from "./model-block/model";
@@ -74,7 +74,7 @@ class Order extends React.Component {
 
     let statusId = localStorage.getItem("statusId");
     if (statusId) {
-      getData(`order/${statusId}`).then((json) => {
+      api.getData(`order/${statusId}`).then((json) => {
         // this.getData(`order/${statusId}`).then((json) => {
         this.props.setParamOrderText(true);
         this.props.setStatusIdText(statusId);
@@ -85,7 +85,7 @@ class Order extends React.Component {
         });
       });
     }
-    getData("city").then((json) => {
+    api.getData("city").then((json) => {
       json.data.sort((a, b) =>
         a.name > b.name ? 1 : a.name < b.name ? -1 : 0
       );
@@ -94,7 +94,7 @@ class Order extends React.Component {
       });
     });
 
-    getData("point").then((json) => {
+    api.getData("point").then((json) => {
       // this.getData("point").then((json) => {
       const cityPoint = json.data.filter((item) => item.name);
       this.setState({
@@ -162,14 +162,14 @@ class Order extends React.Component {
     }
     switch (textButton) {
       case "Выбрать модель":
-        getData("car").then((json) => {
+        api.getData("car").then((json) => {
           this.setState({
             cars: json.data,
           });
         });
         break;
       case "Дополнительно":
-        getData("rate").then((json) => {
+        api.getData("rate").then((json) => {
           this.setState({
             rate: json.data,
           });

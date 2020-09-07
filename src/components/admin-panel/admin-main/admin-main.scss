@@ -3,6 +3,7 @@ $cursor: url(../../../assets/icons/Pointer.svg), pointer;
 .admin-main {
   width: 100%;
   padding: 28px 31px;
+  position: relative;
   &_content {
     &_title {
       font-size: 29px;

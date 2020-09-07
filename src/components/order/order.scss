@@ -47,12 +47,34 @@ input[type="checkbox"]:checked + label span:after {
   height: 10px;
   border: solid $black;
   border-width: 0 3px 3px 0;
-
   transform: rotate(45deg);
 }
 input[type="radio"]:checked + label,
 input[type="checkbox"]:checked + label {
   color: $black;
+}
+
+.dropdown-list {
+  width: 100%;
+  max-height: 106px;
+  z-index: 1;
+  border: 1px solid $light-gray;
+  border-top: none;
+  position: absolute;
+  background-color: #fff;
+  overflow-x: hidden;
+  border-top: 1px solid $dark-gray;
+  top: 19px;
+  &.delivery {
+    z-index: 0;
+  }
+  .dropdown {
+    padding: 3px 6px;
+  }
+  .dropdown:hover {
+    color: $green;
+    cursor: $cursor;
+  }
 }
 
 .order {
@@ -176,28 +198,7 @@ input[type="checkbox"]:checked + label {
         padding: 0 8px 3px 8px;
         outline: none;
       }
-      .form .dropdown-list {
-        width: 100%;
-        max-height: 106px;
-        z-index: 1;
-        border: 1px solid $light-gray;
-        border-top: none;
-        position: absolute;
-        background-color: #fff;
-        overflow-x: hidden;
-        border-top: 1px solid $dark-gray;
-        top: 19px;
-        &.delivery {
-          z-index: 0;
-        }
-        .dropdown {
-          padding: 3px 6px;
-        }
-        .dropdown:hover {
-          color: $green;
-          cursor: $cursor;
-        }
-      }
+
       .wrap__location {
         display: flex;
         position: relative;
