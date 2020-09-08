@@ -1,0 +1,25 @@
+.admin-car-list {
+  .description {
+    &_item {
+      display: block;
+      table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+
+        tbody tr:nth-child(odd) {
+          background-color: #f9fafc;
+        }
+        td,
+        th {
+          padding: 10px;
+          text-align: center;
+        }
+        td {
+          color: #818ea3;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

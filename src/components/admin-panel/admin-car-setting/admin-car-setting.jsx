@@ -16,14 +16,14 @@ export default function AdminCarSetting() {
               <img src={car} alt="car" />
               <div className="title">Hyndai, i30 N</div>
               <div className="suptitle">Компакт-кар</div>
-              <label HtmlFor="custom-file-upload" class="filupp">
-                <span class="filupp-file-name">Выберите файл...</span>
+              <label htmlFor="custom-file-upload" className="filupp">
+                <span className="filupp-file-name">Выберите файл...</span>
                 <input
                   type="file"
                   name="attachment-file"
                   id="custom-file-upload"
                 />
-                <span class="filupp-file-button">Обзор</span>
+                <span className="filupp-file-button">Обзор</span>
               </label>
             </div>
             <div className="car-cart_load-bar">

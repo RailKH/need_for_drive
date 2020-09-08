@@ -106,6 +106,7 @@ export default function AdminPoint() {
   const [city, setCity] = useState("");
   const [dropCity, setDropCity] = useState([]);
   const [point, setPoint] = useState([]);
+  const [notific, setNotific] = useState(false);
 
   const [changeName, setchangeName] = useState("");
   const [changeAddress, setchangeAddress] = useState("");
@@ -162,12 +163,13 @@ export default function AdminPoint() {
             name: city,
             id: cityId,
           })
-          .then(() => alert("Пункт успешно создан"))
+          // .then(() => alert("Пункт успешно создан"))
+          .then(() => watchNotif())
           .catch(() => alert("Ошибка"));
       } else {
         await api
           .putDataPoint(changeName, changeAddress, changeId)
-          .then(() => alert("Пункт успешно редактирован"))
+          .then(() => watchNotif())
           .catch(() => alert("Ошибка"));
       }
       setchangeId("");
@@ -180,9 +182,13 @@ export default function AdminPoint() {
       });
     } else alert("Пустое(ые) значения");
   }
+  function watchNotif() {
+    setNotific(true);
+    setTimeout(() => setNotific(false), 3000);
+  }
   return (
     <div className="admin-main">
-      {/* <Notification /> */}
+      {notific && <Notification />}
       <div className="admin-main_content">
         <div className="admin-main_content_title">
           Добавление и изменение пунктов выдачи

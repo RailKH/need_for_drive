@@ -1,3 +1,4 @@
+$cursor: url(../../../assets/icons/Pointer.svg), pointer;
 .admin-car_content_desc .admin-point_select-city {
   min-height: 250px;
   &.box-registration {
@@ -34,6 +35,16 @@
       line-height: 15px;
       letter-spacing: -0.0928572px;
       color: #767f9d;
+    }
+  }
+}
+.admin-car_content_desc .admin-point_list-point {
+  li {
+    list-style: none;
+    padding: 15px 10px 5px 20px;
+    &:hover {
+      cursor: $cursor;
+      color: #007bff;
     }
   }
 }

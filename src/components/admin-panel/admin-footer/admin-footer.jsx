@@ -9,7 +9,7 @@ export default function AdminFooter() {
         <Link to="/">
           <span>Главная страница</span>
         </Link>
-        <Link to="/">
+        <Link to="/order">
           <span>Страница заказов</span>
         </Link>
       </div>
