@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./admin-car-list.scss";
+import Pagination from "./pagination";
 import api from "../../../api/api";
 import Loader from "../../loader";
 let test = [
@@ -53,19 +54,41 @@ let test = [
     priceMin: 1200,
   },
 ];
+const modelOptions = ["Все модели", "Hyundai", "Nissan"];
+const categoryOptions = ["Все категории", "Эконом", "Премиум"];
 const tableHeaders = ["Модель", "Категория", "Цвет", "Цена"];
 export default function AdminCarList() {
   const [carsList, setCarsList] = useState([]);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [model, setModel] = useState("Все модели");
+  const [category, setCategory] = useState("Все категории");
+
   useEffect(() => {
     setTimeout(() => {
       setCarsList(test);
     }, 1000);
     // api.getData("car").then((res) => setCarsList(res.data));
   }, []);
+
+  const lastPostIndex = postsPerPage * currentPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = carsList.slice(firstPostIndex, lastPostIndex);
+
+  function changePage(pageNumber) {
+    setCurrentPage(pageNumber);
+  }
+  function test2() {
+    currentPosts.forEach((item) => {
+      console.log(item);
+    });
+  }
   return (
     <div className="admin-main">
       <div className="admin-main_content">
-        <div className="admin-main_content_title">Список авто</div>
+        <div className="admin-main_content_title" onClick={test2}>
+          Список авто
+        </div>
         <div className="admin-main_content_desc">
           {!carsList.length ? (
             <Loader />
@@ -73,18 +96,23 @@ export default function AdminCarList() {
             <>
               <div className="filter">
                 <div>
-                  <select name="car">
-                    <option selected value="opt1">
-                      Elantra
-                    </option>
-                    <option value="opt2">Hundai</option>
+                  <select
+                    value={model}
+                    onChange={(e) => setModel(e.target.value)}>
+                    {modelOptions.map((item, ind) => (
+                      <option selected={ind === 0} value={item}>
+                        {item}
+                      </option>
+                    ))}
                   </select>
-                  <select name="category">
-                    <option selected value="opt1">
-                      Все категории
-                    </option>
-                    <option value="opt2">Эконом</option>
-                    <option value="opt3">Премиум</option>
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}>
+                    {categoryOptions.map((item, ind) => (
+                      <option selected={ind === 0} value={item}>
+                        {item}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -102,7 +130,7 @@ export default function AdminCarList() {
                       </tr>
                     </thead>
                     <tbody>
-                      {carsList.map((item, id) => (
+                      {currentPosts.map((item, id) => (
                         <tr key={`${item}_${id}`}>
                           <td data-label="Модель">{item.name}</td>
                           <td data-label="Категория">{item.categoryId.name}</td>
@@ -116,6 +144,12 @@ export default function AdminCarList() {
               </div>
             </>
           )}
+          <Pagination
+            postsCount={carsList.length}
+            postsPerPage={postsPerPage}
+            currentPage={currentPage}
+            changePage={changePage}
+          />
         </div>
       </div>
     </div>
