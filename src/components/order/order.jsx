@@ -59,7 +59,6 @@ class Order extends React.Component {
       rate: [],
     };
     this.changeProps = this.changeProps.bind(this);
-    // this.getData = this.getData.bind(this);
     this.postData = this.postData.bind(this);
     this.nextWrapper = this.nextWrapper.bind(this);
     this.setDefValue = this.setDefValue.bind(this);
@@ -75,7 +74,6 @@ class Order extends React.Component {
     let statusId = localStorage.getItem("statusId");
     if (statusId) {
       api.getData(`order/${statusId}`).then((json) => {
-        // this.getData(`order/${statusId}`).then((json) => {
         this.props.setParamOrderText(true);
         this.props.setStatusIdText(statusId);
         this.setDefValue(json);
@@ -95,7 +93,6 @@ class Order extends React.Component {
     });
 
     api.getData("point").then((json) => {
-      // this.getData("point").then((json) => {
       const cityPoint = json.data.filter((item) => item.name);
       this.setState({
         point: cityPoint,
@@ -103,6 +100,7 @@ class Order extends React.Component {
       this.props.changeLoader(false);
     });
   }
+
   setDefValue(json) {
     let value = json ? json.data : defaultList;
     this.props.setCityText(value.cityId);
@@ -117,14 +115,6 @@ class Order extends React.Component {
     this.props.setChairText(value.isNeedChildChair);
     this.props.setWheelText(value.isRightWheel);
   }
-  // getData = async (item) => {
-  //   let data = await fetch(`${PROXY}${URL}${item}`, {
-  //     method: "GET",
-  //     headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
-  //   }).then((res) => res.json());
-
-  //   return data;
-  // };
 
   postData = async (item, order) => {
     let data = await fetch(`${PROXY}${URL}${item}`, {
@@ -156,7 +146,6 @@ class Order extends React.Component {
           paramLocation: false,
           orderFalse: true,
         });
-        this.setDefValue();
       }
       !this.state.orderFalse && this.props.changeVerification("verification");
     }
@@ -215,7 +204,9 @@ class Order extends React.Component {
                 </div>
                 <span />
                 <div
-                  onClick={(e) => paramLocation && this.nextWrapper(1)}
+                  onClick={(e) =>
+                    paramLocation && paramModel && this.nextWrapper(1)
+                  }
                   className={classnames("link__content__text", {
                     active: id === 1,
                     ready: paramModel,
@@ -224,7 +215,9 @@ class Order extends React.Component {
                 </div>
                 <span />
                 <div
-                  onClick={(e) => paramModel && this.nextWrapper(2)}
+                  onClick={(e) =>
+                    paramModel && paramExtra && this.nextWrapper(2)
+                  }
                   className={classnames("link__content__text", {
                     active: id === 2,
                     ready: paramExtra,
