@@ -8,7 +8,7 @@ export default function Pagination({
   currentPage,
 }) {
   const pageNumbers = [];
-  for (let i = 1; i <= Math.floor(postsCount / postsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(postsCount / postsPerPage); i++) {
     pageNumbers.push(i);
   }
   return (

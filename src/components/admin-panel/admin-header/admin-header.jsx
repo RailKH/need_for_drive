@@ -8,9 +8,9 @@ export default function AdminHeader(props) {
     props.changeAutorisation();
   }
   function deleteCookie() {
-    document.cookie = `basicToken=''; max-age=-1; path='/need-for-drive/admin`;
-    document.cookie = `access_token=''; max-age=-1; path='/need-for-drive/admin`;
-    document.cookie = `refresh_token=''; max-age=-1; path='/need-for-drive/admin`;
+    document.cookie = `basicToken=''; max-age=-1; path='/need_for_drive/admin`;
+    document.cookie = `access_token=''; max-age=-1; path='/need_for_drive/admin`;
+    document.cookie = `refresh_token=''; max-age=-1; path='/need_for_drive/admin`;
   }
   return (
     <div className="admin-header">

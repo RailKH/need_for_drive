@@ -3,72 +3,34 @@ import "./admin-car-list.scss";
 import Pagination from "./pagination";
 import api from "../../../api/api";
 import Loader from "../../loader";
-let test = [
-  {
-    categoryId: { name: "Эконом" },
-    colors: ["голубой", "красный"],
-    name: "Hyndai, Elantra",
-    priceMax: 2500,
-    priceMin: 1200,
-  },
-  {
-    categoryId: { name: "Эконом" },
-    colors: ["голубой", "красный", "black"],
-    name: "Hyndai, Sonata",
-    priceMax: 2500,
-    priceMin: 1200,
-  },
-  {
-    categoryId: { name: "Премиум" },
-    colors: ["голубой", "красный", "blue"],
-    name: "Hyndai, Corssa",
-    priceMax: 2500,
-    priceMin: 1200,
-  },
-  {
-    categoryId: { name: "Эконом" },
-    colors: ["голубой", "красный"],
-    name: "Hyndai, Elantra",
-    priceMax: 2500,
-    priceMin: 1200,
-  },
-  {
-    categoryId: { name: "Эконом" },
-    colors: ["голубой", "красный", "black"],
-    name: "Hyndai, Sonata",
-    priceMax: 2500,
-    priceMin: 1200,
-  },
-  {
-    categoryId: { name: "Эконом" },
-    colors: ["голубой", "красный"],
-    name: "Hyndai, Elantra",
-    priceMax: 2500,
-    priceMin: 1200,
-  },
-  {
-    categoryId: { name: "Эконом" },
-    colors: ["голубой", "красный", "black"],
-    name: "Hyndai, Sonata",
-    priceMax: 2500,
-    priceMin: 1200,
-  },
-];
-const modelOptions = ["Все модели", "Hyundai", "Nissan"];
+
 const categoryOptions = ["Все категории", "Эконом", "Премиум"];
 const tableHeaders = ["Модель", "Категория", "Цвет", "Цена"];
+let originList = [];
+
 export default function AdminCarList() {
   const [carsList, setCarsList] = useState([]);
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [modelOptions, setModelOptions] = useState([]);
   const [model, setModel] = useState("Все модели");
   const [category, setCategory] = useState("Все категории");
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setCarsList(test);
-    }, 1000);
-    // api.getData("car").then((res) => setCarsList(res.data));
+    let modelOptions = [];
+
+    api.getData("car").then((res) => {
+      setCarsList(res.data);
+      originList = res.data;
+      originList.forEach((item) => {
+        let value = item.name.split(",")[0];
+        !modelOptions.includes(value) && modelOptions.push(value);
+      });
+      modelOptions.unshift("Все модели");
+      setModelOptions(modelOptions);
+      setLoader(false);
+    });
   }, []);
 
   const lastPostIndex = postsPerPage * currentPage;
@@ -78,19 +40,21 @@ export default function AdminCarList() {
   function changePage(pageNumber) {
     setCurrentPage(pageNumber);
   }
-  function test2() {
-    currentPosts.forEach((item) => {
-      console.log(item);
-    });
+  function changeFilter() {
+    const fixModel = model === "Все модели" ? "" : model;
+    const fixCategory = category === "Все категории" ? "" : category;
+    const fixList = originList
+      .filter((item) => item.name.startsWith(fixModel))
+      .filter((item) => item.categoryId.name.startsWith(fixCategory));
+    setCarsList(fixList);
+    changePage(1);
   }
   return (
     <div className="admin-main">
       <div className="admin-main_content">
-        <div className="admin-main_content_title" onClick={test2}>
-          Список авто
-        </div>
+        <div className="admin-main_content_title">Список авто</div>
         <div className="admin-main_content_desc">
-          {!carsList.length ? (
+          {loader ? (
             <Loader />
           ) : (
             <>
@@ -100,7 +64,10 @@ export default function AdminCarList() {
                     value={model}
                     onChange={(e) => setModel(e.target.value)}>
                     {modelOptions.map((item, ind) => (
-                      <option selected={ind === 0} value={item}>
+                      <option
+                        selected={ind === 0}
+                        value={item}
+                        key={`${item}_${ind}`}>
                         {item}
                       </option>
                     ))}
@@ -109,14 +76,21 @@ export default function AdminCarList() {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}>
                     {categoryOptions.map((item, ind) => (
-                      <option selected={ind === 0} value={item}>
+                      <option
+                        selected={ind === 0}
+                        value={item}
+                        key={`${item}_${ind}`}>
                         {item}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <button className="admin_button active">Применить</button>
+                  <button
+                    className="admin_button active"
+                    onClick={changeFilter}>
+                    Применить
+                  </button>
                 </div>
               </div>
               <div className="admin-car-list description">
