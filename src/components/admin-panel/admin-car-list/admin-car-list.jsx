@@ -61,25 +61,19 @@ export default function AdminCarList() {
               <div className="filter">
                 <div>
                   <select
-                    value={model}
+                    defaultValue={model}
                     onChange={(e) => setModel(e.target.value)}>
                     {modelOptions.map((item, ind) => (
-                      <option
-                        selected={ind === 0}
-                        value={item}
-                        key={`${item}_${ind}`}>
+                      <option value={item} key={`${item}_${ind}`}>
                         {item}
                       </option>
                     ))}
                   </select>
                   <select
-                    value={category}
+                    defaultValue={category}
                     onChange={(e) => setCategory(e.target.value)}>
                     {categoryOptions.map((item, ind) => (
-                      <option
-                        selected={ind === 0}
-                        value={item}
-                        key={`${item}_${ind}`}>
+                      <option value={item} key={`${item}_${ind}`}>
                         {item}
                       </option>
                     ))}

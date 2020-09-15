@@ -15,29 +15,25 @@ export default function AdminMain() {
           <div className="filter">
             <div>
               <select name="daySelect">
-                <option selected value="opt1">
-                  За неделю
-                </option>
-                <option value="opt2">За месяц</option>
+                <option selected>За неделю</option>
+                <option>За месяц</option>
               </select>
               <select name="carSelect">
                 <option selected value="opt1">
                   Elantra
                 </option>
-                <option value="opt2">Hundai</option>
+                <option>Hundai</option>
               </select>
               <select name="citySelect">
                 <option selected value="opt1">
                   Ульяновск
                 </option>
-                <option value="opt2">Казань</option>
-                <option value="opt2">Питер</option>
+                <option>Казань</option>
+                <option>Питер</option>
               </select>
               <select name="waitSelect">
-                <option selected value="opt1">
-                  В процессе
-                </option>
-                <option value="opt2">Завершено</option>
+                <option selected>В процессе</option>
+                <option>Завершено</option>
               </select>
             </div>
             <div>
