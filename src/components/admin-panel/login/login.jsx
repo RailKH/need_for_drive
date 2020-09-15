@@ -13,14 +13,8 @@ export default function Login(props) {
 
   useEffect(() => {
     setLoader(true);
-    checkAuth()
-      .then((res) => {
-        props.changeAutorisation();
-        props.setName(res);
-      })
-      .catch(() => setLoader(false));
+    checkAuth();
   }, []);
-
   function getToken() {
     let token = "";
     const WORDS =
@@ -43,14 +37,42 @@ export default function Login(props) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
   }
   function checkAuth() {
-    return fetch(`${URL}auth/check`, {
-      method: "GET",
-      headers: {
-        "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + getCookie("access_token"),
-      },
-    }).then((response) => response.json());
+    const token = getCookie("access_token");
+    if (token) {
+      fetch(`${URL}auth/check`, {
+        method: "GET",
+        headers: {
+          "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          props.changeAutorisation();
+          props.setName(res);
+        })
+        .catch(() => {
+          fetch(`${URL}auth/refresh`, {
+            method: "POST",
+            headers: {
+              "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + getCookie("refresh_token"),
+            },
+            body: JSON.stringify({ refresh_token: getCookie("refresh_token") }),
+          })
+            .then((response) => response.json())
+            .then((res) => {
+              document.cookie = `basicToken=${basicToken}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
+              document.cookie = `access_token=${res.access_token}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
+              document.cookie = `refresh_token=${res.refresh_token}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
+              checkAuth();
+            });
+        });
+    } else {
+      setLoader(false);
+    }
   }
   function Auth() {
     return fetch(`${URL}auth/login`, {
@@ -72,10 +94,7 @@ export default function Login(props) {
           document.cookie = `basicToken=${basicToken}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
           document.cookie = `access_token=${res.access_token}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
           document.cookie = `refresh_token=${res.refresh_token}; max-age=${res.expires_in}; path='/need-for-drive/admin`;
-          checkAuth().then((res) => {
-            props.changeAutorisation();
-            props.setName(res);
-          });
+          checkAuth();
         })
         .catch(() => {
           setError(true);
