@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./admin-car-list.scss";
 import Pagination from "./pagination";
 import api from "../../../api/api";
@@ -9,6 +10,7 @@ const tableHeaders = ["Модель", "Категория", "Цвет", "Цен�
 let originList = [];
 
 export default function AdminCarList() {
+  const history = useHistory();
   const [carsList, setCarsList] = useState([]);
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,6 +23,7 @@ export default function AdminCarList() {
     let modelOptions = [];
 
     api.getData("car").then((res) => {
+      console.log(res.data);
       setCarsList(res.data);
       originList = res.data;
       originList.forEach((item) => {
@@ -48,6 +51,9 @@ export default function AdminCarList() {
       .filter((item) => item.categoryId.name.startsWith(fixCategory));
     setCarsList(fixList);
     changePage(1);
+  }
+  function test(id) {
+    history.push("admin-main");
   }
   return (
     <div className="admin-main">
@@ -99,7 +105,7 @@ export default function AdminCarList() {
                     </thead>
                     <tbody>
                       {currentPosts.map((item, id) => (
-                        <tr key={`${item}_${id}`}>
+                        <tr key={`${item}_${id}`} onClick={() => test(item.id)}>
                           <td data-label="Модель">{item.name}</td>
                           <td data-label="Категория">{item.categoryId.name}</td>
                           <td data-label="Цвет">{item.colors.join(", ")}</td>

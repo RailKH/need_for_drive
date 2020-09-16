@@ -40,7 +40,7 @@ $cursor: url(../../../assets/icons/Pointer.svg), pointer;
         }
       }
       .description {
-        height: 268px;
+        min-height: 268px;
         border-top: 1px solid #e0e2e8;
         border-bottom: 1px solid #e0e2e8;
         .additional__checkbox {
