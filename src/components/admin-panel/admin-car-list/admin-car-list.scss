@@ -26,6 +26,13 @@ $cursor: url(../../../assets/icons/Pointer.svg), pointer;
           color: #818ea3;
           font-size: 13px;
         }
+        tr:hover {
+          td {
+            color: #007bff;
+            font-weight: bold;
+          }
+          cursor: $cursor;
+        }
       }
     }
   }

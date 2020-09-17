@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import "./admin-car-list.scss";
 import Pagination from "./pagination";
 import api from "../../../api/api";
@@ -23,7 +25,6 @@ export default function AdminCarList() {
     let modelOptions = [];
 
     api.getData("car").then((res) => {
-      console.log(res.data);
       setCarsList(res.data);
       originList = res.data;
       originList.forEach((item) => {
@@ -52,8 +53,8 @@ export default function AdminCarList() {
     setCarsList(fixList);
     changePage(1);
   }
-  function test(id) {
-    history.push("admin-main");
+  function editCar(id) {
+    window.open(`admin-car-setting/${id}`);
   }
   return (
     <div className="admin-main">
@@ -105,7 +106,10 @@ export default function AdminCarList() {
                     </thead>
                     <tbody>
                       {currentPosts.map((item, id) => (
-                        <tr key={`${item}_${id}`} onClick={() => test(item.id)}>
+                        <tr
+                          key={`${item}_${id}`}
+                          onClick={() => test(item.id)}
+                          onClick={() => editCar(item.id)}>
                           <td data-label="Модель">{item.name}</td>
                           <td data-label="Категория">{item.categoryId.name}</td>
                           <td data-label="Цвет">{item.colors.join(", ")}</td>

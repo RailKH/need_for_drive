@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import classnames from "classnames";
 import api from "../../../api/api.js";
 import Notification from "../notification";
+import { Link, useHistory } from "react-router-dom";
 
 import "./admin-point.scss";
 
@@ -103,6 +104,8 @@ let listPointCity = [
 ];
 let cityId = "";
 export default function AdminPoint() {
+  const history = useHistory();
+
   const [city, setCity] = useState("");
   const [dropCity, setDropCity] = useState([]);
   const [point, setPoint] = useState([]);
@@ -113,12 +116,12 @@ export default function AdminPoint() {
   const [changeId, setchangeId] = useState("");
 
   useEffect(() => {
-    api.getData("city").then((json) => {
-      listCity = json.data;
-    });
-    api.getData("point").then((json) => {
-      listPointCity = json.data;
-    });
+    // api.getData("city").then((json) => {
+    //   listCity = json.data;
+    // });
+    // api.getData("point").then((json) => {
+    //   listPointCity = json.data;
+    // });
   }, []);
 
   function inputChange(e) {
@@ -163,13 +166,12 @@ export default function AdminPoint() {
             name: city,
             id: cityId,
           })
-          // .then(() => alert("Пункт успешно создан"))
-          .then(() => watchNotif())
+          .then(() => showNotif())
           .catch(() => alert("Ошибка"));
       } else {
         await api
           .putDataPoint(changeName, changeAddress, changeId)
-          .then(() => watchNotif())
+          .then(() => showNotif())
           .catch(() => alert("Ошибка"));
       }
       setchangeId("");
@@ -182,7 +184,7 @@ export default function AdminPoint() {
       });
     } else alert("Пустое(ые) значения");
   }
-  function watchNotif() {
+  function showNotif() {
     setNotific(true);
     setTimeout(() => setNotific(false), 3000);
   }
@@ -190,7 +192,10 @@ export default function AdminPoint() {
     <div className="admin-main">
       {notific && <Notification />}
       <div className="admin-main_content">
-        <div className="admin-main_content_title">
+        <div
+          className="admin-main_content_title"
+          onClick={() => history.push("admin-error")}>
+          {/* onClick={() => window.open("admin-car-setting/55")}> */}
           Добавление и изменение пунктов выдачи
         </div>
         <div className="admin-car_content_desc">

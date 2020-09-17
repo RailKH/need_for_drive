@@ -15,7 +15,7 @@ class AdminPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      autorisation: false,
+      autorisation: true,
       adminName: "",
     };
     this.changeAutorisation = this.changeAutorisation.bind(this);
@@ -48,14 +48,18 @@ class AdminPanel extends React.Component {
                 changeAutorisation={this.changeAutorisation}
               />
               <Switch>
-                <Route path="/admin/admin-main" component={AdminMain} />
-                <Route path="/admin/admin-error" component={AdminError} />
-                <Route path="/admin/admin-point" component={AdminPoint} />
-                <Route path="/admin/admin-car-list" component={AdminCarList} />
+                <Route
+                  path="/admin/admin-car-setting/:id"
+                  component={AdminCarSetting}
+                />
                 <Route
                   path="/admin/admin-car-setting"
                   component={AdminCarSetting}
                 />
+                <Route exact path="/admin/admin-main" component={AdminMain} />
+                <Route path="/admin/admin-car-list" component={AdminCarList} />
+                <Route path="/admin/admin-error" component={AdminError} />
+                <Route path="/admin/admin-point" component={AdminPoint} />
               </Switch>
               <AdminFooter />
             </div>

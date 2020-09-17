@@ -158,6 +158,12 @@
     color: #3d5170;
     margin: 8px 0 15px 0;
     outline: none;
+    &::placeholder {
+      font-size: 11px;
+      line-height: 15px;
+      letter-spacing: -0.0928572px;
+      color: #767f9d;
+    }
   }
   &.error input {
     border: 0.5px solid #c4183c;
