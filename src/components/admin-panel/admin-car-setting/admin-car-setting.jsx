@@ -10,18 +10,30 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { withRouter } from "react-router-dom";
 
-// const color = ["Красный", "Белый", "Черный"];
+const defaultValue = {
+  name: "",
+  number: "",
+  categoryId: "",
+  colors: "",
+  description: "",
+  priceMax: "",
+  priceMin: "",
+};
 
 export default withRouter(function AdminCarSetting(props) {
   let history = useHistory();
   const [loader, setLoader] = useState(false);
-  const [state, setState] = useState({});
+  const [state, setState] = useState(defaultValue);
   const [notific, setNotific] = useState(false);
   const [selectColor, setSelectColor] = useState("");
+  const [progressBar, setProgressBar] = useState(0);
 
   useEffect(() => {
     getCar();
   }, []);
+  useEffect(() => {
+    calcBar();
+  });
 
   function getCar() {
     let carId = props.match.params.id;
@@ -41,21 +53,40 @@ export default withRouter(function AdminCarSetting(props) {
     setNotific(true);
     setTimeout(() => setNotific(false), 3000);
   }
+  function calcBar() {
+    let progress = 0;
+
+    for (let key in state) {
+      if (state[key] && key !== "colors") {
+        progress += 100 / Object.keys(state).length;
+      }
+      if (key === "colors" && state.colors.length) {
+        progress += 100 / Object.keys(state).length;
+      }
+    }
+
+    setProgressBar(Math.ceil(progress) > 100 ? 100 : Math.ceil(progress));
+  }
   function handleChange(event) {
     console.log(state);
-    const { name, value } = event.target;
-    setState({ ...state, [name]: value });
+    const { name, value, id } = event.target;
+    name == "categoryId"
+      ? setState({ ...state, [name]: { name: value, id: id } })
+      : setState({ ...state, [name]: value });
   }
   function addColor() {
-    state.colors
-      ? setState({ ...state, colors: [...state.colors, selectColor] })
-      : setState({ ...state, colors: [selectColor] });
-    setSelectColor("");
+    if (selectColor.length) {
+      state.colors
+        ? setState({ ...state, colors: [...state.colors, selectColor] })
+        : setState({ ...state, colors: [selectColor] });
+      setSelectColor("");
+    }
   }
   function deleteColor(ind) {
     let changeArray = state.colors;
     changeArray.splice(ind, 1);
     setState({ ...state, colors: changeArray });
+    calcBar();
   }
   return (
     <div className="admin-car admin-main">
@@ -64,9 +95,7 @@ export default withRouter(function AdminCarSetting(props) {
         <Loader />
       ) : (
         <div className="admin-car_content admin-main_content">
-          <div
-            className="admin-main_content_title"
-            onClick={() => console.log(state)}>
+          <div className="admin-main_content_title" onClick={() => calcBar()}>
             Карточка автомобиля
           </div>
           <div className="admin-car_content_desc">
@@ -89,18 +118,27 @@ export default withRouter(function AdminCarSetting(props) {
               <div className="car-cart_load-bar">
                 <div className="car-cart_load-bar_wrap">
                   <span className="car-cart_suptitle">Заполнено</span>
-                  <span>74%</span>
+                  <span>{`${progressBar}%`}</span>
                 </div>
                 <div className="car-cart_load-bar_wrap-loader">
-                  <div className="car-cart_load-bar_loader"></div>
+                  <div
+                    className="car-cart_load-bar_loader"
+                    style={{
+                      width: `${progressBar}%`,
+                    }}></div>
                 </div>
               </div>
               <div className="car-cart_desc">
                 <div className="car-cart_suptitle">Описание</div>
-                <div className="car-cart_text">
-                  {state.description ||
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odi eaque, quidem, commodi soluta qui quae quod dolorum sint alias, possimus illum assumenda eligendi cumque?"}
-                </div>
+                <textarea
+                  name="description"
+                  placeholder="Введите описание автомобиля"
+                  cols="30"
+                  rows="5"
+                  value={state.description}
+                  className="car-cart_text"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="car-setting">
@@ -155,15 +193,16 @@ export default withRouter(function AdminCarSetting(props) {
                     <div key={item.id} className="categoryId">
                       <input
                         type="radio"
-                        id={`m${id}`}
+                        id={item.id}
                         name="categoryId"
-                        value={`{name: ${item.name}, id: ${item.id}}`}
+                        value={item.name}
                         defaultChecked={
-                          state.categoryId && item === state.categoryId.name
+                          state.categoryId &&
+                          item.name === state.categoryId.name
                         }
                         onClick={handleChange}
                       />
-                      <label htmlFor={`m${id}`}>
+                      <label htmlFor={item.id}>
                         <span />
                         {item.name}
                       </label>
@@ -209,7 +248,12 @@ export default withRouter(function AdminCarSetting(props) {
               <div className="car-footer">
                 <div className="car-footer_wrapper">
                   <button className="admin_button active">Сохранить</button>
-                  <button className="admin_button active cancel">
+                  <button
+                    className="admin_button active cancel"
+                    onClick={() => {
+                      history.push("/admin/admin-car-setting");
+                      setState({});
+                    }}>
                     Отменить
                   </button>
                 </div>
