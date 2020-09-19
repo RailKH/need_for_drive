@@ -13,11 +13,18 @@ import { withRouter } from "react-router-dom";
 const defaultValue = {
   name: "",
   number: "",
-  categoryId: "",
+  categoryId: { name: "Эконом", id: "5e25c98d099b810b946c5d62" },
   colors: "",
   description: "",
   priceMax: "",
   priceMin: "",
+  thumbnail: {
+    mimetype: "image/png",
+    originalname:
+      "5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
+    path:
+      "/files/5f21d9829d3a610b850fcd58_5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
+  },
 };
 
 export default withRouter(function AdminCarSetting(props) {
@@ -27,7 +34,10 @@ export default withRouter(function AdminCarSetting(props) {
   const [notific, setNotific] = useState(false);
   const [selectColor, setSelectColor] = useState("");
   const [progressBar, setProgressBar] = useState(0);
-
+  const categoryId = [
+    { name: "Премиум", id: "5e25c99a099b810b946c5d63" },
+    { name: "Эконом", id: "5e25c98d099b810b946c5d62" },
+  ];
   useEffect(() => {
     getCar();
   }, []);
@@ -88,6 +98,15 @@ export default withRouter(function AdminCarSetting(props) {
     setState({ ...state, colors: changeArray });
     calcBar();
   }
+  function test(e) {
+    // const data = new FormData();
+    // for (let key in e.target.files[0]) {
+    //   console.log(key, e.target.files[0][key]);
+    //   data.append(key, e.target.files[0][key]);
+    // }
+    // data.append("file", e.target.files[0]);
+    console.log(e.target.files);
+  }
   return (
     <div className="admin-car admin-main">
       {notific && <Notification />}
@@ -111,6 +130,7 @@ export default withRouter(function AdminCarSetting(props) {
                     type="file"
                     name="attachment-file"
                     id="custom-file-upload"
+                    onChange={test}
                   />
                   <span className="filupp-file-button">Обзор</span>
                 </label>
@@ -186,20 +206,14 @@ export default withRouter(function AdminCarSetting(props) {
                 </div>
                 <div className="car-setting_content_item box-registration">
                   <p>Класс автомобиля</p>
-                  {[
-                    { name: "Премиум", id: "5e25c99a099b810b946c5d63" },
-                    { name: "Эконом", id: "5e25c98d099b810b946c5d62" },
-                  ].map((item, id) => (
+                  {categoryId.map((item, id) => (
                     <div key={item.id} className="categoryId">
                       <input
                         type="radio"
                         id={item.id}
                         name="categoryId"
                         value={item.name}
-                        defaultChecked={
-                          state.categoryId &&
-                          item.name === state.categoryId.name
-                        }
+                        checked={item.name === state.categoryId.name}
                         onClick={handleChange}
                       />
                       <label htmlFor={item.id}>
@@ -252,7 +266,7 @@ export default withRouter(function AdminCarSetting(props) {
                     className="admin_button active cancel"
                     onClick={() => {
                       history.push("/admin/admin-car-setting");
-                      setState({});
+                      setState(defaultValue);
                     }}>
                     Отменить
                   </button>

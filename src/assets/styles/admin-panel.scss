@@ -49,6 +49,7 @@
   &_edit {
     display: flex;
     flex-direction: column;
+    height: 100vh;
     .block-notification {
       position: absolute;
       background: #0ec261;

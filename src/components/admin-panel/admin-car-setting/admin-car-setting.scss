@@ -139,7 +139,7 @@
                 color: #becad6;
                 margin: 8px 0 15px 8px;
                 &:hover {
-                  cursor: $cursor;
+                  cursor: url(../../../assets/icons/Pointer.svg), pointer;
                 }
               }
             }

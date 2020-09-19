@@ -4,6 +4,7 @@ $cursor: url(../../../assets/icons/Pointer.svg), pointer;
   width: 100%;
   padding: 28px 31px;
   position: relative;
+  overflow-y: auto;
   &_content {
     &_title {
       font-size: 29px;
