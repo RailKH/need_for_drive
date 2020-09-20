@@ -46,9 +46,34 @@ async function putDataPoint(name, address, changeId) {
     }),
   }).then((res) => res.json());
 }
+async function putDataCar(state, changeId, method) {
+  return await fetch(`${PROXY}${URL}car/${changeId}`, {
+    method: method,
+    headers: {
+      "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+    body: JSON.stringify(state),
+  }).then((res) => res.json());
+}
+async function postDataCar(state) {
+  console.log(state);
+  return await fetch(`${PROXY}${URL}car/`, {
+    method: "POST",
+    headers: {
+      "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookie("access_token"),
+    },
+    body: JSON.stringify(state),
+  }).then((res) => res.json());
+}
 
 export default {
   getData,
   postDataPoint,
   putDataPoint,
+  putDataCar,
+  postDataCar,
 };

@@ -40,6 +40,15 @@
       cursor: $cursor;
       color: #000;
     }
+    &.disabled {
+      background: #eee;
+      &:active {
+        box-shadow: none;
+      }
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 }
 .admin_page_content {

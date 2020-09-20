@@ -7,6 +7,7 @@
       display: grid;
       grid-template-columns: 334.5px 1fr;
       grid-gap: 28px;
+      grid-template-rows: min-content;
       .car-cart {
         background: #fff;
         width: 334.5px;
@@ -22,6 +23,11 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 0 22.5px;
+          width: 100%;
+          img {
+            width: 100%;
+          }
           .title {
             font-size: 24.5px;
             line-height: 28px;
@@ -40,6 +46,12 @@
             span {
               padding: 8px 13px;
               font-size: 10px;
+              height: 26px;
+            }
+            .filupp-file-name {
+              width: 170px;
+              overflow: hidden;
+              white-space: nowrap;
             }
             .filupp-file-button {
               background: #e9ecef;

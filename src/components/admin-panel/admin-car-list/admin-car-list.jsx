@@ -24,17 +24,23 @@ export default function AdminCarList() {
   useEffect(() => {
     let modelOptions = [];
 
-    api.getData("car").then((res) => {
-      setCarsList(res.data);
-      originList = res.data;
-      originList.forEach((item) => {
-        let value = item.name.split(",")[0];
-        !modelOptions.includes(value) && modelOptions.push(value);
-      });
-      modelOptions.unshift("Все модели");
-      setModelOptions(modelOptions);
-      setLoader(false);
-    });
+    // api
+    //   .getData("car")
+    //   .then((res) => {
+    //     setCarsList(res.data);
+    //     originList = res.data;
+    //     originList.forEach((item) => {
+    //       let value = item.name.split(",")[0];
+    //       !modelOptions.includes(value) && modelOptions.push(value);
+    //     });
+    //     modelOptions.unshift("Все модели");
+    //     setModelOptions(modelOptions);
+    //     setLoader(false);
+    //   })
+    //   .catch((error) => {
+    //     console.log("ERRORRRRRR", error);
+    //     history.push("/admin/admin-error");
+    //   });
   }, []);
 
   const lastPostIndex = postsPerPage * currentPage;

@@ -1,11 +1,12 @@
 import React from "react";
 import "./admin-car-setting.scss";
+import classnames from "classnames";
+import defaultCar from "../../../assets/img/defaultCar.png";
 import Loader from "../../loader";
 import api from "../../../api/api";
 import { useHistory } from "react-router-dom";
 
 import Notification from "../notification";
-import car from "../../../assets/img/cars/image_2.png";
 import { useEffect } from "react";
 import { useState } from "react";
 import { withRouter } from "react-router-dom";
@@ -18,13 +19,14 @@ const defaultValue = {
   description: "",
   priceMax: "",
   priceMin: "",
-  thumbnail: {
-    mimetype: "image/png",
-    originalname:
-      "5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
-    path:
-      "/files/5f21d9829d3a610b850fcd58_5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
-  },
+  thumbnail: "",
+  // {
+  // mimetype: "image/png",
+  // originalname:
+  //   "5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
+  // path:
+  //   "/files/5f21d9829d3a610b850fcd58_5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
+  // },
 };
 
 export default withRouter(function AdminCarSetting(props) {
@@ -34,6 +36,9 @@ export default withRouter(function AdminCarSetting(props) {
   const [notific, setNotific] = useState(false);
   const [selectColor, setSelectColor] = useState("");
   const [progressBar, setProgressBar] = useState(0);
+  const [photo, setPhoto] = useState({});
+  const [carId, setCarId] = useState("");
+  const [permit, setPermit] = useState(false);
   const categoryId = [
     { name: "Премиум", id: "5e25c99a099b810b946c5d63" },
     { name: "Эконом", id: "5e25c98d099b810b946c5d62" },
@@ -43,14 +48,16 @@ export default withRouter(function AdminCarSetting(props) {
   }, []);
   useEffect(() => {
     calcBar();
+    checkData();
   });
 
   function getCar() {
-    let carId = props.match.params.id;
-    if (carId) {
+    const value = props.match.params.id;
+    setCarId(value);
+    if (value) {
       setLoader(true);
       api
-        .getData(`car/${carId}`)
+        .getData(`car/${value}`)
         .then((res) => setState(res.data))
         .catch((error) => {
           console.log(error);
@@ -61,13 +68,13 @@ export default withRouter(function AdminCarSetting(props) {
   }
   function showNotif() {
     setNotific(true);
-    setTimeout(() => setNotific(false), 3000);
+    setTimeout(() => setNotific(false), 5000);
   }
   function calcBar() {
     let progress = 0;
 
     for (let key in state) {
-      if (state[key] && key !== "colors") {
+      if (key === "tank" || (state[key] && key !== "colors")) {
         progress += 100 / Object.keys(state).length;
       }
       if (key === "colors" && state.colors.length) {
@@ -96,16 +103,74 @@ export default withRouter(function AdminCarSetting(props) {
     let changeArray = state.colors;
     changeArray.splice(ind, 1);
     setState({ ...state, colors: changeArray });
-    calcBar();
   }
-  function test(e) {
+  function addPhoto(e) {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = () => {
+      setState({
+        ...state,
+        thumbnail: {
+          mimetype: file.type,
+          originalname: file.name,
+          path: {
+            content: {
+              "image/png": {
+                schema: {
+                  type: "string",
+                  format: reader.result,
+                },
+              },
+            },
+          },
+          size: file.size,
+        },
+      });
+    };
+    reader.readAsDataURL(file);
     // const data = new FormData();
-    // for (let key in e.target.files[0]) {
-    //   console.log(key, e.target.files[0][key]);
-    //   data.append(key, e.target.files[0][key]);
-    // }
+
     // data.append("file", e.target.files[0]);
-    console.log(e.target.files);
+    // setState({ ...state, thumbnail: data });
+    setPhoto(e.target.files[0]);
+  }
+  function checkData() {
+    state.name && state.priceMax && state.priceMin && state.thumbnail
+      ? setPermit(true)
+      : setPermit(false);
+  }
+  async function saveValue() {
+    let result = carId
+      ? api.putDataCar(state, carId, "PUT")
+      : api.postDataCar(state);
+    result
+      .then((res) => {
+        showNotif();
+        setDefaultValue();
+      })
+      .catch((error) => {
+        console.log("ERRORRRR", error);
+        history.push("/admin/admin-error");
+      });
+  }
+  function setDefaultValue() {
+    history.push("/admin/admin-car-setting");
+    setState(defaultValue);
+    setPhoto("");
+    setCarId("");
+  }
+  function deleteCar() {
+    api
+      .putDataCar(state, carId, "DELETE")
+      .then(() => {
+        showNotif();
+        setDefaultValue();
+      })
+      .catch((error) => {
+        console.log("ERRORRRR", error);
+        history.push("/admin/admin-error");
+      });
   }
   return (
     <div className="admin-car admin-main">
@@ -114,23 +179,34 @@ export default withRouter(function AdminCarSetting(props) {
         <Loader />
       ) : (
         <div className="admin-car_content admin-main_content">
-          <div className="admin-main_content_title" onClick={() => calcBar()}>
+          <div className="admin-main_content_title" onClick={() => showNotif()}>
             Карточка автомобиля
           </div>
           <div className="admin-car_content_desc">
             <div className="car-cart">
               <div className="car-cart_photo">
-                <img src={car} alt="car" />
+                <img
+                  src={
+                    photo.name
+                      ? URL.createObjectURL(photo)
+                      : state.thumbnail
+                      ? `http://api-factory.simbirsoft1.com${state.thumbnail.path}`
+                      : defaultCar
+                  }
+                  alt="car"
+                />
                 <div className="title">
                   {state.name || "Название автомобиля"}
                 </div>
                 <label htmlFor="custom-file-upload" className="filupp">
-                  <span className="filupp-file-name">Выберите файл...</span>
+                  <span className="filupp-file-name">
+                    {photo.name ? photo.name : "Выберите файл..."}
+                  </span>
                   <input
                     type="file"
                     name="attachment-file"
                     id="custom-file-upload"
-                    onChange={test}
+                    onChange={addPhoto}
                   />
                   <span className="filupp-file-button">Обзор</span>
                 </label>
@@ -261,17 +337,28 @@ export default withRouter(function AdminCarSetting(props) {
               </div>
               <div className="car-footer">
                 <div className="car-footer_wrapper">
-                  <button className="admin_button active">Сохранить</button>
+                  <button
+                    className={classnames("admin_button active", {
+                      disabled: !permit,
+                    })}
+                    onClick={() => {
+                      permit && saveValue();
+                    }}>
+                    Сохранить
+                  </button>
                   <button
                     className="admin_button active cancel"
-                    onClick={() => {
-                      history.push("/admin/admin-car-setting");
-                      setState(defaultValue);
-                    }}>
+                    onClick={setDefaultValue}>
                     Отменить
                   </button>
                 </div>
-                <button className="admin_button active delete">Удалить</button>
+                {carId && (
+                  <button
+                    className="admin_button active delete"
+                    onClick={deleteCar}>
+                    Удалить
+                  </button>
+                )}
               </div>
             </div>
           </div>
