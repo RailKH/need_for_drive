@@ -116,12 +116,12 @@ export default function AdminPoint() {
   const [changeId, setchangeId] = useState("");
 
   useEffect(() => {
-    // api.getData("city").then((json) => {
-    //   listCity = json.data;
-    // });
-    // api.getData("point").then((json) => {
-    //   listPointCity = json.data;
-    // });
+    api.getData("city").then((json) => {
+      listCity = json.data;
+    });
+    api.getData("point").then((json) => {
+      listPointCity = json.data;
+    });
   }, []);
 
   function inputChange(e) {

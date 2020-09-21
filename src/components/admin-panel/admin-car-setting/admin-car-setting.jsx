@@ -2,7 +2,7 @@ import React from "react";
 import "./admin-car-setting.scss";
 import classnames from "classnames";
 import defaultCar from "../../../assets/img/defaultCar.png";
-import Loader from "../../loader";
+import Loader from "../admin-loader";
 import api from "../../../api/api";
 import { useHistory } from "react-router-dom";
 
@@ -141,6 +141,7 @@ export default withRouter(function AdminCarSetting(props) {
       : setPermit(false);
   }
   async function saveValue() {
+    setLoader(true);
     let result = carId
       ? api.putDataCar(state, carId, "PUT")
       : api.postDataCar(state);
@@ -152,7 +153,8 @@ export default withRouter(function AdminCarSetting(props) {
       .catch((error) => {
         console.log("ERRORRRR", error);
         history.push("/admin/admin-error");
-      });
+      })
+      .finally(() => setLoader(false));
   }
   function setDefaultValue() {
     history.push("/admin/admin-car-setting");
@@ -161,6 +163,7 @@ export default withRouter(function AdminCarSetting(props) {
     setCarId("");
   }
   function deleteCar() {
+    setLoader(true);
     api
       .putDataCar(state, carId, "DELETE")
       .then(() => {
@@ -170,200 +173,196 @@ export default withRouter(function AdminCarSetting(props) {
       .catch((error) => {
         console.log("ERRORRRR", error);
         history.push("/admin/admin-error");
-      });
+      })
+      .finally(() => setLoader(false));
   }
   return (
     <div className="admin-car admin-main">
       {notific && <Notification />}
-      {loader ? (
-        <Loader />
-      ) : (
-        <div className="admin-car_content admin-main_content">
-          <div className="admin-main_content_title" onClick={() => showNotif()}>
-            Карточка автомобиля
-          </div>
-          <div className="admin-car_content_desc">
-            <div className="car-cart">
-              <div className="car-cart_photo">
-                <img
-                  src={
-                    photo.name
-                      ? URL.createObjectURL(photo)
-                      : state.thumbnail
-                      ? `http://api-factory.simbirsoft1.com${state.thumbnail.path}`
-                      : defaultCar
-                  }
-                  alt="car"
+
+      <div className="admin-car_content admin-main_content">
+        <div className="admin-main_content_title" onClick={() => showNotif()}>
+          Карточка автомобиля
+        </div>
+        <div className="admin-car_content_desc">
+          {loader && <Loader />}
+
+          <div className="car-cart">
+            <div className="car-cart_photo">
+              <img
+                src={
+                  photo.name
+                    ? URL.createObjectURL(photo)
+                    : state.thumbnail
+                    ? `http://api-factory.simbirsoft1.com${state.thumbnail.path}`
+                    : defaultCar
+                }
+                alt="car"
+              />
+              <div className="title">{state.name || "Название автомобиля"}</div>
+              <label htmlFor="custom-file-upload" className="filupp">
+                <span className="filupp-file-name">
+                  {photo.name ? photo.name : "Выберите файл..."}
+                </span>
+                <input
+                  type="file"
+                  name="attachment-file"
+                  id="custom-file-upload"
+                  onChange={addPhoto}
                 />
-                <div className="title">
-                  {state.name || "Название автомобиля"}
-                </div>
-                <label htmlFor="custom-file-upload" className="filupp">
-                  <span className="filupp-file-name">
-                    {photo.name ? photo.name : "Выберите файл..."}
-                  </span>
-                  <input
-                    type="file"
-                    name="attachment-file"
-                    id="custom-file-upload"
-                    onChange={addPhoto}
-                  />
-                  <span className="filupp-file-button">Обзор</span>
-                </label>
+                <span className="filupp-file-button">Обзор</span>
+              </label>
+            </div>
+            <div className="car-cart_load-bar">
+              <div className="car-cart_load-bar_wrap">
+                <span className="car-cart_suptitle">Заполнено</span>
+                <span>{`${progressBar}%`}</span>
               </div>
-              <div className="car-cart_load-bar">
-                <div className="car-cart_load-bar_wrap">
-                  <span className="car-cart_suptitle">Заполнено</span>
-                  <span>{`${progressBar}%`}</span>
-                </div>
-                <div className="car-cart_load-bar_wrap-loader">
-                  <div
-                    className="car-cart_load-bar_loader"
-                    style={{
-                      width: `${progressBar}%`,
-                    }}></div>
-                </div>
+              <div className="car-cart_load-bar_wrap-loader">
+                <div
+                  className="car-cart_load-bar_loader"
+                  style={{
+                    width: `${progressBar}%`,
+                  }}></div>
               </div>
-              <div className="car-cart_desc">
-                <div className="car-cart_suptitle">Описание</div>
-                <textarea
-                  name="description"
-                  placeholder="Введите описание автомобиля"
-                  cols="30"
-                  rows="5"
-                  value={state.description}
-                  className="car-cart_text"
+            </div>
+            <div className="car-cart_desc">
+              <div className="car-cart_suptitle">Описание</div>
+              <textarea
+                name="description"
+                placeholder="Введите описание автомобиля"
+                cols="30"
+                rows="5"
+                value={state.description}
+                className="car-cart_text"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="car-setting">
+            <div className="car-setting_title">Настройки автомобиля</div>
+            <div className="car-setting_content">
+              <div className="car-setting_content_item box-registration">
+                <p>Модель автомобиля</p>
+                <input
+                  type="text"
+                  value={state.name}
+                  name="name"
+                  placeholder="Введите название автомобиля"
                   onChange={handleChange}
                 />
               </div>
-            </div>
-            <div className="car-setting">
-              <div className="car-setting_title">Настройки автомобиля</div>
-              <div className="car-setting_content">
-                <div className="car-setting_content_item box-registration">
-                  <p>Модель автомобиля</p>
-                  <input
-                    type="text"
-                    value={state.name}
-                    name="name"
-                    placeholder="Введите название автомобиля"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="car-setting_content_item box-registration">
-                  <p>Номер автомобиля</p>
-                  <input
-                    type="text"
-                    value={state.number}
-                    name="number"
-                    placeholder="Введите номер автомобиля"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="car-setting_content_item box-registration">
-                  <p>Максимальная цена</p>
-                  <input
-                    type="text"
-                    value={state.priceMax}
-                    name="priceMax"
-                    placeholder="Введите максимальная цену"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="car-setting_content_item box-registration">
-                  <p>Минимальная цена</p>
-                  <input
-                    type="text"
-                    value={state.priceMin}
-                    name="priceMin"
-                    placeholder="Введите минимальную цену"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="car-setting_content_item box-registration">
-                  <p>Класс автомобиля</p>
-                  {categoryId.map((item, id) => (
-                    <div key={item.id} className="categoryId">
-                      <input
-                        type="radio"
-                        id={item.id}
-                        name="categoryId"
-                        value={item.name}
-                        checked={item.name === state.categoryId.name}
-                        onClick={handleChange}
-                      />
-                      <label htmlFor={item.id}>
-                        <span />
-                        {item.name}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                <div className="car-setting_content_item box-registration">
-                  <p>Добавить цвет</p>
-                  <div className="wrapper">
+              <div className="car-setting_content_item box-registration">
+                <p>Номер автомобиля</p>
+                <input
+                  type="text"
+                  value={state.number}
+                  name="number"
+                  placeholder="Введите номер автомобиля"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="car-setting_content_item box-registration">
+                <p>Максимальная цена</p>
+                <input
+                  type="text"
+                  value={state.priceMax}
+                  name="priceMax"
+                  placeholder="Введите максимальная цену"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="car-setting_content_item box-registration">
+                <p>Минимальная цена</p>
+                <input
+                  type="text"
+                  value={state.priceMin}
+                  name="priceMin"
+                  placeholder="Введите минимальную цену"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="car-setting_content_item box-registration">
+                <p>Класс автомобиля</p>
+                {categoryId.map((item, id) => (
+                  <div key={item.id} className="categoryId">
                     <input
-                      type="text"
-                      value={selectColor}
-                      placeholder="Введите цвет"
-                      onChange={(e) => setSelectColor(e.target.value)}
+                      type="radio"
+                      id={item.id}
+                      name="categoryId"
+                      value={item.name}
+                      checked={item.name === state.categoryId.name}
+                      onClick={handleChange}
                     />
-                    <div className="plus-box" onClick={addColor}>
-                      +
-                    </div>
+                    <label htmlFor={item.id}>
+                      <span />
+                      {item.name}
+                    </label>
                   </div>
-                  {state.colors &&
-                    state.colors.map((item, ind) => {
-                      return (
-                        <div
-                          className="additional__checkbox"
-                          key={`${ind}_${item}`}>
-                          <input
-                            type="checkbox"
-                            className="additional__checkbox__custom"
-                            id={item}
-                            defaultChecked
-                          />
-                          <label
-                            htmlFor={item}
-                            onClick={() => deleteColor(ind)}>
-                            <span />
-                            {item}
-                          </label>
-                        </div>
-                      );
-                    })}
-                </div>
+                ))}
               </div>
-              <div className="car-footer">
-                <div className="car-footer_wrapper">
-                  <button
-                    className={classnames("admin_button active", {
-                      disabled: !permit,
-                    })}
-                    onClick={() => {
-                      permit && saveValue();
-                    }}>
-                    Сохранить
-                  </button>
-                  <button
-                    className="admin_button active cancel"
-                    onClick={setDefaultValue}>
-                    Отменить
-                  </button>
+              <div className="car-setting_content_item box-registration">
+                <p>Добавить цвет</p>
+                <div className="wrapper">
+                  <input
+                    type="text"
+                    value={selectColor}
+                    placeholder="Введите цвет"
+                    onChange={(e) => setSelectColor(e.target.value)}
+                  />
+                  <div className="plus-box" onClick={addColor}>
+                    +
+                  </div>
                 </div>
-                {carId && (
-                  <button
-                    className="admin_button active delete"
-                    onClick={deleteCar}>
-                    Удалить
-                  </button>
-                )}
+                {state.colors &&
+                  state.colors.map((item, ind) => {
+                    return (
+                      <div
+                        className="additional__checkbox"
+                        key={`${ind}_${item}`}>
+                        <input
+                          type="checkbox"
+                          className="additional__checkbox__custom"
+                          id={item}
+                          defaultChecked
+                        />
+                        <label htmlFor={item} onClick={() => deleteColor(ind)}>
+                          <span />
+                          {item}
+                        </label>
+                      </div>
+                    );
+                  })}
               </div>
+            </div>
+            <div className="car-footer">
+              <div className="car-footer_wrapper">
+                <button
+                  className={classnames("admin_button active", {
+                    disabled: !permit,
+                  })}
+                  onClick={() => {
+                    permit && saveValue();
+                  }}>
+                  Сохранить
+                </button>
+                <button
+                  className="admin_button active cancel"
+                  onClick={setDefaultValue}>
+                  Отменить
+                </button>
+              </div>
+              {carId && (
+                <button
+                  className="admin_button active delete"
+                  onClick={deleteCar}>
+                  Удалить
+                </button>
+              )}
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 });

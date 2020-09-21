@@ -14,6 +14,8 @@ $cursor: url(../../../assets/icons/Pointer.svg), pointer;
     &_desc {
       margin-top: 28px;
       background: #ffffff;
+      min-height: 250px;
+      position: relative;
       box-shadow: 0px 2px 0px rgba(90, 97, 105, 0.11),
         0px 4px 8px rgba(90, 97, 105, 0.12),
         0px 10px 10px rgba(90, 97, 105, 0.06),
@@ -26,8 +28,8 @@ $cursor: url(../../../assets/icons/Pointer.svg), pointer;
         justify-content: space-between;
         select {
           margin-left: 15px;
-          padding: 8px 0 8px 14px;
-          width: 110px;
+          padding: 8px 10px 8px 8px;
+          min-width: 120px;
           border: 0.5px solid #becad6;
           border-radius: 4px;
           font-size: 11px;

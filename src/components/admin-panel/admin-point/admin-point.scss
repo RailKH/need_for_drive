@@ -6,9 +6,10 @@ $cursor: url(../../../assets/icons/Pointer.svg), pointer;
     position: relative;
   }
   .dropdown-list {
-    border: 1px solid #eee;
+    // border: 1px solid #eee;
+    border: none;
     top: 70px;
-    width: 90%;
+    width: 89%;
   }
   .admin-point_add-point {
     p {

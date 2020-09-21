@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./admin-car-list.scss";
 import Pagination from "./pagination";
 import api from "../../../api/api";
-import Loader from "../../loader";
+import Loader from "../admin-loader";
 
 const categoryOptions = ["Все категории", "Эконом", "Премиум"];
 const tableHeaders = ["Модель", "Категория", "Цвет", "Цена"];
@@ -24,23 +24,23 @@ export default function AdminCarList() {
   useEffect(() => {
     let modelOptions = [];
 
-    // api
-    //   .getData("car")
-    //   .then((res) => {
-    //     setCarsList(res.data);
-    //     originList = res.data;
-    //     originList.forEach((item) => {
-    //       let value = item.name.split(",")[0];
-    //       !modelOptions.includes(value) && modelOptions.push(value);
-    //     });
-    //     modelOptions.unshift("Все модели");
-    //     setModelOptions(modelOptions);
-    //     setLoader(false);
-    //   })
-    //   .catch((error) => {
-    //     console.log("ERRORRRRRR", error);
-    //     history.push("/admin/admin-error");
-    //   });
+    api
+      .getData("car")
+      .then((res) => {
+        setCarsList(res.data);
+        originList = res.data;
+        originList.forEach((item) => {
+          let value = item.name.split(",")[0];
+          !modelOptions.includes(value) && modelOptions.push(value);
+        });
+        modelOptions.unshift("Все модели");
+        setModelOptions(modelOptions);
+        setLoader(false);
+      })
+      .catch((error) => {
+        console.log("ERRORRRRRR", error);
+        history.push("/admin/admin-error");
+      });
   }, []);
 
   const lastPostIndex = postsPerPage * currentPage;

@@ -120,7 +120,7 @@ export default function Login(props) {
           />
           <p>Пароль</p>
           <input
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

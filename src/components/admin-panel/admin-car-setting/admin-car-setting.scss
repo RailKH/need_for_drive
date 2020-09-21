@@ -2,6 +2,8 @@
   position: relative;
 
   &_content {
+    position: relative;
+    // min-height: 250px;
     &_desc {
       margin-top: 28px;
       display: grid;
