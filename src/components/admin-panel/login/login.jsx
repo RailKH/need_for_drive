@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import classnames from "classnames";
 import { useState } from "react";
-const URL =
-  "https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/";
+import api from "../../../api/api";
 
 export default function Login(props) {
   const [mail, setMail] = useState("");
@@ -12,6 +11,7 @@ export default function Login(props) {
   let basicToken = "";
 
   useEffect(() => {
+    console.log("test");
     setLoader(true);
     checkAuth();
   }, []);
@@ -39,7 +39,7 @@ export default function Login(props) {
   function checkAuth() {
     const token = getCookie("access_token");
     if (token) {
-      fetch(`${URL}auth/check`, {
+      fetch(`${api.URL}auth/check`, {
         method: "GET",
         headers: {
           "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -53,7 +53,7 @@ export default function Login(props) {
           props.setName(res);
         })
         .catch(() => {
-          fetch(`${URL}auth/refresh`, {
+          fetch(`${api.URL}auth/refresh`, {
             method: "POST",
             headers: {
               "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -75,7 +75,7 @@ export default function Login(props) {
     }
   }
   function Auth() {
-    return fetch(`${URL}auth/login`, {
+    return fetch(`${api.URL}auth/login`, {
       method: "POST",
       headers: {
         "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -130,10 +130,10 @@ export default function Login(props) {
           <button className="admin_button active" onClick={Checking}>
             {loader ? (
               <span className="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div />
+                <div />
+                <div />
+                <div />
               </span>
             ) : (
               "Войти"

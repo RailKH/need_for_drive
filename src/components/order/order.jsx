@@ -26,8 +26,6 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-const URL = "http://api-factory.simbirsoft1.com/api/db/";
-const PROXY = "https://cors-anywhere.herokuapp.com/";
 const defaultList = {
   cityId: { name: "" },
   pointId: { address: "" },
@@ -57,22 +55,26 @@ class Order extends React.Component {
       point: [],
       cars: [],
       rate: [],
+      loader: false,
     };
     this.changeProps = this.changeProps.bind(this);
     this.postData = this.postData.bind(this);
     this.nextWrapper = this.nextWrapper.bind(this);
     this.setDefValue = this.setDefValue.bind(this);
   }
-  componentDidMount() {
+  componentWillMount() {
     this.setDefValue();
     this.setState({
       paramLocation: false,
       paramModel: false,
       paramExtra: false,
     });
-
+  }
+  componentDidMount() {
     let statusId = localStorage.getItem("statusId");
+
     if (statusId) {
+      console.log("API");
       api.getData(`order/${statusId}`).then((json) => {
         this.props.setParamOrderText(true);
         this.props.setStatusIdText(statusId);
@@ -109,6 +111,7 @@ class Order extends React.Component {
     this.props.setColorText(value.color);
     this.props.setRateText(value.rateId);
     this.props.setPriceText(value.price);
+    this.props.setDateCountText(value.dateCount);
     this.props.setDateStartText(value.dateFrom);
     this.props.setDateFinishText(value.dateTo);
     this.props.setTankText(value.isFullTank);
@@ -117,7 +120,7 @@ class Order extends React.Component {
   }
 
   postData = async (item, order) => {
-    let data = await fetch(`${PROXY}${URL}${item}`, {
+    let data = await fetch(`${api.URL}db/${item}`, {
       method: "POST",
       headers: {
         "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -151,9 +154,13 @@ class Order extends React.Component {
     }
     switch (textButton) {
       case "Выбрать модель":
+        this.setState({
+          loader: true,
+        });
         api.getData("car").then((json) => {
           this.setState({
             cars: json.data,
+            loader: false,
           });
         });
         break;
@@ -172,7 +179,13 @@ class Order extends React.Component {
   }
 
   render() {
-    const { id, paramLocation, paramExtra, paramModel } = this.state;
+    const {
+      id,
+      paramLocation,
+      paramExtra,
+      paramModel,
+      orderFalse,
+    } = this.state;
 
     return (
       <section className={classnames("order", { disabled: this.props.burger })}>
@@ -183,7 +196,11 @@ class Order extends React.Component {
                 Need for drive
               </span>
             </Link>
-            <span className="content__header__location">Ульяновск</span>
+            <span
+              className="content__header__location"
+              onClick={() => console.log(this.state, this.props)}>
+              Ульяновск
+            </span>
           </header>
         </div>
         <div className="link">
@@ -195,7 +212,7 @@ class Order extends React.Component {
             ) : (
               <>
                 <div
-                  onClick={(e) => this.nextWrapper(0)}
+                  onClick={(e) => !orderFalse && this.nextWrapper(0)}
                   className={classnames("link__content__text", {
                     active: id === 0,
                     ready: paramLocation,
@@ -226,7 +243,9 @@ class Order extends React.Component {
                 </div>
                 <span />
                 <div
-                  onClick={(e) => paramExtra && this.nextWrapper(3)}
+                  onClick={(e) =>
+                    paramModel && paramExtra && this.nextWrapper(3)
+                  }
                   className={classnames("link__content__text", {
                     active: id === 3,
                     ready: paramExtra,
@@ -251,6 +270,7 @@ class Order extends React.Component {
               id={id}
               cars={this.state.cars}
               changeProps={this.changeProps}
+              loader={this.state.loader}
             />
             <ExtraBlock
               id={id}

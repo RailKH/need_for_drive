@@ -15,10 +15,10 @@ import {
 function Extra(props) {
   useEffect(() => {
     props.color &&
-      props.rate &&
+      props.rate.id &&
       props.dateCount &&
       props.changeProps(true, "paramExtra");
-  });
+  }, [props.color, props.dateCount, props.rate]);
 
   useEffect(() => {
     props.dateStart && props.dateFinish && props.setDateCountText(diffDates());

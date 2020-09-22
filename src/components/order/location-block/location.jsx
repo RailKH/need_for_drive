@@ -46,6 +46,7 @@ function Location(props) {
         setfilterCityPoint(filterCityPoint);
       }
     }
+    props.changeProps(false, "paramLocation");
   }
   const getCoord = async (value) => {
     return await fetch(
@@ -73,6 +74,7 @@ function Location(props) {
   function selectCity(item, value) {
     props[value](item);
     if (value === "setCityText") {
+      clearInput("cityPoint");
       setfilterCity([]);
 
       getCoord(item.name).then((json) => {

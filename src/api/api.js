@@ -1,5 +1,6 @@
-const URL = "http://api-factory.simbirsoft1.com/api/db/";
+const MAIN_URL = "http://api-factory.simbirsoft1.com/api/";
 const PROXY = "https://cors-anywhere.herokuapp.com/";
+const URL = PROXY + MAIN_URL;
 
 function getCookie(name) {
   let matches = document.cookie.match(
@@ -12,13 +13,13 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 async function getData(item) {
-  return await fetch(`${PROXY}${URL}${item}`, {
+  return await fetch(`${URL}db/${item}`, {
     method: "GET",
     headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
   }).then((res) => res.json());
 }
 async function postDataPoint(name, address, cityId) {
-  return await fetch(`${PROXY}${URL}point`, {
+  return await fetch(`${URL}db/point`, {
     method: "POST",
     headers: {
       "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -33,7 +34,7 @@ async function postDataPoint(name, address, cityId) {
   }).then((res) => res.json());
 }
 async function putDataPoint(name, address, changeId) {
-  return await fetch(`${PROXY}${URL}point/${changeId}`, {
+  return await fetch(`${URL}db/point/${changeId}`, {
     method: "PUT",
     headers: {
       "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -47,7 +48,7 @@ async function putDataPoint(name, address, changeId) {
   }).then((res) => res.json());
 }
 async function putDataCar(state, changeId, method) {
-  return await fetch(`${PROXY}${URL}car/${changeId}`, {
+  return await fetch(`${URL}db/car/${changeId}`, {
     method: method,
     headers: {
       "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -59,7 +60,7 @@ async function putDataCar(state, changeId, method) {
 }
 async function postDataCar(state) {
   console.log(state);
-  return await fetch(`${PROXY}${URL}car/`, {
+  return await fetch(`${URL}db/car/`, {
     method: "POST",
     headers: {
       "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -76,4 +77,5 @@ export default {
   putDataPoint,
   putDataCar,
   postDataCar,
+  URL,
 };

@@ -15,7 +15,7 @@ class AdminPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      autorisation: true,
+      autorisation: false,
       adminName: "",
     };
     this.changeAutorisation = this.changeAutorisation.bind(this);
