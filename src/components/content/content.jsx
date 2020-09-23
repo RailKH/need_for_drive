@@ -1,16 +1,12 @@
 import React from "react";
 import "./content.scss";
 import { Link } from "react-router-dom";
+import Header from "../header/header";
 
 export default function Content(props) {
   return (
     <section className="content">
-      <header className="content__header">
-        <a href="#" className="content__header__logo">
-          Need for drive
-        </a>
-        <span className="content__header__location">Ульяновск</span>
-      </header>
+      <Header />
       <main className="content__desc">
         <div className="content__desc__title">
           Каршеринг <br />

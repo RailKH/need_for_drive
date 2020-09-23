@@ -7,6 +7,8 @@ import ModelBlock from "./model-block/model";
 import ExtraBlock from "./extra-block/extra";
 import TotalBlock from "./total-block/total";
 import CostBlock from "./cost-block/cost";
+import Header from "../header/header";
+import Links from "./links/links";
 import { setCityText, setCityPointText } from "../../store/location/action";
 import { setCarText } from "../../store/model/action";
 import {
@@ -23,7 +25,6 @@ import {
   setWheelText,
 } from "../../store/extra/action";
 
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const defaultList = {
@@ -190,72 +191,17 @@ class Order extends React.Component {
     return (
       <section className={classnames("order", { disabled: this.props.burger })}>
         <div className="order__header">
-          <header className="content__header">
-            <Link to="/">
-              <span href="#" className="content__header__logo">
-                Need for drive
-              </span>
-            </Link>
-            <span
-              className="content__header__location"
-              onClick={() => console.log(this.state, this.props)}>
-              Ульяновск
-            </span>
-          </header>
+          <Header />
         </div>
-        <div className="link">
-          <div className="link__content">
-            {this.props.orderStatusId ? (
-              <div className="link__content__title">
-                Заказ номер {this.props.orderStatusId}
-              </div>
-            ) : (
-              <>
-                <div
-                  onClick={(e) => !orderFalse && this.nextWrapper(0)}
-                  className={classnames("link__content__text", {
-                    active: id === 0,
-                    ready: paramLocation,
-                  })}>
-                  Местоположение
-                </div>
-                <span />
-                <div
-                  onClick={(e) =>
-                    paramLocation && paramModel && this.nextWrapper(1)
-                  }
-                  className={classnames("link__content__text", {
-                    active: id === 1,
-                    ready: paramModel,
-                  })}>
-                  Модель
-                </div>
-                <span />
-                <div
-                  onClick={(e) =>
-                    paramModel && paramExtra && this.nextWrapper(2)
-                  }
-                  className={classnames("link__content__text", {
-                    active: id === 2,
-                    ready: paramExtra,
-                  })}>
-                  Дополнительно
-                </div>
-                <span />
-                <div
-                  onClick={(e) =>
-                    paramModel && paramExtra && this.nextWrapper(3)
-                  }
-                  className={classnames("link__content__text", {
-                    active: id === 3,
-                    ready: paramExtra,
-                  })}>
-                  Итого
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+        <Links
+          orderStatusId={this.props.orderStatusId}
+          orderFalse={orderFalse}
+          nextWrapper={this.nextWrapper}
+          paramLocation={paramLocation}
+          paramModel={paramModel}
+          paramExtra={paramExtra}
+          id={id}
+        />
         <section className="order__content">
           <div className="wrapper">
             <LocationBlock
