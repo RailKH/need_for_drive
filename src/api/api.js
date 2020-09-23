@@ -12,10 +12,19 @@ function getCookie(name) {
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-async function getData(item) {
+async function getData(item, auth) {
   return await fetch(`${URL}db/${item}`, {
     method: "GET",
-    headers: { "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b" },
+    headers: auth
+      ? {
+          "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getCookie("access_token"),
+        }
+      : {
+          "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+          "Content-Type": "application/json",
+        },
   }).then((res) => res.json());
 }
 async function postDataPoint(name, address, cityId) {
@@ -47,7 +56,7 @@ async function putDataPoint(name, address, changeId) {
     }),
   }).then((res) => res.json());
 }
-async function putDataCar(state, changeId, method) {
+async function updateDataCar(state, changeId, method) {
   return await fetch(`${URL}db/car/${changeId}`, {
     method: method,
     headers: {
@@ -59,7 +68,6 @@ async function putDataCar(state, changeId, method) {
   }).then((res) => res.json());
 }
 async function postDataCar(state) {
-  console.log(state);
   return await fetch(`${URL}db/car/`, {
     method: "POST",
     headers: {
@@ -75,7 +83,7 @@ export default {
   getData,
   postDataPoint,
   putDataPoint,
-  putDataCar,
+  updateDataCar,
   postDataCar,
   URL,
 };

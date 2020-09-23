@@ -20,13 +20,6 @@ const defaultValue = {
   priceMax: "",
   priceMin: "",
   thumbnail: "",
-  // {
-  // mimetype: "image/png",
-  // originalname:
-  //   "5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
-  // path:
-  //   "/files/5f21d9829d3a610b850fcd58_5ea9e813099b810b946c7235_d0ee30e3d35226917d318a3ef0719f20.png",
-  // },
 };
 
 export default withRouter(function AdminCarSetting(props) {
@@ -129,10 +122,6 @@ export default withRouter(function AdminCarSetting(props) {
       });
     };
     reader.readAsDataURL(file);
-    // const data = new FormData();
-
-    // data.append("file", e.target.files[0]);
-    // setState({ ...state, thumbnail: data });
     setPhoto(e.target.files[0]);
   }
   function checkData() {
@@ -143,7 +132,7 @@ export default withRouter(function AdminCarSetting(props) {
   async function saveValue() {
     setLoader(true);
     let result = carId
-      ? api.putDataCar(state, carId, "PUT")
+      ? api.updateDataCar(state, carId, "PUT")
       : api.postDataCar(state);
     result
       .then((res) => {
@@ -165,7 +154,7 @@ export default withRouter(function AdminCarSetting(props) {
   function deleteCar() {
     setLoader(true);
     api
-      .putDataCar(state, carId, "DELETE")
+      .updateDataCar(state, carId, "DELETE")
       .then(() => {
         showNotif();
         setDefaultValue();

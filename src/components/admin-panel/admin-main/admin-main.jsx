@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./admin-main.scss";
+import api from "../../../api/api";
 import car from "../../../assets/img/cars/image_2.png";
 import mark from "../../../assets/icons/admin-menu/true.svg";
 import cross from "../../../assets/icons/admin-menu/false.svg";
@@ -7,6 +8,10 @@ import ellipsis from "../../../assets/icons/admin-menu/ellipsis.svg";
 const additional = ["Полный бак", "Детско кресло", "Правый руль"];
 
 export default function AdminMain() {
+  useEffect(() => {
+    api.getData("order?page=1&limit=4", true).then((res) => console.log(res));
+  }, []);
+
   return (
     <div className="admin-main">
       <div className="admin-main_content">
@@ -14,16 +19,6 @@ export default function AdminMain() {
         <div className="admin-main_content_desc">
           <div className="filter">
             <div>
-              <select name="daySelect">
-                <option selected>За неделю</option>
-                <option>За месяц</option>
-              </select>
-              <select name="carSelect">
-                <option selected value="opt1">
-                  Elantra
-                </option>
-                <option>Hundai</option>
-              </select>
               <select name="citySelect">
                 <option selected value="opt1">
                   Ульяновск
